@@ -1,4 +1,4 @@
-﻿using SnelleWiel.Pages;
+﻿using Snelle_Wiel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,17 +14,23 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Snelle_Wiel
+namespace SnelleWiel.Pages
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for LoginPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LoginPage : Page
     {
-        public MainWindow()
+        MainWindow Main;
+        public LoginPage(MainWindow main)
         {
             InitializeComponent();
-            this.Content = new LoginPage(this);
+            this.Main = main;
+        }
+
+        private void BtLogin_Click(object sender, RoutedEventArgs e)
+        {
+            this.Main.Content = new HomePlanner();
         }
     }
 }
