@@ -66,6 +66,22 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\BeheerChauffeur.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BeheerFacturatie.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BeheerKlanten.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BeheerWagens.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\HomePlanner.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -76,6 +92,18 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pages\BeheerChauffeur.xaml.cs">
+      <DependentUpon>BeheerChauffeur.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BeheerFacturatie.xaml.cs">
+      <DependentUpon>BeheerFacturatie.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BeheerKlanten.xaml.cs">
+      <DependentUpon>BeheerKlanten.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BeheerWagens.xaml.cs">
+      <DependentUpon>BeheerWagens.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\HomePlanner.xaml.cs">
       <DependentUpon>HomePlanner.xaml</DependentUpon>
     </Compile>
