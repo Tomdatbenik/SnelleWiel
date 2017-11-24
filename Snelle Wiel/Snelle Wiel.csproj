@@ -78,13 +78,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\BeheerPlanning.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\BeheerWagens.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\HomePlanner.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Pages\Home.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\LoginPage.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -101,11 +105,14 @@
     <Compile Include="Pages\BeheerKlanten.xaml.cs">
       <DependentUpon>BeheerKlanten.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\BeheerPlanning.xaml.cs">
+      <DependentUpon>BeheerPlanning.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\BeheerWagens.xaml.cs">
       <DependentUpon>BeheerWagens.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\HomePlanner.xaml.cs">
-      <DependentUpon>HomePlanner.xaml</DependentUpon>
+    <Compile Include="Pages\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>

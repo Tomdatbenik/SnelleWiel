@@ -8,25 +8,67 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="LoginPage">
 
+
+    <Page.Resources>
+        <Style TargetType="Button" x:Key="FlatButtonStyle">
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderThickness="0"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
             <RowDefinition Height="2*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="6*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="8*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock x:Name="TxbNaam" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextWrapping="Wrap" Text="Naam:"/>
-        <TextBox x:Name="TbName" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-        <TextBlock x:Name="TxbPass" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextWrapping="Wrap" Text="Password:"/>
-        <PasswordBox x:Name="PbPass" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" PasswordChar="*"/>
-        <Button x:Name="BtLogin" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Login" Click="BtLogin_Click"/>
+        <Border x:Name="BBorder" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8" Grid.ColumnSpan="3" Grid.RowSpan="8" Background="#FFF6F6F6"  Grid.Column="1"/>
+        <Viewbox  HorizontalAlignment="Center" VerticalAlignment="top" Grid.Row="0" Grid.Column="2">
+            <TextBlock x:Name="txbSnelleWiel" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Snelle Wiel"/>
+        </Viewbox>
+
+        <Viewbox Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left">
+            <TextBlock x:Name="TxbNaam" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextWrapping="Wrap" Text="Naam:" />
+        </Viewbox>
+
+        <Viewbox Grid.Column="2" Grid.Row="2">
+            <TextBox x:Name="TbName" Grid.Column="2" Grid.Row="2" Height="21.6" Width="200" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        </Viewbox>
+        
+        <Viewbox Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left" >
+            <TextBlock x:Name="TxbPass" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextWrapping="Wrap" Text="Password:"/>
+        </Viewbox>
+
+        <Viewbox Grid.Column="2" Grid.Row="4">
+            <PasswordBox x:Name="PbPass" Grid.Column="2" Grid.Row="4" Height="21.6" Width="200" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" PasswordChar="*"/>
+        </Viewbox>
+
+        <Viewbox Grid.Column="2" Grid.Row="6">
+            <Button Style="{StaticResource FlatButtonStyle}" x:Name="BtLogin"  Height="21.6" Width="225" Grid.Column="2" Grid.Row="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Login" Click="BtLogin_Click" MinHeight="25"/>
+        </Viewbox>
     </Grid>
 </Page>

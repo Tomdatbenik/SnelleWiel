@@ -1,0 +1,36 @@
+﻿<Page x:Class="Snelle_Wiel.Pages.Home"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Snelle_Wiel.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="Home" MinHeight="350" MinWidth="525" Background="White">
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="9*"/>
+        </Grid.RowDefinitions>
+        <Viewbox Stretch="Uniform" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="6" Grid.RowSpan="2">
+            <Frame x:Name="FNavigateframe" Source="/Snelle Wiel;component/Pages/BeheerPlanning.xaml" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden"/>
+        </Viewbox>
+        <Button Content="Planning" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <Button Content="Chauffeurs" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <Button Content="Wagens" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <Button Content="Klant" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <Button Content="Facturatie" Grid.Column="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <Button Content="Applicatie" Grid.Column="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+    </Grid>
+</Page>

@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SnelleWiel.Pages
+namespace Snelle_Wiel.Pages
 {
     /// <summary>
-    /// Interaction logic for HomePlanner.xaml
+    /// Interaction logic for BeheerPlanning.xaml
     /// </summary>
-    public partial class HomePlanner : Page
+    public partial class BeheerPlanning : Page
     {
-        public HomePlanner()
+        public BeheerPlanning()
         {
             InitializeComponent();
         }
