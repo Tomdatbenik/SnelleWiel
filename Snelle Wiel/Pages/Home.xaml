@@ -20,7 +20,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="9*"/>
+            <RowDefinition Height="19*"/>
         </Grid.RowDefinitions>
         <Viewbox Stretch="Uniform" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="6" Grid.RowSpan="2">
             <Frame x:Name="FNavigateframe" Source="/Snelle Wiel;component/Pages/BeheerPlanning.xaml" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden"/>
