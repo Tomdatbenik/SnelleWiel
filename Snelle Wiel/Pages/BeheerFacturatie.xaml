@@ -9,6 +9,6 @@
       Title="BeheerFacturatie">
 
     <Grid>
-        
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Facturatie" VerticalAlignment="Top"/>
     </Grid>
 </Page>

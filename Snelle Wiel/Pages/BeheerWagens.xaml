@@ -9,6 +9,6 @@
       Title="BeheerWagens">
 
     <Grid>
-        
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Wagens" VerticalAlignment="Top"/>
     </Grid>
 </Page>

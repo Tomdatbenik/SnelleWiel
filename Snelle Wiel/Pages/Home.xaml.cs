@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Snelle_Wiel.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,17 @@ namespace Snelle_Wiel.Pages
     /// </summary>
     public partial class Home : Page
     {
+        Navigator Nav;
         public Home()
         {
             InitializeComponent();
+            this.Nav = new Navigator(this);
+        }
+
+        public void navigatorbutton_click(object sender, RoutedEventArgs e)
+        {
+            Button b = sender as Button;
+            this.Nav.NavigateTo(b.Content.ToString());
         }
     }
 }

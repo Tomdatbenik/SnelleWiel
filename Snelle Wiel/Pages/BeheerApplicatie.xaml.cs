@@ -1,7 +1,4 @@
-﻿using Snelle_Wiel;
-using Snelle_Wiel.Classes;
-using Snelle_Wiel.Pages;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,23 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SnelleWiel.Pages
+namespace Snelle_Wiel.Pages
 {
     /// <summary>
-    /// Interaction logic for LoginPage.xaml
+    /// Interaction logic for BeheerApplicatie.xaml
     /// </summary>
-    public partial class LoginPage : Page
+    public partial class BeheerApplicatie : Page
     {
-        MainWindow Main;
-        public LoginPage(MainWindow main)
+        public BeheerApplicatie()
         {
             InitializeComponent();
-            this.Main = main;
-        }
-
-        private void BtLogin_Click(object sender, RoutedEventArgs e)
-        {
-            this.Main.Content = new Home();
         }
     }
 }
