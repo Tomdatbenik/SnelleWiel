@@ -6,10 +6,19 @@
       xmlns:local="clr-namespace:Snelle_Wiel.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="BeheerApplicatie">
+      Title="BeheerApplicatie" MinHeight="350" MinWidth="525" Background="White">
 
     <Grid>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="APPLICATIE" VerticalAlignment="Top"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="19*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
 
+        <TextBlock Grid.Column="0" Text="Users:" HorizontalAlignment="Left"></TextBlock>
+        <ListView x:Name="lvUserlist" Grid.Row="1"></ListView>
+        
     </Grid>
 </Page>
