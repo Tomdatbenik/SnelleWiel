@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Snelle_Wiel.Classes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -33,7 +34,8 @@ namespace Snelle_Wiel.Pages
             InitializeComponent();
         }
 
-        private void listBox_PreviewMouseMove(object sender, MouseEventArgs e)
+
+        private void ListView_PreviewMouseMove(object sender, MouseEventArgs e)
         {
             oldlistbox = sender as ListView;
 
@@ -48,28 +50,19 @@ namespace Snelle_Wiel.Pages
             
         }
 
-        private void Listbox_drop(object sender, DragEventArgs e)
+        private void ListView_drop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(_dropIdentifier))
             {
                 var item = e.Data.GetData(_dropIdentifier) as ListViewItem;
-                DropOnListbox(sender as ListView, item);
+                DropOnListView(sender as ListView, item);
             }
         }
 
-        public void DropOnListbox(ListView targetlistbox, ListViewItem item)
+        public void DropOnListView(ListView targetlistbox, ListViewItem item)
         {
             oldlistbox.Items.Remove(item);
             targetlistbox.Items.Add(item);
-        }
-
-        private void Listbox_DragEnter(object sender, DragEventArgs e)
-        {
-            if (!e.Data.GetDataPresent(_dropIdentifier) ||
-              sender == e.Source)
-            {
-                e.Effects = DragDropEffects.None;
-            }
         }
     }
 }
