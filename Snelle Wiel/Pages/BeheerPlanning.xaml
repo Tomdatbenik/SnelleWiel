@@ -6,13 +6,35 @@
       xmlns:local="clr-namespace:Snelle_Wiel.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="BeheerPlanning" MinWidth="525" Background="White">
+      Title="BeheerPlanning" MinHeight="350" MinWidth="525" Background="White">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="0.1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="0.1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="0.1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="0.1*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="11*"/>
-            <RowDefinition Height="139*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="18*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Button Content="Button" HorizontalAlignment="Left" Grid.Row="0" VerticalAlignment="Stretch"/>
+        <ListView AllowDrop="True" Drop="Listbox_drop" DragEnter="Listbox_DragEnter" PreviewMouseDown="listBox_PreviewMouseMove" 
+                 Grid.Column="3" Grid.Row="1"
+                 >
+        </ListView>
+        <ListView x:Name="lbTwo"
+                 AllowDrop="True" Drop="Listbox_drop" DragEnter="Listbox_DragEnter" PreviewMouseDown="listBox_PreviewMouseMove"
+                 Grid.Column="1" Grid.Row="1"
+                 >
+            <ListViewItem>#nummer 1</ListViewItem>
+            <ListViewItem>#nummer 2</ListViewItem>
+        </ListView>
     </Grid>
 </Page>
