@@ -50,9 +50,9 @@
         </ListView>
         <Border BorderThickness="1" BorderBrush="Black" Grid.Row="1" Grid.Column="4" Grid.RowSpan="6"/>
         <TextBlock FontWeight="Bold" HorizontalAlignment="Center" Grid.Column="4" Grid.Row="1" Text="Chauffeurs"/>
-        <Button Grid.Row="2" Grid.Column="4" Content="Chauffeur toevoegen"/>
-        <Button Grid.Row="4" Grid.Column="4" Content="Chauffeur wijzigen"/>
-        <Button Grid.Row="6" Grid.Column="4" Content="Chauffeur verwijderen"/>
+        <Button Grid.Row="2" Grid.Column="4" Content="Chauffeur toevoegen" Margin="20,0,20,0"/>
+        <Button Grid.Row="4" Grid.Column="4" Content="Chauffeur wijzigen" Margin="20,0,20,0"/>
+        <Button Grid.Row="6" Grid.Column="4" Content="Chauffeur verwijderen" Margin="20,0,20,0"/>
         <Border BorderThickness="1" BorderBrush="Black" Grid.Row="8" Grid.Column="4" Grid.RowSpan="2"/>
         <ListView Grid.Column="4" Grid.Row="9">
             <ListViewItem>Erik van de Borg</ListViewItem>
