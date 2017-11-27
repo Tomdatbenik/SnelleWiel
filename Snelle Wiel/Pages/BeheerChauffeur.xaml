@@ -54,5 +54,11 @@
         <Button Grid.Row="4" Grid.Column="4" Content="Chauffeur wijzigen"/>
         <Button Grid.Row="6" Grid.Column="4" Content="Chauffeur verwijderen"/>
         <Border BorderThickness="1" BorderBrush="Black" Grid.Row="8" Grid.Column="4" Grid.RowSpan="2"/>
+        <ListView Grid.Column="4" Grid.Row="9">
+            <ListViewItem>Erik van de Borg</ListViewItem>
+            <ListViewItem>Frans Keizer</ListViewItem>
+            <ListViewItem>Jan van Donge</ListViewItem>
+        </ListView>
+        <TextBlock FontWeight="Bold" HorizontalAlignment="Center" Grid.Column="4" Grid.Row="8" Text="Chauffeurs overzicht"/>
     </Grid>
 </Page>
