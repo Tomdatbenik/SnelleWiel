@@ -18,7 +18,16 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Column="0" Text="Users:" HorizontalAlignment="Left"></TextBlock>
-        <ListView x:Name="lvUserlist" Grid.Row="1"></ListView>
+        <ListView x:Name="lvUserlist" Grid.Row="1">
+            <Grid>
+                <ListView Margin="10" Name="lvUsers">
+                    <ListViewItem>userid: 1, Role: Admin, Functie: Planner, Naam: voorbeeld 1</ListViewItem>
+                    <ListViewItem>userid: 2, Role: Admin, Functie: Chauffeur, Naam: voorbeeld 2</ListViewItem>
+                    <ListViewItem>userid: 3, Role: Admin, Functie: Chauffeur, Naam: voorbeeld 3</ListViewItem>
+                    <ListViewItem>userid: 4, Role: Admin, Functie: Chauffeur, Naam: voorbeeld 4</ListViewItem>
+                </ListView>
+            </Grid>
+        </ListView>
         
     </Grid>
 </Page>
