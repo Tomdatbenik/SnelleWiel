@@ -4,11 +4,30 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Snelle_Wiel.Pages"
-      mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-      Title="BeheerFacturatie">
-
+      mc:Ignorable="d"
+      Title="BeheerFacturatie" MinHeight="350" MinWidth="525" Background="White">
     <Grid>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Facturatie" VerticalAlignment="Top"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="127*"/>
+            <ColumnDefinition Width="233*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="135*"/>
+            <ColumnDefinition Width="10*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="278*"/>
+            <RowDefinition Height="21*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Column="1" Grid.Row="1" BorderThickness="1" BorderBrush="Black" Grid.ColumnSpan="2" Grid.RowSpan="4"/>
+        <TextBlock Text="Factuurinformatie" Grid.Column="1" Grid.Row="1"/>
+        <Button Grid.Column="1" Grid.Row="3" Content="Informatie wijzigen"/>
+        <Border Grid.Column="4" Grid.Row="1" BorderThickness="1" BorderBrush="Black" Grid.RowSpan="4"/>
+        <Button Grid.Column="4" Grid.Row="1" Content="Factuur 1"/>
     </Grid>
+
 </Page>
