@@ -34,5 +34,32 @@ namespace SnelleWiel.Pages
         {
             this.Main.Content = new Home();
         }
+
+
+        bool tbenter = true;
+
+        private void Mouse_enter(object sender, RoutedEventArgs e)
+        {
+            if (tbenter == true)
+            {
+                tbenter = false;
+                TbName.Text = "";
+            }
+        }
+
+        bool pbenter = true;
+        private void PbPass_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (pbenter == true)
+            {
+                pbenter = false;
+                PbPass.Password = "";
+            }
+        }
+
+        private void wachtwoordvergeten_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Console.WriteLine("Test");
+        }
     }
 }
