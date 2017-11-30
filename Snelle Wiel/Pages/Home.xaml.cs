@@ -22,10 +22,12 @@ namespace Snelle_Wiel.Pages
     public partial class Home : Page
     {
         Navigator Nav;
+        Database Data;
         public Home()
         {
             InitializeComponent();
-            this.Nav = new Navigator(this);
+            this.Data = new Database();
+            this.Nav = new Navigator(this, this.Data);
         }
 
         public void navigatorbutton_click(object sender, RoutedEventArgs e)

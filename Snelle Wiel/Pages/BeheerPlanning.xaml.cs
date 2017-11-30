@@ -28,10 +28,11 @@ namespace Snelle_Wiel.Pages
         private static readonly string _dropIdentifier = "dropIdentifier";
         #endregion
 
-
-        public BeheerPlanning()
+        Database db;
+        public BeheerPlanning(Database database)
         {
             InitializeComponent();
+            this.db = database;
         }
 
 

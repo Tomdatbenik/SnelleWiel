@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Snelle_Wiel.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,11 @@ namespace Snelle_Wiel.Windows
     /// </summary>
     public partial class WAddUser : Window
     {
-        public WAddUser()
+        Database db;
+        public WAddUser(Database database)
         {
             InitializeComponent();
+            this.db = database;
         }
 
         private void BtnAddUser_Click(object sender, RoutedEventArgs e)

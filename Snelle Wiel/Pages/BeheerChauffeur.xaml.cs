@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Snelle_Wiel.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,11 @@ namespace Snelle_Wiel.Pages
     /// </summary>
     public partial class BeheerChauffeur : Page
     {
-        public BeheerChauffeur()
+        Database db;
+        public BeheerChauffeur(Database database)
         {
             InitializeComponent();
+            this.db = database;
         }
     }
 }

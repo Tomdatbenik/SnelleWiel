@@ -16,16 +16,18 @@ namespace Snelle_Wiel.Classes
         BeheerApplicatie Beheerapplicatie;
         BeheerPlanning Beheerplanning;
         Home home;
+        Database db = new Database();
 
-        public Navigator(Home givenhome)
+        public Navigator(Home givenhome, Database database)
         {
-            this.Beheerchauffeur = new BeheerChauffeur();
-            this.Beheerfacturatie = new BeheerFacturatie();
-            this.Beheerklanten = new BeheerKlanten();
-            this.Beheerwagens = new BeheerWagens();
-            this.Beheerapplicatie = new BeheerApplicatie();
-            this.Beheerplanning = new BeheerPlanning();
             this.home = givenhome;
+            this.db = database;
+            this.Beheerchauffeur = new BeheerChauffeur(this.db);
+            this.Beheerfacturatie = new BeheerFacturatie(this.db);
+            this.Beheerklanten = new BeheerKlanten(this.db);
+            this.Beheerwagens = new BeheerWagens(this.db);
+            this.Beheerapplicatie = new BeheerApplicatie(this.db);
+            this.Beheerplanning = new BeheerPlanning(this.db);
         }
 
         public void NavigateTo(string Location)

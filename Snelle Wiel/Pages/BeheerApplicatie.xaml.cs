@@ -1,4 +1,5 @@
-﻿using Snelle_Wiel.Windows;
+﻿using Snelle_Wiel.Classes;
+using Snelle_Wiel.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,14 +22,16 @@ namespace Snelle_Wiel.Pages
     /// </summary>
     public partial class BeheerApplicatie : Page
     {
-        public BeheerApplicatie()
+        Database db;
+        public BeheerApplicatie(Database database)
         {
             InitializeComponent();
+            this.db = database;
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            WAddUser aw = new WAddUser();
+            WAddUser aw = new WAddUser(this.db);
             aw.ShowDialog();
         }
     }
