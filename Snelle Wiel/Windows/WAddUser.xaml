@@ -1,0 +1,65 @@
+﻿<Window x:Class="Snelle_Wiel.Windows.WAddUser"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Snelle_Wiel.Windows"
+        mc:Ignorable="d"
+        Title="Gebruiker Toevoegen" Height="300" Width="400" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="#FFF6F6F6">
+    <Window.Resources>
+        <Style TargetType="Button" x:Key="FlatButtonStyle">
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderThickness="0"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="DarkGray"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    
+    <Grid Background="#FFF6F6F6">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="70*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="70*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Column="1" Grid.Row="0" Text="Login naam:" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="15"></TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="2" Text="Login wachtwoord:" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="15"></TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="4" Text="Rol:" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="15"></TextBlock>
+        <TextBlock x:Name="TbError" Grid.Column="1" Grid.Row="6" Text="" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="15" Foreground="Red"></TextBlock>
+
+        <TextBox Grid.Column="1" Grid.Row="1" BorderBrush="#FFC3C1C1" BorderThickness="0,0,0,1" Foreground="#FF909090" Background="#FFF6F6F6" FontSize="22"/>
+
+        <TextBox Grid.Column="1" Grid.Row="3" BorderBrush="#FFC3C1C1" BorderThickness="0,0,0,1" Foreground="#FF909090" Background="#FFF6F6F6" FontSize="22"></TextBox>
+
+        <ComboBox Grid.Column="1" Grid.Row="5" BorderBrush="#FFC3C1C1" BorderThickness="0,0,0,1" Foreground="#FF909090" Background="#FFF6F6F6" FontSize="22">
+            <ComboBoxItem>Planner</ComboBoxItem>
+            <ComboBoxItem>Administratie</ComboBoxItem>
+            <ComboBoxItem>Chauffeur</ComboBoxItem>
+        </ComboBox>
+        <Button x:Name="BtnAddUser" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="1" Style="{StaticResource FlatButtonStyle}" Content="Opslaan" Click="BtnAddUser_Click"></Button>
+    </Grid>
+</Window>

@@ -24,6 +24,11 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="DarkGray"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
     </Page.Resources>
 
@@ -56,19 +61,16 @@
         </Viewbox>
 
         <Viewbox Grid.Column="2" Grid.Row="2">
-            <TextBox x:Name="TbName" Text="Naam" Background="#FFF6F6F6" BorderThickness="0" Grid.Column="2" Grid.Row="2" Height="21.6" Width="200" HorizontalAlignment="Center" VerticalAlignment="Stretch" Foreground="#FF909090" MouseEnter="Mouse_enter" />
+            <TextBox x:Name="TbName" Text="Naam" Background="#FFF6F6F6" BorderBrush="#FFC3C1C1" BorderThickness="0,0,0,1" Grid.Column="2" Grid.Row="2" Height="21.6" Width="200" HorizontalAlignment="Center" VerticalAlignment="Stretch" Foreground="#FF909090" MouseEnter="Mouse_enter" />
         </Viewbox>
-        <Rectangle Grid.Column="2" Grid.Row="2" Fill="#FFC3C1C1" Height="1" VerticalAlignment="Bottom"></Rectangle>
 
         <Viewbox Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left" >
-            <TextBlock x:Name="TxbPass" Background="#FFF6F6F6" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextWrapping="Wrap" Text="Password:"/>
+            <TextBlock x:Name="TxbPass" Background="#FFF6F6F6" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextWrapping="Wrap" Text="Wachtwoord:"/>
         </Viewbox>
 
         <Viewbox Grid.Column="2" Grid.Row="4">
-            <PasswordBox x:Name="PbPass" Background="#FFF6F6F6" BorderThickness="0" Grid.Column="2" Grid.Row="4" Height="21.6" Width="200" PasswordChar="*" Foreground="#FF909090" Password="12345678" MouseEnter="PbPass_MouseEnter" HorizontalAlignment="Center"/>
+            <PasswordBox x:Name="PbPass" Background="#FFF6F6F6" BorderBrush="#FFC3C1C1" BorderThickness="0,0,0,1" Grid.Column="2" Grid.Row="4" Height="21.6" Width="200" PasswordChar="*" Foreground="#FF909090" Password="12345678" MouseEnter="PbPass_MouseEnter" HorizontalAlignment="Center"/>
         </Viewbox>
-        <Rectangle Grid.Column="2" Grid.Row="4" Fill="#FFC3C1C1" Height="1" VerticalAlignment="Bottom">
-        </Rectangle>
 
         <Viewbox Grid.Column="2" Grid.Row="6">
             <Button Style="{StaticResource FlatButtonStyle}" x:Name="BtLogin"  Height="21.6" Width="225" Grid.Column="2" Grid.Row="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Login" Click="BtLogin_Click" MinHeight="25"/>

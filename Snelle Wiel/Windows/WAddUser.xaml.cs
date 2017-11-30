@@ -1,5 +1,4 @@
-﻿using Snelle_Wiel.Windows;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,25 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Snelle_Wiel.Pages
+namespace Snelle_Wiel.Windows
 {
     /// <summary>
-    /// Interaction logic for BeheerApplicatie.xaml
+    /// Interaction logic for WAddUser.xaml
     /// </summary>
-    public partial class BeheerApplicatie : Page
+    public partial class WAddUser : Window
     {
-        public BeheerApplicatie()
+        public WAddUser()
         {
             InitializeComponent();
         }
 
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        private void BtnAddUser_Click(object sender, RoutedEventArgs e)
         {
-            WAddUser aw = new WAddUser();
-            aw.ShowDialog();
+
         }
     }
 }
