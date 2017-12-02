@@ -24,6 +24,7 @@ namespace SnelleWiel.Pages
     public partial class LoginPage : Page
     {
         MainWindow Main;
+        Database db = new Database();
         public LoginPage(MainWindow main)
         {
             InitializeComponent();
@@ -32,7 +33,7 @@ namespace SnelleWiel.Pages
 
         private void BtLogin_Click(object sender, RoutedEventArgs e)
         {
-            this.Main.Content = new Home();
+            this.Main.Content = new Home(db);
         }
 
 

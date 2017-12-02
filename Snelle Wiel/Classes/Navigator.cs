@@ -16,7 +16,7 @@ namespace Snelle_Wiel.Classes
         BeheerApplicatie Beheerapplicatie;
         BeheerPlanning Beheerplanning;
         Home home;
-        Database db = new Database();
+        Database db;
 
         public Navigator(Home givenhome, Database database)
         {

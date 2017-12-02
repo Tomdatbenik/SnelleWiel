@@ -21,7 +21,7 @@ namespace Snelle_Wiel.Classes
         public void Connect()
         {
             //this.Con = new MySqlConnection("Server=localhost;Database=ekwc;Uid=root;Pwd=;");
-            this.Con = new MySqlConnection("Server=81.207.39.183;Database=snellewiel;Uid=snellewiel;Pwd=SnelleWiel!;");
+            this.Con = new MySqlConnection("Server=81.207.39.183;Database=snellewiel;Uid=snellewiel;Pwd=SnelleWiel1;");
             this.Con.Open();
         }
 

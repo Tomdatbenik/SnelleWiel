@@ -23,10 +23,10 @@ namespace Snelle_Wiel.Pages
     {
         Navigator Nav;
         Database Data;
-        public Home()
+        public Home(Database database)
         {
             InitializeComponent();
-            this.Data = new Database();
+            this.Data = database;
             this.Nav = new Navigator(this, this.Data);
         }
 
