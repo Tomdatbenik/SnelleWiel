@@ -59,6 +59,7 @@
     </ApplicationDefinition>
     <Compile Include="Classes\Bcrypt.cs" />
     <Compile Include="Classes\cLogin.cs" />
+    <Compile Include="Objects\User.cs" />
     <Compile Include="Windows\WAddUser.xaml.cs">
       <DependentUpon>WAddUser.xaml</DependentUpon>
     </Compile>

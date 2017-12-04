@@ -24,7 +24,7 @@ namespace Snelle_Wiel
         public MainWindow()
         {
             InitializeComponent();
-            this.Content = new LoginPage(this);
+            Mainframe.Navigate(new LoginPage());
         }
     }
 }

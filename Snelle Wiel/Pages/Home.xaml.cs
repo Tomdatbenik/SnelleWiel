@@ -28,6 +28,7 @@ namespace Snelle_Wiel.Pages
             InitializeComponent();
             this.Data = database;
             this.Nav = new Navigator(this, this.Data);
+            this.Nav.NavigateTo("Planning");
         }
 
         public void navigatorbutton_click(object sender, RoutedEventArgs e)

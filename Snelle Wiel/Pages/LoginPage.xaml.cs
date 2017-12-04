@@ -23,17 +23,15 @@ namespace SnelleWiel.Pages
     /// </summary>
     public partial class LoginPage : Page
     {
-        MainWindow Main;
         Database db = new Database();
-        public LoginPage(MainWindow main)
+        public LoginPage()
         {
             InitializeComponent();
-            this.Main = main;
         }
 
         private void BtLogin_Click(object sender, RoutedEventArgs e)
         {
-            this.Main.Content = new Home(db);
+            this.NavigationService.Navigate(new Home(db));
         }
 
 

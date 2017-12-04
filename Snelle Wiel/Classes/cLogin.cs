@@ -13,13 +13,24 @@ namespace Snelle_Wiel.Classes
         {
             this.db = database;
         }
-        public void Login(string Name, string Pass)
+        public void AddUser(string Name, string Pass,int Role,string naam, string woonplaats, string adres, string postcode, string email,string telefoon)
         {
             string Salt = BCrypt.GenerateSalt();
             string HashedPass = BCrypt.HashPassword(Pass, Salt);
-            Console.WriteLine(HashedPass);
-            //myHash == "$2a$10$rBV2JDeWW3.vKyeQcM8fFO4777l4bVeQgDL6VIkxqlzQ7TCalQvla"
-            bool doesPasswordMatch = BCrypt.CheckPassword(HashedPass, HashedPass);
+            string query = "INSERT INTO `Users`(ULoginname, ULoginpass, USalt, RoleId, UNaam, UWoonplaats, UAdres, UPostcode, UEmail,UTelefoon) " +
+                "VALUES(" +
+                "'"+ Name +"'," +
+                "'" + HashedPass + "'," +
+                "'" + Salt + "'," +
+                "'" + Role + "'," +
+                "'" + naam + "'," +
+                "'" + woonplaats + "'," +
+                "'" + adres + "'," +
+                "'" + postcode + "'," +
+                "'" + email + "'," +
+                "'" + telefoon + "'" +
+                ");";
+            db.ExecuteStringQuery(query);
         }
     }
 }

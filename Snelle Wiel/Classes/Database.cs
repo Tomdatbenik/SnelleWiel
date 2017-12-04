@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace Snelle_Wiel.Classes
         public void Connect()
         {
             //this.Con = new MySqlConnection("Server=localhost;Database=ekwc;Uid=root;Pwd=;");
-            this.Con = new MySqlConnection("Server=81.207.39.183;Database=snellewiel;Uid=snellewiel;Pwd=SnelleWiel1;");
+            this.Con = new MySqlConnection("Server=81.207.39.183;Database=snellewiel;Uid=TeamAO;Pwd=teamao1;");
             this.Con.Open();
         }
 
@@ -40,7 +41,7 @@ namespace Snelle_Wiel.Classes
             {
                 MySqlDataAdapter adapter = new MySqlDataAdapter(Query, Con);
                 adapter.Fill(Result);
-            }
+            }   
             //MySqlCommand Command = new MySqlCommand(Query, Con);
 
             this.Disconnect();

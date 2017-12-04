@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Snelle_Wiel.Windows"
         mc:Ignorable="d"
-        Title="Gebruiker Toevoegen" Height="300" Width="400" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="#FFF6F6F6">
+        Title="Gebruiker Toevoegen" Height="800" Width="400" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="#FFF6F6F6">
     <Window.Resources>
         <Style TargetType="Button" x:Key="FlatButtonStyle">
             <Setter Property="Background" Value="LightGray"/>
@@ -42,6 +42,18 @@
             <RowDefinition Height="100*"/>
             <RowDefinition Height="100*"/>
             <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
             <RowDefinition Height="70*"/>
             <RowDefinition Height="100*"/>
             <RowDefinition Height="70*"/>
@@ -49,17 +61,28 @@
         <TextBlock Grid.Column="1" Grid.Row="0" Text="Login naam:" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="15"></TextBlock>
         <TextBlock Grid.Column="1" Grid.Row="2" Text="Login wachtwoord:" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="15"></TextBlock>
         <TextBlock Grid.Column="1" Grid.Row="4" Text="Rol:" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="15"></TextBlock>
-        <TextBlock x:Name="TbError" Grid.Column="1" Grid.Row="6" Text="" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="15" Foreground="Red"></TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="6" Text="Naam:" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="15"></TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="8" Text="Woonplaats:" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="15"></TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="10" Text="Adres:" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="15"></TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="12" Text="Postcode:" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="15"></TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="14" Text="Email:" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="15"></TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="16" Text="Telefoon nummer:" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="15"></TextBlock>
+        <TextBlock x:Name="TbError" Grid.Column="1" Grid.Row="16" Text="" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="15" Foreground="Red"></TextBlock>
 
-        <TextBox Grid.Column="1" Grid.Row="1" BorderBrush="#FFC3C1C1" BorderThickness="0,0,0,1" Foreground="#FF909090" Background="#FFF6F6F6" FontSize="22"/>
+        <TextBox x:Name="TbLName" Grid.Column="1" Grid.Row="1" BorderBrush="#FFC3C1C1" BorderThickness="0,0,0,1" Foreground="#FF909090" Background="#FFF6F6F6" FontSize="22"/>
+        <PasswordBox x:Name="PbPass" Grid.Column="1" Grid.Row="3" BorderBrush="#FFC3C1C1" BorderThickness="0,0,0,1" Foreground="#FF909090" Background="#FFF6F6F6" FontSize="22" PasswordChar="*"></PasswordBox>
+        <TextBox x:Name="TbName" Grid.Column="1" Grid.Row="7" BorderBrush="#FFC3C1C1" BorderThickness="0,0,0,1" Foreground="#FF909090" Background="#FFF6F6F6" FontSize="22"/>
+        <TextBox x:Name="TbWoonplaats" Grid.Column="1" Grid.Row="9" BorderBrush="#FFC3C1C1" BorderThickness="0,0,0,1" Foreground="#FF909090" Background="#FFF6F6F6" FontSize="22"/>
+        <TextBox x:Name="TbAdres" Grid.Column="1" Grid.Row="11" BorderBrush="#FFC3C1C1" BorderThickness="0,0,0,1" Foreground="#FF909090" Background="#FFF6F6F6" FontSize="22"/>
+        <TextBox x:Name="TbPostcode" Grid.Column="1" Grid.Row="13" BorderBrush="#FFC3C1C1" BorderThickness="0,0,0,1" Foreground="#FF909090" Background="#FFF6F6F6" FontSize="22"/>
+        <TextBox x:Name="TbEmail" Grid.Column="1" Grid.Row="15" BorderBrush="#FFC3C1C1" BorderThickness="0,0,0,1" Foreground="#FF909090" Background="#FFF6F6F6" FontSize="22"/>
+        <TextBox x:Name="TbTelefoon" Grid.Column="1" Grid.Row="17" BorderBrush="#FFC3C1C1" BorderThickness="0,0,0,1" Foreground="#FF909090" Background="#FFF6F6F6" FontSize="22"/>
 
-        <TextBox Grid.Column="1" Grid.Row="3" BorderBrush="#FFC3C1C1" BorderThickness="0,0,0,1" Foreground="#FF909090" Background="#FFF6F6F6" FontSize="22"></TextBox>
-
-        <ComboBox Grid.Column="1" Grid.Row="5" BorderBrush="#FFC3C1C1" BorderThickness="0,0,0,1" Foreground="#FF909090" Background="#FFF6F6F6" FontSize="22">
-            <ComboBoxItem>Planner</ComboBoxItem>
-            <ComboBoxItem>Administratie</ComboBoxItem>
-            <ComboBoxItem>Chauffeur</ComboBoxItem>
+        <ComboBox x:Name="CbRole" SelectedValuePath="Tag" Grid.Column="1" Grid.Row="5" BorderBrush="#FFC3C1C1" BorderThickness="0,0,0,1" Foreground="#FF909090" Background="#FFF6F6F6" FontSize="22">
+            <ComboBoxItem Tag="1">Planner</ComboBoxItem>
+            <ComboBoxItem Tag="2" IsSelected="True" >Chauffeur</ComboBoxItem>
+            <ComboBoxItem Tag="3">Administratie</ComboBoxItem>
         </ComboBox>
-        <Button x:Name="BtnAddUser" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="1" Style="{StaticResource FlatButtonStyle}" Content="Opslaan" Click="BtnAddUser_Click"></Button>
+        <Button x:Name="BtnAddUser" Grid.Column="1" Grid.Row="19" Grid.ColumnSpan="1" Style="{StaticResource FlatButtonStyle}" Content="Opslaan" Click="BtnAddUser_Click"></Button>
     </Grid>
 </Window>

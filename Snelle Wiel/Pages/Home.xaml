@@ -22,7 +22,7 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="19*"/>
         </Grid.RowDefinitions>
-        <Frame x:Name="FNavigateframe" Source="/Snelle Wiel;component/Pages/BeheerPlanning.xaml" Grid.Row="1"  Grid.ColumnSpan="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden"/>
+        <Frame x:Name="FNavigateframe" Grid.Row="1"  Grid.ColumnSpan="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden"/>
         <Button Content="Planning" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="navigatorbutton_click"/>
         <Button Content="Chauffeurs" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="navigatorbutton_click"/>
         <Button Content="Wagens" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="navigatorbutton_click"/>
