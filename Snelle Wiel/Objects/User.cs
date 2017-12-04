@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Snelle_Wiel.Objects
 {
-    class User
+    public class User
     {
-        public int Id;
-        public string Naam;
-        public string Woonplaats;
-        public string Adres;
-        public string Postcode;
-        public string Email;
-        public string Telefoonnr;
+        public int Id { get; set; }
+        public string Naam { get; set; }
+        public string Woonplaats { get; set; }
+        public string Adres { get; set; }
+        public string Postcode { get; set; }
+        public string Email { get; set; }
+        public string Telefoonnr { get; set; }
 
         public User(int id, string naam, string woonplaats, string adres, string postcode, string email, string telefoonnr)
         {

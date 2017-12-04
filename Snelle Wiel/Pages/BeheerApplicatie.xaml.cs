@@ -3,6 +3,7 @@ using Snelle_Wiel.Objects;
 using Snelle_Wiel.Windows;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -25,59 +26,22 @@ namespace Snelle_Wiel.Pages
     public partial class BeheerApplicatie : Page
     {
         Database db;
-        List<User> Users = new List<User>();
+        ObservableCollection<User> Users = new ObservableCollection<User>();
         public BeheerApplicatie(Database database)
         {
             InitializeComponent();
             this.db = database;
+            loadusers();
         }
 
         public void loadusers()
         {
-            // Add columns
-            var gridView = new GridView();
-            gridView.Columns.Add(new GridViewColumn
-            {
-                Header = "UserId",
-                DisplayMemberBinding = new Binding("PBarcode")
-            });
-            gridView.Columns.Add(new GridViewColumn
-            {
-                Header = "Naam",
-                DisplayMemberBinding = new Binding("POmschrijving")
-            });
-            gridView.Columns.Add(new GridViewColumn
-            {
-                Header = "Woonplaats",
-                DisplayMemberBinding = new Binding("PPrijs")
-            });
-            gridView.Columns.Add(new GridViewColumn
-            {
-                Header = "Adres",
-                DisplayMemberBinding = new Binding("PPrijs")
-            });
-            gridView.Columns.Add(new GridViewColumn
-            {
-                Header = "Postcode",
-                DisplayMemberBinding = new Binding("PPrijs")
-            });
-            gridView.Columns.Add(new GridViewColumn
-            {
-                Header = "Email",
-                DisplayMemberBinding = new Binding("PPrijs")
-            });
-            gridView.Columns.Add(new GridViewColumn
-            {
-                Header = "Telefoon",
-                DisplayMemberBinding = new Binding("PPrijs")
-            });
-
-            lvUserlist.View = gridView;
+            lvUserlist.ItemsSource = null;
+            Users.Clear();
 
             DataTable dtResult = new DataTable();
-            db.Connect();
-            db.Verify();
-            string query = "SELECT `UserId`,`UNaam`,`UWoonplaats`,`UAdres`,`UPostcode`,`UEmail`,`UTelefoon`";
+ 
+            string query = "SELECT `UserId`,`UNaam`,`UWoonplaats`,`UAdres`,`UPostcode`,`UEmail`,`UTelefoon` FROM Users";
 
             dtResult =  db.ExecuteStringQuery(query);
             foreach (DataRow dr in dtResult.Rows)
@@ -89,20 +53,27 @@ namespace Snelle_Wiel.Pages
                 string postcode = dr["UPostcode"].ToString();
                 string email = dr["UEmail"].ToString();
                 string telefoonnr = dr["UTelefoon"].ToString();
+
                 User u = new User(id,naam,woonplaats,adres,postcode,email,telefoonnr);
                 Users.Add(u);
             }
-            foreach(User u in Users)
-            {
-                lvUserlist.Items.Add(u);
-            }
 
+            lvUserlist.ItemsSource = Users;
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             WAddUser aw = new WAddUser(this.db);
             aw.ShowDialog();
+            loadusers();
+        }
+
+        private void BtnRemove_Click(object sender, RoutedEventArgs e)
+        {
+            int UserId = Users[lvUserlist.SelectedIndex].Id;
+            string query = "DELETE FROM `snellewiel`.`Users` WHERE  `UserId`= "+UserId+";";
+            db.ExecuteStringQuery(query);
+            loadusers();
         }
     }
 }

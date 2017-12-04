@@ -19,13 +19,23 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Column="0" Text="Users:" HorizontalAlignment="Left"></TextBlock>
-        <ListView x:Name="lvUserlist" Grid.Row="1" Grid.ColumnSpan="2">
-
+        <ListView x:Name="lvUserlist" Grid.Row="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="Naam" DisplayMemberBinding="{Binding Naam}"/>
+                    <GridViewColumn Header="Woonplaats" DisplayMemberBinding="{Binding Woonplaats}"/>
+                    <GridViewColumn Header="Adres" DisplayMemberBinding="{Binding Adres}"/>
+                    <GridViewColumn Header="Postcode" DisplayMemberBinding="{Binding Postcode}"/>
+                    <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"/>
+                    <GridViewColumn Header="Telefoonnr" DisplayMemberBinding="{Binding Telefoonnr}"/>
+                </GridView>
+            </ListView.View>
         </ListView>
         <StackPanel Grid.Row="1" Grid.Column="1">
             <Button Content="Add" x:Name="btnAdd" Click="btnAdd_Click"></Button>
             <Button Content="Edit"></Button>
-            <Button Content="Remove"></Button>
+            <Button x:Name="BtnRemove" Content="Remove" Click="BtnRemove_Click"></Button>
         </StackPanel>
 
     </Grid>
