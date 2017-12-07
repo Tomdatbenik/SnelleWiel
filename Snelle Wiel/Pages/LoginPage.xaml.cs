@@ -1,5 +1,6 @@
 ﻿using Snelle_Wiel;
 using Snelle_Wiel.Classes;
+using Snelle_Wiel.Objects;
 using Snelle_Wiel.Pages;
 using System;
 using System.Collections.Generic;
@@ -24,14 +25,21 @@ namespace SnelleWiel.Pages
     public partial class LoginPage : Page
     {
         Database db = new Database();
+        cLogin lg;
         public LoginPage()
         {
             InitializeComponent();
+            lg = new cLogin(this.db);
         }
 
         private void BtLogin_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new Home(db));
+           User u = lg.Login(TbName.Text, PbPass.Password);
+            
+           if(u.Id != 0)
+           {
+                this.NavigationService.Navigate(new Home(db));
+           }
         }
 
 

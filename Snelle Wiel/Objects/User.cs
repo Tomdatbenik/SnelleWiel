@@ -9,6 +9,7 @@ namespace Snelle_Wiel.Objects
     public class User
     {
         public int Id { get; set; }
+        public int Rol { get; set; }
         public string Naam { get; set; }
         public string Woonplaats { get; set; }
         public string Adres { get; set; }

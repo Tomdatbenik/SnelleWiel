@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Snelle_Wiel.Objects;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -15,26 +16,37 @@ namespace Snelle_Wiel.Classes
             this.db = database;
         }
 
-        public bool Login(string lname, string lpass)
+        public User Login(string lname, string lpass)
         {
-            string query = "SELECT UserId , ULoginpass FROM Users WHERE ULoginname = '" + lname + "' ";
+            User u = new User(0, null, null, null, null, null, null);
+            string query = "SELECT UserId, ULoginpass FROM Users WHERE ULoginname = '" + lname + "' ";
             DataTable dt = db.ExecuteStringQuery(query);
-            int id;
-            string pass = "";
 
-            if (dt.Rows != null)
+            if (dt.Rows.Count != 0)
             {
-                foreach (DataRow dr in dt.Rows)
+                DataRow dr = dt.Rows[0];
+                int id = int.Parse(dr["UserId"].ToString());
+                string pass = dr["ULoginpass"].ToString();
+
+                if (BCrypt.CheckPassword(lpass, pass))
                 {
-                    id = int.Parse(dr["UserId"].ToString());
-                    pass = dr["ULoginpass"].ToString();
+                    string q = "SELECT UserId, RoleId, UNaam, UWoonplaats, UAdres, UPostcode, UEmail, UTelefoon FROM Users WHERE UserId = '" + id.ToString() + "' ";
+                    DataTable udata = db.ExecuteStringQuery(q);
+                    foreach (DataRow dar in udata.Rows)
+                    {
+                        u.Id = int.Parse(dar["UserId"].ToString());
+                        u.Rol = int.Parse(dar["RoleId"].ToString());
+                        u.Naam = dar["UNaam"].ToString();
+                        u.Woonplaats = dar["UWoonplaats"].ToString();
+                        u.Adres = dar["UAdres"].ToString();
+                        u.Email = dar["UEmail"].ToString();
+                        u.Telefoonnr = dar["UTelefoon"].ToString();
+                    }   
                 }
-
-                BCrypt.CheckPassword(lpass, pass);
-            }
+            }   
 
 
-            return false;
+            return u;
         }
 
 
