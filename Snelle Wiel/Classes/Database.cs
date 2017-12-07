@@ -12,7 +12,7 @@ namespace Snelle_Wiel.Classes
     public class Database
     {
         public MySqlConnection Con;
-
+        public int Userid;
         public Database()
         {
             Connect();

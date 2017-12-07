@@ -38,6 +38,7 @@ namespace SnelleWiel.Pages
             
            if(u.Id != 0)
            {
+                db.Userid = u.Id;
                 this.NavigationService.Navigate(new Home(db));
            }
         }
