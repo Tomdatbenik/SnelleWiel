@@ -1,6 +1,7 @@
 ﻿using Snelle_Wiel.Classes;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,16 @@ namespace Snelle_Wiel.Pages
         {
             InitializeComponent();
             this.db = database;
+        }
+
+        public void Setup()
+        {
+            LvChauffeurs.Items.Clear();
+            DataTable dt = db.ExecuteStringQuery("SELECT UNaam FROM Users WHERE RoleId = 2");
+            foreach(DataRow dr in dt.Rows)
+            {
+                LvChauffeurs.Items.Add(dr["UNaam"].ToString());
+            }
         }
     }
 }

@@ -39,6 +39,7 @@ namespace Snelle_Wiel.Classes
                     break;
                 case "Chauffeurs":
                     home.FNavigateframe.Navigate(this.Beheerchauffeur);
+                    this.Beheerchauffeur.Setup();
                     break;
                 case "Facturatie":
                     home.FNavigateframe.Navigate(this.Beheerfacturatie);

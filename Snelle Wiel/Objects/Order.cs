@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Snelle_Wiel.Classes
+namespace Snelle_Wiel.Objects
 {
-    class Order
+    public class Order
     {
         public int oId { get; }
         public string oOmschrijving { get; }
