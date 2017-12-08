@@ -7,7 +7,16 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="Home" MinHeight="350" MinWidth="525" Background="White">
-
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="Window.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity"  From="0.1" To="1" Duration="0:0:0:1" FillBehavior="HoldEnd" AutoReverse="False"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Page.Triggers>
+    
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -20,15 +29,17 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="19*"/>
+            <RowDefinition Height="18*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Frame x:Name="FNavigateframe" Grid.Row="1"  Grid.ColumnSpan="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden"/>
-        <Button Content="Planning" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="navigatorbutton_click"/>
-        <Button Content="Chauffeurs" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="navigatorbutton_click"/>
-        <Button Content="Wagens" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="navigatorbutton_click"/>
-        <Button Content="Klant" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="navigatorbutton_click"/>
-        <Button Content="Facturatie" Grid.Column="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="navigatorbutton_click"/>
-        <Button Content="Applicatie" Grid.Column="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="navigatorbutton_click"/>
+        <Border Grid.Row="3" Background="#FF4A67AB" Grid.ColumnSpan="6"></Border>
+        <Frame x:Name="FNavigateframe" Grid.Row="1"  Grid.ColumnSpan="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden" />
+        <Button Content="Planning" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="navigatorbutton_click" Background="#FF4A67AB" Foreground="White"/>
+        <Button Content="Chauffeurs" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="navigatorbutton_click" Background="#FF4A67AB" Foreground="White"/>
+        <Button Content="Wagens" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="navigatorbutton_click" Background="#FF4A67AB" Foreground="White"/>
+        <Button Content="Klant" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="navigatorbutton_click" Background="#FF4A67AB" Foreground="White"/>
+        <Button Content="Facturatie" Grid.Column="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="navigatorbutton_click" Background="#FF4A67AB" Foreground="White"/>
+        <Button Content="Applicatie" Grid.Column="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="navigatorbutton_click" Background="#FF4A67AB" Foreground="White"/>
 
     </Grid>
 </Page>

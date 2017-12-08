@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media.Animation;
 
 namespace Snelle_Wiel.Classes
 {
@@ -58,9 +61,24 @@ namespace Snelle_Wiel.Classes
                     break;
 
             }
-
         }
 
+        private void PageSlide(Page topage)
+        {
+            var a = new DoubleAnimation
+            {
+                From = -700,
+                To = topage.ActualWidth,
+                FillBehavior = FillBehavior.Stop,
+                Duration = new Duration(TimeSpan.FromSeconds(0.2))
+            };
+            var storyboard = new Storyboard();
 
+            storyboard.Children.Add(a);
+            Storyboard.SetTarget(a, topage);
+            Storyboard.SetTargetProperty(a, new PropertyPath("(Canvas.Left)"));
+            storyboard.Completed += delegate { this.home.Visibility = Visibility.Hidden; home.FNavigateframe.Navigate(topage); };
+            storyboard.Begin();
+        }
     }
 }

@@ -8,11 +8,10 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="LoginPage">
 
-
     <Page.Resources>
         <Style TargetType="Button" x:Key="FlatButtonStyle">
-            <Setter Property="Background" Value="LightGray"/>
-            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="#FF4A67AB"/>
+            <Setter Property="Foreground" Value="White"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -26,23 +25,30 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="DarkGray"/>
+                    <Setter Property="Background" Value="#FF6394E8"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
     </Page.Resources>
+    <Page.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF63B3CB" Offset="0.597"/>
+            <GradientStop Color="#FF6394E8" Offset="0.038"/>
+        </LinearGradientBrush>
+    </Page.Background>
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="10*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="45*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="34*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="34*"/>
+            <RowDefinition Height="33*"/>
+            <RowDefinition Height="34*"/>
+            <RowDefinition Height="33*"/>
+            <RowDefinition Height="17*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="8*"/>
@@ -51,31 +57,33 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="8*"/>
         </Grid.ColumnDefinitions>
-        <Border x:Name="BBorder" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8" Grid.ColumnSpan="3" Grid.RowSpan="8" Background="#FFF6F6F6"  Grid.Column="1"/>
-        <Viewbox  HorizontalAlignment="Center" VerticalAlignment="top" Grid.Row="0" Grid.Column="2">
-            <TextBlock x:Name="txbSnelleWiel" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Snelle Wiel"/>
+        <Border x:Name="BBorder" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8" Grid.ColumnSpan="3" Grid.RowSpan="8" Background="#FFF6F6F6"  Grid.Column="1" Grid.Row="1"/>
+        <Border Grid.Column="2" Grid.RowSpan="8" Grid.Row="1" Width="30" Background="#FF4A67AB" HorizontalAlignment="Right" CornerRadius="0,8,8,0" Grid.ColumnSpan="2"></Border>
+        <Viewbox  HorizontalAlignment="Center" VerticalAlignment="top" Grid.Row="0" Grid.Column="2" Grid.RowSpan="2">
+            <TextBlock x:Name="txbSnelleWiel" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Snelle Wiel" Foreground="#FF4A67AB" FontFamily="Dubai"/>
         </Viewbox>
 
-        <Viewbox Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left">
-            <TextBlock x:Name="TxbNaam" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextWrapping="Wrap" Text="Naam:" />
+        <Viewbox Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left">
+            <TextBlock x:Name="TxbNaam" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextWrapping="Wrap" Text="Naam:" Foreground="#FF909090" FontFamily="Dubai"/>
         </Viewbox>
 
-        <Viewbox Grid.Column="2" Grid.Row="2">
-            <TextBox x:Name="TbName" Text="Naam" Background="#FFF6F6F6" BorderBrush="#FFC3C1C1" BorderThickness="0,0,0,1" Grid.Column="2" Grid.Row="2" Height="21.6" Width="200" HorizontalAlignment="Center" VerticalAlignment="Stretch" Foreground="#FF909090" MouseEnter="Mouse_enter" />
+        <Viewbox Grid.Column="2" Grid.Row="3">
+            <TextBox x:Name="TbName" Text="Naam" Background="#FFF6F6F6" BorderBrush="#FFC3C1C1" BorderThickness="0,0,0,1" Grid.Column="2" Grid.Row="2" Height="21.6" Width="200" HorizontalAlignment="Center" VerticalAlignment="Stretch" Foreground="#FF909090" MouseEnter="Mouse_enter" FontFamily="Dubai"/>
         </Viewbox>
 
-        <Viewbox Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left" >
-            <TextBlock x:Name="TxbPass" Background="#FFF6F6F6" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextWrapping="Wrap" Text="Wachtwoord:"/>
+        <Viewbox Grid.Column="2" Grid.Row="4" HorizontalAlignment="Left">
+            <TextBlock x:Name="TxbPass" Background="#FFF6F6F6" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextWrapping="Wrap" Text="Wachtwoord:" Foreground="#FF909090" FontFamily="Dubai"/>
         </Viewbox>
 
-        <Viewbox Grid.Column="2" Grid.Row="4">
-            <PasswordBox x:Name="PbPass" Background="#FFF6F6F6" BorderBrush="#FFC3C1C1" BorderThickness="0,0,0,1" Grid.Column="2" Grid.Row="4" Height="21.6" Width="200" PasswordChar="*" Foreground="#FF909090" Password="12345678" MouseEnter="PbPass_MouseEnter" HorizontalAlignment="Center"/>
+        <Viewbox Grid.Column="2" Grid.Row="5">
+            <PasswordBox x:Name="PbPass" Background="#FFF6F6F6" BorderBrush="#FFC3C1C1" BorderThickness="0,0,0,1" Grid.Column="2" Grid.Row="4" Height="21.6" Width="200" PasswordChar="*" Foreground="#FF909090" Password="12345678" MouseEnter="PbPass_MouseEnter" HorizontalAlignment="Center" FontFamily="Dubai"/>
         </Viewbox>
 
         <Viewbox Grid.Column="2" Grid.Row="6">
-            <Button Style="{StaticResource FlatButtonStyle}" x:Name="BtLogin"  Height="21.6" Width="225" Grid.Column="2" Grid.Row="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Login" Click="BtLogin_Click" MinHeight="25"/>
+            <TextBlock x:Name="TbError" HorizontalAlignment="left" VerticalAlignment="Top" Text="Login Gegevens niet correct!!" Foreground="Red" Visibility="Hidden" FontFamily="Dubai"></TextBlock>
         </Viewbox>
-
-        <TextBlock x:Name="wachtwoordvergeten" Grid.Row="7" Grid.Column="2" TextWrapping="Wrap" Text="Wachtwoord vergeten?" Height="20" HorizontalAlignment="Center" VerticalAlignment="Top" MouseUp="wachtwoordvergeten_MouseUp" TextDecorations="Underline"/>
+        <Viewbox Grid.Column="2" Grid.Row="7">
+            <Button Style="{StaticResource FlatButtonStyle}" x:Name="BtLogin"  Height="21.6" Width="225" Grid.Column="2" Grid.Row="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Login" Click="BtLogin_Click" MinHeight="25" Foreground="White" FontFamily="Dubai"/>
+        </Viewbox>
     </Grid>
 </Page>

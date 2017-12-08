@@ -32,7 +32,7 @@ namespace Snelle_Wiel.Pages
         public void Setup()
         {
             LvChauffeurs.Items.Clear();
-            DataTable dt = db.ExecuteStringQuery("SELECT UNaam FROM Users WHERE RoleId = 2");
+            DataTable dt = db.ExecuteStringQuery("SELECT UserId, RoleId, UNaam, UWoonplaats, UAdres, UPostcode, UEmail, UTelefoon FROM Users WHERE RoleId = 2");
             foreach(DataRow dr in dt.Rows)
             {
                 LvChauffeurs.Items.Add(dr["UNaam"].ToString());

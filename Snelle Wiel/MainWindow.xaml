@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Snelle_Wiel"
         mc:Ignorable="d"
         Title="Snelle Wiel" MinHeight="350" MinWidth="525" Icon="Images/busje.png" WindowStartupLocation="CenterScreen">
+    
     <Grid>
-        <Frame x:Name="Mainframe" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Frame>
+        <Frame x:Name="Mainframe" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden" ></Frame>
     </Grid>
 </Window>

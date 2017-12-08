@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,9 +14,11 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace SnelleWiel.Pages
 {
@@ -34,15 +37,18 @@ namespace SnelleWiel.Pages
 
         private void BtLogin_Click(object sender, RoutedEventArgs e)
         {
-           User u = lg.Login(TbName.Text, PbPass.Password);
-            
-           if(u.Id != 0)
-           {
+            User u = lg.Login(TbName.Text, PbPass.Password);
+            //TextBlockHide(TbError);
+            if (u.Id != 0)
+            {
                 db.Userid = u.Id;
-                this.NavigationService.Navigate(new Home(db));
-           }
+                pagefade(this);
+            }
+            else
+            {
+                TbError.Visibility = System.Windows.Visibility.Visible;
+            }
         }
-
 
         bool tbenter = true;
 
@@ -65,9 +71,25 @@ namespace SnelleWiel.Pages
             }
         }
 
-        private void wachtwoordvergeten_MouseUp(object sender, MouseButtonEventArgs e)
+
+
+
+        private void pagefade(Page page)
         {
-            Console.WriteLine("Test");
+           var a = new DoubleAnimation
+            {
+                From = 1.0,
+                To = 0.0,
+                FillBehavior = FillBehavior.Stop,
+                Duration = new Duration(TimeSpan.FromSeconds(0.2))
+            };
+        var storyboard = new Storyboard();
+
+        storyboard.Children.Add(a);
+        Storyboard.SetTarget(a, page);
+        Storyboard.SetTargetProperty(a, new PropertyPath(OpacityProperty));
+        storyboard.Completed += delegate { this.Visibility = Visibility.Hidden; this.NavigationService.Navigate(new Home(db)); };
+        storyboard.Begin();
         }
     }
 }
