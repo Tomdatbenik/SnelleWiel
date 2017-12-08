@@ -15,8 +15,40 @@
                 </Storyboard>
             </BeginStoryboard>
         </EventTrigger>
+        <!--
+        <EventTrigger RoutedEvent="ButtonBase.Click">
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetName="FNavigateframe" Storyboard.TargetProperty="Margin">
+                    <ThicknessAnimation From="-1000,0,1000,0" To="0 , 0 , 0, 0" Duration="0:0:0:1"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+        -->
     </Page.Triggers>
     
+    <Page.Resources>
+        <Style TargetType="Button" x:Key="FlatButtonStyle">
+            <Setter Property="Background" Value="#FF4A67AB"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderThickness="0"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FF6394E8"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
     <Grid>
 
         <Grid.ColumnDefinitions>
