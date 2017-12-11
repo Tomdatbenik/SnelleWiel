@@ -6,6 +6,30 @@
       xmlns:local="clr-namespace:Snelle_Wiel.Pages"
       mc:Ignorable="d"
       Title="BeheerFacturatie" MinHeight="350" MinWidth="525" Background="White">
+
+    <Page.Resources>
+        <Style TargetType="Button" x:Key="FlatButtonStyle">
+            <Setter Property="Background" Value="#FF4A67AB"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderThickness="0"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FF6394E8"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10*"/>
@@ -25,9 +49,9 @@
         </Grid.RowDefinitions>
         <Border Grid.Column="1" Grid.Row="1" BorderThickness="1" BorderBrush="Black" Grid.ColumnSpan="2" Grid.RowSpan="4"/>
         <TextBlock Text="Factuurinformatie" Grid.Column="1" Grid.Row="1"/>
-        <Button Grid.Column="1" Grid.Row="3" Content="Informatie wijzigen"/>
+        <Button Grid.Column="1" Grid.Row="3" Content="Informatie wijzigen" Style="{StaticResource FlatButtonStyle }"/>
         <Border Grid.Column="4" Grid.Row="1" BorderThickness="1" BorderBrush="Black" Grid.RowSpan="4"/>
-        <Button Grid.Column="4" Grid.Row="1" Content="Factuur 1"/>
+        <Button Grid.Column="4" Grid.Row="1" Content="Factuur 1" Style="{StaticResource FlatButtonStyle }"/>
     </Grid>
 
 </Page>

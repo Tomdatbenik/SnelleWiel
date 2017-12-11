@@ -8,6 +8,28 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="BeheerPlanning" MinHeight="350" MinWidth="525" Background="White">
 
+    <Page.Resources>
+        <Style TargetType="Button" x:Key="FlatButtonStyle">
+            <Setter Property="Background" Value="#FF4A67AB"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderThickness="0"
+                        Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FF6394E8"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.1*"/>
@@ -31,8 +53,8 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="1" Grid.Column="1" Text="Datum:" HorizontalAlignment="Left" VerticalAlignment="Stretch"></TextBlock>
         <DatePicker Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch"/>
-        <Button Grid.Row="1" Content="Vorige 3" Grid.Column="4"  VerticalAlignment="Stretch" Background="#FF4A67AB" Foreground="White"/>
-        <Button Grid.Row="1" Content="Volgende 3" Grid.Column="5"  VerticalAlignment="Stretch" Background="#FF4A67AB" Foreground="White"/>
+        <Button Grid.Row="1" Content="Vorige 3" Grid.Column="4"  VerticalAlignment="Stretch" Style="{StaticResource FlatButtonStyle}"/>
+        <Button Grid.Row="1" Content="Volgende 3" Grid.Column="5"  VerticalAlignment="Stretch" Style="{StaticResource FlatButtonStyle}"/>
 
         <TextBlock Grid.Row="2" Grid.Column="1" Text="Chauffeur 1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="2"/>
         <TextBlock Grid.Row="2" Grid.Column="4" Text="Chauffeur 2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="2"/>

@@ -1,4 +1,5 @@
 ﻿using Snelle_Wiel.Classes;
+using Snelle_Wiel.Windows;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -37,6 +38,13 @@ namespace Snelle_Wiel.Pages
             {
                 LvChauffeurs.Items.Add(dr["UNaam"].ToString());
             }
+        }
+
+        private void btnaddchauffeur_Click(object sender, RoutedEventArgs e)
+        {
+            WAddUser aw = new WAddUser(this.db);
+            aw.ShowDialog();
+            Setup();
         }
     }
 }

@@ -7,6 +7,28 @@
       mc:Ignorable="d"
       Title="BeheerKlanten" MinHeight="350" MinWidth="525" Background="White">
 
+    <Page.Resources>
+        <Style TargetType="Button" x:Key="FlatButtonStyle">
+            <Setter Property="Background" Value="#FF4A67AB"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderThickness="0"
+                        Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FF6394E8"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>
@@ -49,8 +71,8 @@
         <TextBlock Grid.Column="2" Grid.Row="4" Text="Klokgieter 5"/>
         <TextBlock Grid.Row="5" Text="Postcode:" Grid.Column="1"/>
         <TextBlock Grid.Column="2" Grid.Row="5" Text="9812 SM"/>
-        <Button Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" Content="Informatie wijzigen" Margin="0,3,70,3"/>
-        <Button Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" Content="Klant afmelden" Margin="0,3,70,3"/>
+        <Button Grid.Column="1" Grid.Row="6" Content="Informatie wijzigen" Style="{StaticResource FlatButtonStyle}"/>
+        <Button Grid.Column="1" Grid.Row="7" Content="Klant afmelden"  Style="{StaticResource FlatButtonStyle}"/>
         <TextBlock Grid.Row="9" Text="Contactinformatie:" Grid.Column="1"/>
         <ListView Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="7">
             <ListViewItem>Naam: Voorbeeld Persoon</ListViewItem>

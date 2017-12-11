@@ -6,10 +6,12 @@
         xmlns:local="clr-namespace:Snelle_Wiel.Windows"
         mc:Ignorable="d"
         Title="Gebruiker Toevoegen" Height="800" Width="400" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="#FFF6F6F6">
+
+    
     <Window.Resources>
         <Style TargetType="Button" x:Key="FlatButtonStyle">
-            <Setter Property="Background" Value="LightGray"/>
-            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="#FF4A67AB"/>
+            <Setter Property="Foreground" Value="White"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -23,7 +25,7 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="DarkGray"/>
+                    <Setter Property="Background" Value="#FF6394E8"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -71,7 +73,7 @@
 
         <TextBox x:Name="TbLName" Grid.Column="1" Grid.Row="1" BorderBrush="#FFC3C1C1" BorderThickness="0,0,0,1" Foreground="#FF909090" Background="#FFF6F6F6" FontSize="22"/>
         <PasswordBox x:Name="PbPass" Grid.Column="1" Grid.Row="3" BorderBrush="#FFC3C1C1" BorderThickness="0,0,0,1" Foreground="#FF909090" Background="#FFF6F6F6" FontSize="22" PasswordChar="*"></PasswordBox>
-        <TextBox x:Name="TbName" Grid.Column="1" Grid.Row="7" BorderBrush="#FFC3C1C1" BorderThickness="0,0,0,1" Foreground="#FF909090" Background="#FFF6F6F6" FontSize="22"/>
+        <TextBox x:Name="TbName" Grid.Column="1" Grid.Row="7" BorderBrush="#FFC3C1C1" BorderThickness="0,0,0,1" Foreground="#FF909090" Background="#FFF6F6F6" FontSize="22" TextChanged="TbName_TextChanged" />
         <TextBox x:Name="TbWoonplaats" Grid.Column="1" Grid.Row="9" BorderBrush="#FFC3C1C1" BorderThickness="0,0,0,1" Foreground="#FF909090" Background="#FFF6F6F6" FontSize="22"/>
         <TextBox x:Name="TbAdres" Grid.Column="1" Grid.Row="11" BorderBrush="#FFC3C1C1" BorderThickness="0,0,0,1" Foreground="#FF909090" Background="#FFF6F6F6" FontSize="22"/>
         <TextBox x:Name="TbPostcode" Grid.Column="1" Grid.Row="13" BorderBrush="#FFC3C1C1" BorderThickness="0,0,0,1" Foreground="#FF909090" Background="#FFF6F6F6" FontSize="22"/>

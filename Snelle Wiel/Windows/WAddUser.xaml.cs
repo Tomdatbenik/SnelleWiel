@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -41,6 +42,39 @@ namespace Snelle_Wiel.Windows
             else
             {
                 TbError.Text = "Vul de gevraagde gegevens in";
+            }
+        }
+
+        //returns true if its allowed
+        private static bool IsTextAllowed(string text)
+        {
+            char[] characters = text.ToCharArray();
+            Regex regex = new Regex("[^0-9.-]+"); //regex that matches disallowed text
+            bool istext = false;
+            foreach (char c in characters)
+            {
+                if (regex.IsMatch(c.ToString()))
+                {
+                    istext = true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return istext;
+        }
+
+        private void TbName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            if(IsTextAllowed(tb.Text))
+            {
+                Console.WriteLine("Het is text!");
+            }
+            else
+            {
+                Console.WriteLine("Het is een nummer!");
             }
         }
     }
