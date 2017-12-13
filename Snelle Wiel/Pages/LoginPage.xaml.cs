@@ -35,7 +35,7 @@ namespace SnelleWiel.Pages
             lg = new cLogin(this.db);
         }
 
-        private void BtLogin_Click(object sender, RoutedEventArgs e)
+        public void BtLogin_Click(object sender, RoutedEventArgs e)
         {
             User u = lg.Login(TbName.Text, PbPass.Password);
             //TextBlockHide(TbError);
@@ -58,6 +58,7 @@ namespace SnelleWiel.Pages
             {
                 tbenter = false;
                 TbName.Text = "";
+                PbPass.Password = "";
             }
         }
 
@@ -70,9 +71,6 @@ namespace SnelleWiel.Pages
                 PbPass.Password = "";
             }
         }
-
-
-
 
         private void pagefade(Page page)
         {
@@ -90,6 +88,14 @@ namespace SnelleWiel.Pages
         Storyboard.SetTargetProperty(a, new PropertyPath(OpacityProperty));
         storyboard.Completed += delegate { this.Visibility = Visibility.Hidden; this.NavigationService.Navigate(new Home(db)); };
         storyboard.Begin();
+        }
+
+        public void Page_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                BtLogin_Click(this, new RoutedEventArgs());
+            }
         }
     }
 }

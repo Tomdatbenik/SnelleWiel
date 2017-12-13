@@ -1,6 +1,7 @@
 ﻿using Snelle_Wiel.Classes;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -17,26 +18,42 @@ using System.Windows.Shapes;
 namespace Snelle_Wiel.Windows
 {
     /// <summary>
-    /// Interaction logic for WAddUser.xaml
+    /// Interaction logic for WEditUser.xaml
     /// </summary>
-    public partial class WAddUser : Window
+    public partial class WEditUser : Window
     {
         Database db;
         cLogin lg;
-        public WAddUser(Database database)
+        int id;
+
+        public WEditUser(Database database, int Id)
         {
             InitializeComponent();
             this.db = database;
             this.lg = new cLogin(database);
+            this.id = Id;
+            string query = "SELECT * FROM Users WHERE UserId = '"+ id.ToString() +"'";
+            DataTable dt = db.ExecuteStringQuery(query);
+            foreach (DataRow dr in dt.Rows)
+            {
+                TbLName.Text = dr["ULoginname"].ToString();
+                CbRole.SelectedIndex = int.Parse(dr["RoleId"].ToString()) -1;
+                TbName.Text = dr["Unaam"].ToString();
+                TbWoonplaats.Text = dr["UWoonplaats"].ToString();
+                TbAdres.Text = dr["UAdres"].ToString();
+                TbPostcode.Text = dr["UPostcode"].ToString();
+                TbEmail.Text = dr["UEmail"].ToString();
+                TbTelefoon.Text = dr["UTelefoon"].ToString();
+            }
         }
 
-        private void BtnAddUser_Click(object sender, RoutedEventArgs e)
+        private void BtnEditUser_Click(object sender, RoutedEventArgs e)
         {
-            if (TbLName.Text != "" && PbPass.Password != "" && TbName.Text != "" && TbWoonplaats.Text != "" && TbAdres.Text != "" && TbPostcode.Text != "" && TbEmail.Text != "" && TbTelefoon.Text != "")
+            if(TbLName.Text != "" && TbName.Text != "" && TbWoonplaats.Text != "" && TbAdres.Text != "" && TbPostcode.Text != "" && TbEmail.Text != "" && TbTelefoon.Text != "")
             {
                 string tag = CbRole.SelectedValue.ToString();
                 int Roleid = int.Parse(tag);
-                lg.AddUser(TbLName.Text, PbPass.Password, Roleid,TbName.Text,TbWoonplaats.Text, TbAdres.Text, TbPostcode.Text, TbEmail.Text,TbTelefoon.Text);
+                lg.EditUser(this.id,TbLName.Text, PbPass.Password, Roleid, TbName.Text, TbWoonplaats.Text, TbAdres.Text, TbPostcode.Text, TbEmail.Text, TbTelefoon.Text);
                 this.Close();
             }
             else
@@ -45,7 +62,6 @@ namespace Snelle_Wiel.Windows
             }
         }
 
-        //returns true if its allowed
         private static bool IsTextAllowed(string text)
         {
             char[] characters = text.ToCharArray();
@@ -68,10 +84,10 @@ namespace Snelle_Wiel.Windows
         private void Textbox_TextChanged(object sender, TextChangedEventArgs e)
         {
             TextBox tb = sender as TextBox;
-            if(!IsTextAllowed(tb.Text))
+            if (!IsTextAllowed(tb.Text))
             {
                 string text = tb.Text;
-                if(text != "")
+                if (text != "")
                 {
                     char[] characters = text.ToCharArray();
                     tb.Text = text.TrimEnd(characters[characters.Length - 1]);
@@ -81,16 +97,5 @@ namespace Snelle_Wiel.Windows
                 }
             }
         }
-
-        private void TbPostcode_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Console.WriteLine(IsPostcode(TbPostcode.Text));
-        }
-
-        private static bool IsPostcode(string text)
-        {
-            return false;
-        }
-
     }
 }

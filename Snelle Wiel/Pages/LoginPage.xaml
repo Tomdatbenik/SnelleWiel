@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:SnelleWiel.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="LoginPage">
+      Title="LoginPage" KeyDown="Page_KeyDown">
 
     <Page.Resources>
         <Style TargetType="Button" x:Key="FlatButtonStyle">

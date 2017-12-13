@@ -60,10 +60,17 @@
         <Border BorderThickness="1" BorderBrush="Black" Grid.Row="1" Grid.Column="4" Grid.RowSpan="6" CornerRadius="8,8,8,8"/>
         <TextBlock FontWeight="Bold" HorizontalAlignment="Center" Grid.Column="4" Grid.Row="1" Text="Chauffeurs"/>
         <Button x:Name="btnaddchauffeur" Grid.Row="1" Grid.Column="4" Content="Chauffeur toevoegen" Margin="20,18.4,19.6,2" Grid.RowSpan="2" Style="{StaticResource FlatButtonStyle}" Click="btnaddchauffeur_Click"/>
-        <Button Grid.Row="3" Grid.Column="4" Content="Chauffeur wijzigen" Margin="20,10,19.6,10.4" Grid.RowSpan="2" Style="{StaticResource FlatButtonStyle}"/>
-        <Button Grid.Row="5" Grid.Column="4" Content="Chauffeur verwijderen" Margin="20,5.6,19.6,15.8" Grid.RowSpan="2" Style="{StaticResource FlatButtonStyle}"/>
+        <Button x:Name="btnChauffeurWijzigen" Grid.Row="3" Grid.Column="4" Content="Chauffeur wijzigen" Margin="20,10,19.6,10.4" Grid.RowSpan="2" Style="{StaticResource FlatButtonStyle}" Click="btnChauffeurWijzigen_Click"/>
+        <Button x:Name="btnChauffeurVerwijderen" Grid.Row="5" Grid.Column="4" Content="Chauffeur verwijderen" Margin="20,5.6,19.6,15.8" Grid.RowSpan="2" Style="{StaticResource FlatButtonStyle}" Click="btnChauffeurVerwijderen_Click"/>
         <Border BorderThickness="1" BorderBrush="Black" Grid.Row="8" Grid.Column="4" Grid.RowSpan="2"/>
-        <ListView x:Name="LvChauffeurs" Grid.Column="4" Grid.Row="9"/>
+        <ListView x:Name="LvChauffeurs" Grid.Column="4" Grid.Row="9">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="Naam" DisplayMemberBinding="{Binding Naam}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
         <TextBlock FontWeight="Bold" HorizontalAlignment="Center" Grid.Column="4" Grid.Row="8" Text="Chauffeurs overzicht"/>
         
     </Grid>

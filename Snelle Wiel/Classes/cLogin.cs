@@ -69,5 +69,39 @@ namespace Snelle_Wiel.Classes
                 ");";
             db.ExecuteStringQuery(query);
         }
+
+        public void EditUser(int id,string Name, string Pass, int Role, string naam, string woonplaats, string adres, string postcode, string email, string telefoon)
+        {
+
+            if(Pass == "")
+            {
+                string query = "UPDATE `snellewiel`.`Users` SET ULoginname = '" + Name + "'," +
+                "RoleId= '" + Role + "'" +
+                ", UNaam= '" + naam + " '" +
+                ", UWoonplaats= '" + woonplaats + "', " +
+                "UAdres= '" + adres + "', " +
+                "UPostcode= '" + postcode + " ', " +
+                "UEmail= '" + email + "'," +
+                "UTelefoon= '" + telefoon + " ' " +
+                "WHERE  `UserId`='" + id.ToString() + "';";
+                db.ExecuteStringQuery(query);
+            }
+            else
+            {
+                string Salt = BCrypt.GenerateSalt();
+                string HashedPass = BCrypt.HashPassword(Pass, Salt);
+                string query = "UPDATE `snellewiel`.`Users` SET ULoginname = '" + Name +
+                "', ULoginpass= '" + HashedPass + "', " +
+                "RoleId= '" + Role + "'" +
+                ", UNaam= '" + naam + " '" +
+                ", UWoonplaats= '" + woonplaats + "', " +
+                "UAdres= '" + adres + "', " +
+                "UPostcode= '" + postcode + " ', " +
+                "UEmail= '" + email + "'," +
+                "UTelefoon= '" + telefoon + " ' " +
+                "WHERE  `UserId`='" + id.ToString() + "';";
+                db.ExecuteStringQuery(query);
+            }
+        }
     }
 }

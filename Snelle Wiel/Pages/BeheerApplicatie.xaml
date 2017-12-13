@@ -56,7 +56,7 @@
         </ListView>
         <StackPanel Grid.Row="1" Grid.Column="1">
             <Button Style="{StaticResource FlatButtonStyle}" Content="Add" x:Name="btnAdd" Click="btnAdd_Click"></Button>
-            <Button Style="{StaticResource FlatButtonStyle}" Content="Edit"></Button>
+            <Button x:Name="BtnEdit" Style="{StaticResource FlatButtonStyle}" Content="Edit" Click="BtnEdit_Click"></Button>
             <Button Style="{StaticResource FlatButtonStyle}" x:Name="BtnRemove" Content="Remove" Click="BtnRemove_Click"></Button>
         </StackPanel>
 

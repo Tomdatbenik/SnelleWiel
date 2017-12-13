@@ -75,5 +75,32 @@ namespace Snelle_Wiel.Pages
             db.ExecuteStringQuery(query);
             loadusers();
         }
+
+        public class ItemFromList
+        {
+            public int Id { get; set; }
+            public string Naam { get; set; }
+            public string Woonplaats { get; set; }
+            public string Adres { get; set; }
+            public string Postcode { get; set; }
+            public string Email { get; set; }
+            public string Telefoonnr { get; set; }
+        }
+
+
+        private void BtnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            if(lvUserlist.SelectedItem != null)
+            {
+                User u = lvUserlist.SelectedItem as User;
+                WEditUser ew = new WEditUser(this.db, u.Id);
+                ew.ShowDialog();
+                loadusers();
+            }
+            else
+            {
+                MessageBox.Show("Selecteer een gebruiker");
+            }
+        }
     }
 }
