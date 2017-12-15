@@ -27,6 +27,7 @@ namespace Snelle_Wiel.Pages
     {
         Database db;
         ObservableCollection<User> Users = new ObservableCollection<User>();
+        UserData ud;
         public BeheerChauffeur(Database database)
         {
             InitializeComponent();
@@ -36,6 +37,7 @@ namespace Snelle_Wiel.Pages
         public void Setup()
         {
             List<User> ulist = new List<User>();
+            ud = new UserData(this.db);
 
             LvChauffeurs.ItemsSource = null;
             Users.Clear();
@@ -43,10 +45,20 @@ namespace Snelle_Wiel.Pages
             DataTable dt = db.ExecuteStringQuery("SELECT UserId, RoleId, UNaam, UWoonplaats, UAdres, UPostcode, UEmail, UTelefoon FROM Users WHERE RoleId = 2");
             foreach(DataRow dr in dt.Rows)
             {
-                User u = new User(int.Parse(dr["UserId"].ToString()), dr["UNaam"].ToString(),null,null,null,null,null);
+                string id = dr["UserId"].ToString();
+                string naam = dr["UNaam"].ToString();
+                string woonplaats = dr["UWoonplaats"].ToString();
+                string adres = dr["UAdres"].ToString();
+                string postcode = dr["UPostcode"].ToString();
+                string email = dr["UEmail"].ToString();
+                string telefoon = dr["UTelefoon"].ToString();
+
+                User u = new User(int.Parse(id),naam,woonplaats,adres,postcode,email,telefoon);
                 Users.Add(u);
             }
             LvChauffeurs.ItemsSource = Users;
+            Fillinfoboxes(Users[0]);
+            LvRijbewijzen.ItemsSource = ud.GetRijbewijzenOnId(Users[0].Id);
         }
 
         private void btnaddchauffeur_Click(object sender, RoutedEventArgs e)
@@ -77,6 +89,23 @@ namespace Snelle_Wiel.Pages
             string query = "DELETE FROM `snellewiel`.`Users` WHERE  `UserId`= " + UserId + ";";
             db.ExecuteStringQuery(query);
             Setup();
+        }
+
+        private void Fillinfoboxes(User chauf)
+        {
+            TbChaufNaam.Text = chauf.Naam;
+            TbChaufWoonplaats.Text = chauf.Woonplaats;
+            TbChaufAdres.Text = chauf.Adres;
+            TbChaufPostcode.Text = chauf.Postcode;
+            TbChaufEmail.Text = chauf.Email;
+            TbChaufTelefoon.Text = chauf.Telefoonnr;
+        }
+
+        private void LvChauffeurs_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            User u = LvChauffeurs.SelectedItem as User;
+            LvRijbewijzen.ItemsSource = ud.GetRijbewijzenOnId(u.Id);
+            Fillinfoboxes(u);
         }
     }
 }

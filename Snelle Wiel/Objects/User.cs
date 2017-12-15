@@ -17,6 +17,11 @@ namespace Snelle_Wiel.Objects
         public string Email { get; set; }
         public string Telefoonnr { get; set; }
 
+        public User()
+        {
+
+        }
+
         public User(int id, string naam, string woonplaats, string adres, string postcode, string email, string telefoonnr)
         {
             this.Id = id;

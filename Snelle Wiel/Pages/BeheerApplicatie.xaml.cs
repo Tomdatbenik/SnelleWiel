@@ -38,6 +38,7 @@ namespace Snelle_Wiel.Pages
         {
             lvUserlist.ItemsSource = null;
             Users.Clear();
+            
 
             DataTable dtResult = new DataTable();
  
