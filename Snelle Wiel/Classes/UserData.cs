@@ -74,11 +74,11 @@ namespace Snelle_Wiel.Classes
             {
                 foreach (DataRow dar in Data.Rows)
                 {
-                    string rq = "SELECT * FROM Rijbewijs WHERE RijbewijsId = '" + dar["Rid"] + "' ";
+                    string rq = "SELECT Romschrijving,RCatogorie FROM Rijbewijs WHERE RijbewijsId = '" + dar["Rid"] + "' ";
                     DataTable Rijbewijsdata = db.ExecuteStringQuery(rq);
                     if (Rijbewijsdata.Rows.Count != 0)
                     {
-                        foreach (DataRow dr in Data.Rows)
+                        foreach (DataRow dr in Rijbewijsdata.Rows)
                         {
                             Rijbewijs r = new Rijbewijs();
                             r.Id = int.Parse(dar["Rid"].ToString());
