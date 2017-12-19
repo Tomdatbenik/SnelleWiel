@@ -33,31 +33,34 @@
     
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="10"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="30*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="140*"/>
-            <RowDefinition Height="12*"/>
+            <RowDefinition Height="1"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="14*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="154*"/>
-            <ColumnDefinition Width="131*"/>
-            <ColumnDefinition Width="50*"/>
-            <ColumnDefinition Width="170*"/>
-            <ColumnDefinition Width="11*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="15*"/>
+            <ColumnDefinition Width="13*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="17*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Border BorderThickness="1" BorderBrush="Black" Grid.Row="1" Grid.Column="4" Grid.RowSpan="6" CornerRadius="8,8,8,8"/>
         <TextBlock FontWeight="Bold" HorizontalAlignment="Center" Grid.Column="4" Grid.Row="1" Text="Chauffeurs"/>
         <Button x:Name="btnaddchauffeur" Grid.Row="1" Grid.Column="4" Content="Chauffeur toevoegen" Margin="20,18.4,19.6,2" Grid.RowSpan="2" Style="{StaticResource FlatButtonStyle}" Click="btnaddchauffeur_Click"/>
         <Button x:Name="btnChauffeurWijzigen" Grid.Row="3" Grid.Column="4" Content="Chauffeur wijzigen" Margin="20,10,19.6,10.4" Grid.RowSpan="2" Style="{StaticResource FlatButtonStyle}" Click="btnChauffeurWijzigen_Click"/>
         <Button x:Name="btnChauffeurVerwijderen" Grid.Row="5" Grid.Column="4" Content="Chauffeur verwijderen" Margin="20,5.6,19.6,15.8" Grid.RowSpan="2" Style="{StaticResource FlatButtonStyle}" Click="btnChauffeurVerwijderen_Click"/>
+        <Button x:Name="btnrijbewijswijzigen" Grid.Row="8" Grid.Column="2" Content="Rijbewijzen wijzigen" Style="{StaticResource FlatButtonStyle}" Click="btnrijbewijswijzigen_Click"></Button>
+        
+        
         <Border BorderThickness="1" BorderBrush="Black" Grid.Row="8" Grid.Column="4" Grid.RowSpan="2"/>
         <ListView x:Name="LvChauffeurs" Grid.Column="4" Grid.Row="9" MouseDoubleClick="LvChauffeurs_MouseDoubleClick">
             <ListView.View>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Snelle_Wiel.Objects
 {
-    class Rijbewijs
+    public class Rijbewijs
     {
         public int Id { get; set; }
         public string Catogorie { get; set; }

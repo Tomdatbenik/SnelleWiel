@@ -28,6 +28,7 @@ namespace Snelle_Wiel.Pages
         Database db;
         ObservableCollection<User> Users = new ObservableCollection<User>();
         UserData ud;
+        User SelectedChauffeur;
         public BeheerChauffeur(Database database)
         {
             InitializeComponent();
@@ -58,6 +59,7 @@ namespace Snelle_Wiel.Pages
             }
             LvChauffeurs.ItemsSource = Users;
             Fillinfoboxes(Users[0]);
+            SelectedChauffeur = Users[0];
             LvRijbewijzen.ItemsSource = ud.GetRijbewijzenOnId(Users[0].Id);
         }
 
@@ -103,9 +105,16 @@ namespace Snelle_Wiel.Pages
 
         private void LvChauffeurs_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            User u = LvChauffeurs.SelectedItem as User;
-            LvRijbewijzen.ItemsSource = ud.GetRijbewijzenOnId(u.Id);
-            Fillinfoboxes(u);
+            SelectedChauffeur = LvChauffeurs.SelectedItem as User;
+            LvRijbewijzen.ItemsSource = ud.GetRijbewijzenOnId(SelectedChauffeur.Id);
+            Fillinfoboxes(SelectedChauffeur);
+        }
+
+        private void btnrijbewijswijzigen_Click(object sender, RoutedEventArgs e)
+        {
+            WRijbewijswijzigen wrw = new WRijbewijswijzigen(this.db,SelectedChauffeur.Id);
+            wrw.ShowDialog();
+            Setup();
         }
     }
 }
