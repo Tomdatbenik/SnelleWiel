@@ -68,25 +68,18 @@ namespace Snelle_Wiel.Classes
         {
             ObservableCollection<Rijbewijs> rijbewijzen = new ObservableCollection<Rijbewijs>();
 
-            string q = "SELECT Rid FROM ChauffeursRijbewijs WHERE Uid = '" + id.ToString() + "' ";
+            string q = "SELECT * FROM Rijbewijs WHERE RijbewijsId IN (SELECT Rid FROM ChauffeursRijbewijs WHERE Uid = '"+id+"')";
             DataTable Data = db.ExecuteStringQuery(q);
+
             if (Data.Rows.Count != 0)
             {
-                foreach (DataRow dar in Data.Rows)
+                foreach (DataRow dr in Data.Rows)
                 {
-                    string rq = "SELECT Romschrijving,RCatogorie FROM Rijbewijs WHERE RijbewijsId = '" + dar["Rid"] + "' ";
-                    DataTable Rijbewijsdata = db.ExecuteStringQuery(rq);
-                    if (Rijbewijsdata.Rows.Count != 0)
-                    {
-                        foreach (DataRow dr in Rijbewijsdata.Rows)
-                        {
-                            Rijbewijs r = new Rijbewijs();
-                            r.Id = int.Parse(dar["Rid"].ToString());
-                            r.Catogorie = dr["RCatogorie"].ToString();
-                            r.Omschrijving = dr["ROmschrijving"].ToString();
-                            rijbewijzen.Add(r);
-                        }
-                    }
+                    Rijbewijs r = new Rijbewijs();
+                    r.Id = int.Parse(dr["RijbewijsId"].ToString());
+                    r.Catogorie = dr["RCatogorie"].ToString();
+                    r.Omschrijving = dr["ROmschrijving"].ToString();
+                    rijbewijzen.Add(r);
                 }
             }
 
@@ -97,41 +90,17 @@ namespace Snelle_Wiel.Classes
         {
             ObservableCollection<Rijbewijs> rijbewijzen = new ObservableCollection<Rijbewijs>();
 
-            string q = "SELECT Rid FROM ChauffeursRijbewijs WHERE Uid = '" + id.ToString() + "' ";
+            string q = "SELECT * FROM Rijbewijs WHERE RijbewijsId NOT IN (SELECT distinct RId FROM ChauffeursRijbewijs WHERE Uid = "+id+")";
             DataTable Data = db.ExecuteStringQuery(q);
             if (Data.Rows.Count != 0)
             {
-                foreach (DataRow dar in Data.Rows)
+                foreach (DataRow dr in Data.Rows)
                 {
-                    string rq = "SELECT * FROM Rijbewijs WHERE RijbewijsId != '" + dar["Rid"] + "' ";
-                    DataTable Rijbewijsdata = db.ExecuteStringQuery(rq);
-                    if (Rijbewijsdata.Rows.Count != 0)
-                    {
-                        foreach (DataRow dr in Rijbewijsdata.Rows)
-                        {
-                            Rijbewijs r = new Rijbewijs();
-                            r.Id = int.Parse(dr["RijbewijsId"].ToString());
-                            r.Catogorie = dr["RCatogorie"].ToString();
-                            r.Omschrijving = dr["ROmschrijving"].ToString();
-                            rijbewijzen.Add(r);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                string rq = "SELECT * FROM Rijbewijs";
-                DataTable Rijbewijsdata = db.ExecuteStringQuery(rq);
-                if (Rijbewijsdata.Rows.Count != 0)
-                {
-                    foreach (DataRow dr in Rijbewijsdata.Rows)
-                    {
                         Rijbewijs r = new Rijbewijs();
                         r.Id = int.Parse(dr["RijbewijsId"].ToString());
                         r.Catogorie = dr["RCatogorie"].ToString();
                         r.Omschrijving = dr["ROmschrijving"].ToString();
                         rijbewijzen.Add(r);
-                    }
                 }
             }
 
@@ -140,15 +109,24 @@ namespace Snelle_Wiel.Classes
 
         public void AddRijbewijzon(int id,ObservableCollection<Rijbewijs> rijbewijzen, ObservableCollection<Rijbewijs>Nrijbewijs)
         {
+
+            string q = "DELETE FROM `snellewiel`.`ChauffeursRijbewijs` WHERE";
             foreach (Rijbewijs r in Nrijbewijs)
             {
-                string q = "DELETE FROM `snellewiel`.`ChauffeursRijbewijs` WHERE  `RId`=" + r.Id + " AND `UId`=" + id + " LIMIT 1;";
-                db.ExecuteStringQuery(q);
+                 q += " (`RId`=" + r.Id + " AND `UId`=" + id + ") OR";
+               
             }
+            q = q.Remove(q.Length - 2) + ";";
+            db.ExecuteStringQuery(q);
 
-            foreach(Rijbewijs r in rijbewijzen)
+            if(rijbewijzen.Count != 0)
             {
-                string qu = "INSERT INTO `snellewiel`.`ChauffeursRijbewijs` (`RId`, `UId`) VALUES ('"+ r.Id +"', '"+ id +"');";
+                string qu = "INSERT INTO `snellewiel`.`ChauffeursRijbewijs` (`RId`, `UId`) VALUES ";
+                foreach (Rijbewijs r in rijbewijzen)
+                {
+                    qu += "('" + r.Id + "', '" + id + "'),";
+                }
+                qu = qu.Remove(qu.Length - 1) + ";";
                 db.ExecuteStringQuery(qu);
             }
         }

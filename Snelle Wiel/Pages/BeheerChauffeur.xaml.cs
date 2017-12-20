@@ -41,6 +41,7 @@ namespace Snelle_Wiel.Pages
             ud = new UserData(this.db);
 
             LvChauffeurs.ItemsSource = null;
+            LvRijbewijzen.ItemsSource = null;
             Users.Clear();
 
             DataTable dt = db.ExecuteStringQuery("SELECT UserId, RoleId, UNaam, UWoonplaats, UAdres, UPostcode, UEmail, UTelefoon FROM Users WHERE RoleId = 2");
