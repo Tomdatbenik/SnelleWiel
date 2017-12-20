@@ -29,12 +29,14 @@ namespace Snelle_Wiel.Windows
         private ObservableCollection<Rijbewijs> oldlist;
         private static readonly string _dropIdentifier = "dropIdentifier";
         private Database db;
+        private int Id;
         #endregion
 
         public WRijbewijswijzigen(Database database, int id)
         {
             InitializeComponent();
             this.db = database;
+            Id = id;
             Setup(id);
         }
 
@@ -42,7 +44,7 @@ namespace Snelle_Wiel.Windows
         {
             UserData ud = new UserData(this.db);
             LvGot.ItemsSource = ud.GetRijbewijzenOnId(id);
-
+            LvGive.ItemsSource = ud.GetRijbewijzendiehijnietheeftonid(id);
         }
 
         private void ListView_PreviewMouseMove(object sender, MouseEventArgs e)
@@ -51,6 +53,7 @@ namespace Snelle_Wiel.Windows
             oldlist = oldlistbox.ItemsSource as ObservableCollection<Rijbewijs>;
 
             //get rijbewijs obeservarable list die de chauffeur niet heeft
+
 
 
             var listBox = sender as ListView;
@@ -77,7 +80,18 @@ namespace Snelle_Wiel.Windows
         {
             oldlist.Remove(item);
             oldlistbox.ItemsSource = oldlist;
-            targetlistbox.Items.Add(item);
+            ObservableCollection<Rijbewijs> newlist = targetlistbox.ItemsSource as ObservableCollection<Rijbewijs>;
+            newlist.Add(item);
+            targetlistbox.ItemsSource = newlist;
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            ObservableCollection<Rijbewijs> Rijbewijzen = LvGot.ItemsSource as ObservableCollection<Rijbewijs>;
+            ObservableCollection<Rijbewijs> nrijbewijzen = LvGive.ItemsSource as ObservableCollection<Rijbewijs>;
+            UserData ud = new UserData(this.db);
+            ud.AddRijbewijzon(this.Id, Rijbewijzen,nrijbewijzen);
+            this.Close();
         }
     }
 }

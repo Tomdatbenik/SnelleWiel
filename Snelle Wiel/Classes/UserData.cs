@@ -92,5 +92,65 @@ namespace Snelle_Wiel.Classes
 
             return rijbewijzen;
         }
+
+        public ObservableCollection<Rijbewijs> GetRijbewijzendiehijnietheeftonid(int id)
+        {
+            ObservableCollection<Rijbewijs> rijbewijzen = new ObservableCollection<Rijbewijs>();
+
+            string q = "SELECT Rid FROM ChauffeursRijbewijs WHERE Uid = '" + id.ToString() + "' ";
+            DataTable Data = db.ExecuteStringQuery(q);
+            if (Data.Rows.Count != 0)
+            {
+                foreach (DataRow dar in Data.Rows)
+                {
+                    string rq = "SELECT * FROM Rijbewijs WHERE RijbewijsId != '" + dar["Rid"] + "' ";
+                    DataTable Rijbewijsdata = db.ExecuteStringQuery(rq);
+                    if (Rijbewijsdata.Rows.Count != 0)
+                    {
+                        foreach (DataRow dr in Rijbewijsdata.Rows)
+                        {
+                            Rijbewijs r = new Rijbewijs();
+                            r.Id = int.Parse(dr["RijbewijsId"].ToString());
+                            r.Catogorie = dr["RCatogorie"].ToString();
+                            r.Omschrijving = dr["ROmschrijving"].ToString();
+                            rijbewijzen.Add(r);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                string rq = "SELECT * FROM Rijbewijs";
+                DataTable Rijbewijsdata = db.ExecuteStringQuery(rq);
+                if (Rijbewijsdata.Rows.Count != 0)
+                {
+                    foreach (DataRow dr in Rijbewijsdata.Rows)
+                    {
+                        Rijbewijs r = new Rijbewijs();
+                        r.Id = int.Parse(dr["RijbewijsId"].ToString());
+                        r.Catogorie = dr["RCatogorie"].ToString();
+                        r.Omschrijving = dr["ROmschrijving"].ToString();
+                        rijbewijzen.Add(r);
+                    }
+                }
+            }
+
+            return rijbewijzen;
+        }
+
+        public void AddRijbewijzon(int id,ObservableCollection<Rijbewijs> rijbewijzen, ObservableCollection<Rijbewijs>Nrijbewijs)
+        {
+            foreach (Rijbewijs r in Nrijbewijs)
+            {
+                string q = "DELETE FROM `snellewiel`.`ChauffeursRijbewijs` WHERE  `RId`=" + r.Id + " AND `UId`=" + id + " LIMIT 1;";
+                db.ExecuteStringQuery(q);
+            }
+
+            foreach(Rijbewijs r in rijbewijzen)
+            {
+                string qu = "INSERT INTO `snellewiel`.`ChauffeursRijbewijs` (`RId`, `UId`) VALUES ('"+ r.Id +"', '"+ id +"');";
+                db.ExecuteStringQuery(qu);
+            }
+        }
     }
 }

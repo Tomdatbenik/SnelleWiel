@@ -60,7 +60,7 @@
             </ListView.View>
         </ListView>
 
-        <Button Style="{StaticResource FlatButtonStyle}" Grid.Row="2" Grid.ColumnSpan="2" Content="Opslaan"></Button>
+        <Button x:Name="btnSave" Style="{StaticResource FlatButtonStyle}" Grid.Row="2" Grid.ColumnSpan="2" Content="Opslaan" Click="btnSave_Click"></Button>
         
         <TextBlock Text="Chauffeur heeft de rijbewijzen:"></TextBlock>
         <TextBlock Text="Rijbewijs toevoegen:" Grid.Column="1"/>
