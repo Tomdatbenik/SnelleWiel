@@ -36,27 +36,28 @@
             <RowDefinition Height="5*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
             <RowDefinition Height="8*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.3*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.2*"/>
+            <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="0.4*"/>
             <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="0.5*"/>
         </Grid.ColumnDefinitions>
         <Label Content="Bedrijfsnaam:" Grid.Row="0" Grid.Column="1"></Label>
         <Label Content="Lokaties:" Grid.Row="1" Grid.Column="1"></Label>
-        <Label Content="Klant status:" Grid.Row="4" Grid.Column="1"></Label>
-        <Label Content="Contact Personen:" Grid.Row="5" Grid.Column="1"></Label>
+        <Label Content="Klant status:" Grid.Row="3" Grid.Column="1"></Label>
+        <Label Content="Contact Personen:" Grid.Row="4" Grid.Column="1"></Label>
 
-        <TextBox x:Name="TbNaam" Grid.Column="3" Grid.Row="0" ></TextBox>
-        <TextBox x:Name="TbStatus" Grid.Column="3" Grid.Row="4" ></TextBox>
+        <TextBlock x:Name="TbNaam" Grid.Column="3" Grid.Row="0" ></TextBlock>
+        <TextBlock x:Name="TbStatus" Grid.Column="3" Grid.Row="4" ></TextBlock>
 
-        <Button x:Name="BtnWijzigen" Content="informatie wijzigen" Grid.Row="3" Grid.Column="1" Style="{StaticResource FlatButtonStyle}"/>
+        <Button x:Name="BtnWijzigen" Content="informatie wijzigen" Grid.Row="6" Grid.Column="1" Style="{StaticResource FlatButtonStyle}"/>
 
         <ListView Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" x:Name="LvLocaties"></ListView>
-        <ListView Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="3"></ListView>
+        <ListView Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="3"></ListView>
     </Grid>
 </Page>
