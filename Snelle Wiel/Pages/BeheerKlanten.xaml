@@ -28,60 +28,35 @@
             </Style.Triggers>
         </Style>
     </Page.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="10"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="140*"/>
-            <RowDefinition Height="12*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="8*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10"/>
-            <ColumnDefinition Width="118*"/>
-            <ColumnDefinition Width="118*"/>
-            <ColumnDefinition Width="23*"/>
-            <ColumnDefinition Width="47*"/>
-            <ColumnDefinition Width="50*"/>
-            <ColumnDefinition Width="17*"/>
-            <ColumnDefinition Width="58*"/>
-            <ColumnDefinition Width="22*"/>
-            <ColumnDefinition Width="294*"/>
-            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="0.2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="0.4*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="1" Text="Bedrijfsnaam:" Grid.Column="1"/>
-        <TextBlock Grid.Column="2" Grid.Row="1" Text="Groene Vingers"/>
-        <TextBlock Grid.Row="1" Text="Status:" Grid.Column="4"/>
-        <TextBlock Grid.Row="1" Text="In contract" Grid.Column="5" />
-        <TextBlock Grid.Row="1" Text="Klant nummer:" Grid.Column="7"/>
-        <TextBlock Grid.Row="1" Text="1" Grid.Column="8"/>
-        <TextBlock Grid.Row="2" Text="Plaats/plaatsen:" Grid.Column="1"/>
-        <TextBlock Grid.Column="2" Grid.Row="2" Text="Best"/>
-        <TextBlock Grid.Column="2" Grid.Row="3" Text="Eindhoven"/>
-        <Border BorderThickness="1" BorderBrush="Black" Grid.Column="2" Grid.Row="2" Grid.RowSpan="2"/>
-        <TextBlock Grid.Row="4" Text="Adres:" Grid.Column="1"/>
-        <TextBlock Grid.Column="2" Grid.Row="4" Text="Klokgieter 5"/>
-        <TextBlock Grid.Row="5" Text="Postcode:" Grid.Column="1"/>
-        <TextBlock Grid.Column="2" Grid.Row="5" Text="9812 SM"/>
-        <Button Grid.Column="1" Grid.Row="6" Content="Informatie wijzigen" Style="{StaticResource FlatButtonStyle}"/>
-        <Button Grid.Column="1" Grid.Row="7" Content="Klant afmelden"  Style="{StaticResource FlatButtonStyle}"/>
-        <TextBlock Grid.Row="9" Text="Contactinformatie:" Grid.Column="1"/>
-        <ListView Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="7">
-            <ListViewItem>Naam: Voorbeeld Persoon</ListViewItem>
-            <ListViewItem>E-mail: voorbeeldemail@hotmail.com</ListViewItem>
-            <ListViewItem>Telefoon: 0612345678</ListViewItem>
-        </ListView>
-        <TextBox Grid.Column="9" Grid.Row="1" Text="Zoek klant"/>
-        <ListBox Grid.Column="9" Grid.Row="2" Grid.RowSpan="9">
-            <ListBoxItem>Groene Vingers</ListBoxItem>
-        </ListBox>
+        <Label Content="Bedrijfsnaam:" Grid.Row="0" Grid.Column="1"></Label>
+        <Label Content="Lokaties:" Grid.Row="1" Grid.Column="1"></Label>
+        <Label Content="Klant status:" Grid.Row="4" Grid.Column="1"></Label>
+        <Label Content="Contact Personen:" Grid.Row="5" Grid.Column="1"></Label>
+
+        <TextBox x:Name="TbNaam" Grid.Column="3" Grid.Row="0" ></TextBox>
+        <TextBox x:Name="TbStatus" Grid.Column="3" Grid.Row="4" ></TextBox>
+
+        <Button x:Name="BtnWijzigen" Content="informatie wijzigen" Grid.Row="3" Grid.Column="1" Style="{StaticResource FlatButtonStyle}"/>
+
+        <ListView Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" x:Name="LvLocaties"></ListView>
+        <ListView Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="3"></ListView>
     </Grid>
 </Page>
