@@ -37,6 +37,7 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="8*"/>
+            <RowDefinition Height="0.3*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="0.3*"/>
         </Grid.RowDefinitions>
@@ -45,7 +46,8 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="0.4*"/>
             <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <Label Content="Bedrijfsnaam:" Grid.Row="0" Grid.Column="1"></Label>
         <Label Content="Lokaties:" Grid.Row="1" Grid.Column="1"></Label>
@@ -55,9 +57,30 @@
         <TextBlock x:Name="TbNaam" Grid.Column="3" Grid.Row="0" ></TextBlock>
         <TextBlock x:Name="TbStatus" Grid.Column="3" Grid.Row="4" ></TextBlock>
 
-        <Button x:Name="BtnWijzigen" Content="informatie wijzigen" Grid.Row="6" Grid.Column="1" Style="{StaticResource FlatButtonStyle}"/>
+        <Button x:Name="BtnWijzigen" Content="informatie wijzigen" Grid.Row="7" Grid.Column="1" Style="{StaticResource FlatButtonStyle}"/>
 
-        <ListView Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" x:Name="LvLocaties"></ListView>
-        <ListView Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="3"></ListView>
+        <ListView Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" x:Name="LvLocaties">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Locatie" DisplayMemberBinding="{Binding Locatie}"/>
+                    <GridViewColumn Header="Adres" DisplayMemberBinding="{Binding Adres}"/>
+                    <GridViewColumn Header="Postcode" DisplayMemberBinding="{Binding Postcode}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="3" x:Name="LvContacten">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Locatie" DisplayMemberBinding="{Binding Naam}"/>
+                    <GridViewColumn Header="Adres" DisplayMemberBinding="{Binding Telefoon}"/>
+                    <GridViewColumn Header="Postcode" DisplayMemberBinding="{Binding Email}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <TextBlock Text="Klanten Zoeken:" Grid.Column="5" FontSize="20"></TextBlock>
+        <TextBox x:Name="TbKlantenZoeken" Grid.Column="5" Grid.Row="1" BorderBrush="#FFC3C1C1" BorderThickness="1,1,1,1" Margin="0,0,0,1" Foreground="#FF909090" FontSize="20"></TextBox>
+        
+        <ListView Grid.Column="5" Grid.Row="2" Grid.RowSpan="4" x:Name="LvKlanten"></ListView>
     </Grid>
 </Page>

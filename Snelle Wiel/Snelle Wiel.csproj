@@ -76,7 +76,8 @@
     <Compile Include="Classes\cLogin.cs" />
     <Compile Include="Classes\UserData.cs" />
     <Compile Include="Objects\Chauffeur.cs" />
-    <Compile Include="Objects\ContactPersoon.cs" />
+    <Compile Include="Objects\Contact.cs" />
+    <Compile Include="Objects\Klant.cs" />
     <Compile Include="Objects\Locatie.cs" />
     <Compile Include="Objects\Order.cs" />
     <Compile Include="Objects\Rijbewijs.cs" />

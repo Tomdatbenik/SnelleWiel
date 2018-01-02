@@ -6,16 +6,15 @@ using System.Threading.Tasks;
 
 namespace Snelle_Wiel.Objects
 {
-    class ContactPersoon
+    class Contact
     {
-
         public string Naam { get; private set; }
         public string Telefoon { get; private set; }
         public string Email { get; private set; }
 
-        public ContactPersoon() { }
+        public Contact() { }
 
-        public ContactPersoon(string naam, string telefoon, string email)
+        public Contact(string naam, string telefoon, string email)
         {
             this.Naam = naam;
             this.Telefoon = telefoon;
