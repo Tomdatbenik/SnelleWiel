@@ -56,40 +56,54 @@
             <ColumnDefinition Width="0.3*"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="0.3*"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="0.3*"/>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="1" Grid.Column="1" Text="Wagen nummer:"/>
-        <TextBlock Grid.Row="3" Text="Kenteken:" Grid.Column="1"/>
-        <TextBlock Grid.Row="4" Text="Merk:" Grid.Column="1" />
-        <TextBlock Grid.Row="5" Text="Type:" Grid.Column="1"/>
-        <TextBlock Grid.Row="6" Text="Bouwjaar:" Grid.Column="1"/>
-        <TextBlock Grid.Row="7" Text="Brandstof:" Grid.Column="1"/>
-        <TextBlock Grid.Row="8" Text="Vermogen:" Grid.Column="1"/>
-        <TextBlock Grid.Row="9" Text="APK:" Grid.Column="1"/>
-        <TextBlock Grid.Row="10" Text="Voertuig hoogte:" Grid.Column="1"/>
-        <TextBlock Grid.Row="11" Text="Brandstof:" Grid.Column="1"/>
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="Status:"/>
+        <TextBlock Grid.Row="3" Text="Chauffeur:" Grid.Column="1"/>
+        <TextBlock Grid.Row="4" Text="Kenteken:" Grid.Column="1"/>
+        <TextBlock Grid.Row="5" Text="Merk:" Grid.Column="1" />
+        <TextBlock Grid.Row="6" Text="Type:" Grid.Column="1"/>
+        <TextBlock Grid.Row="7" Text="Bouwjaar:" Grid.Column="1"/>
+        <TextBlock Grid.Row="8" Text="Brandstof:" Grid.Column="1"/>
+        <TextBlock Grid.Row="9" Text="Vermogen:" Grid.Column="1"/>
+        <TextBlock Grid.Row="10" Text="APK:" Grid.Column="1"/>
+        <TextBlock Grid.Row="11" Text="Voertuig hoogte:" Grid.Column="1"/>
         <TextBlock Grid.Row="12" Text="Massa Rijklaar:" Grid.Column="1"/>
-        <TextBlock Grid.Row="13" Text="Toegestaand maximale massa:" Grid.Column="1"/>
-        <TextBlock Grid.Row="14" Text="Toegestaand laad vermogen:" Grid.Column="1"/>
+        <TextBlock Grid.Row="13" Text="Toegestaand maximale massa::" Grid.Column="1"/>
+        <TextBlock Grid.Row="14" Text="Toegestaand laad vermogen::" Grid.Column="1"/>
         <TextBlock Grid.Row="15" Text="Laadruimte inhoud:" Grid.Column="1"/>
-        <TextBlock Grid.Column="1" Grid.Row="2" Text="Status:"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="2" x:Name="TbWagenNummer"/>
+        <TextBlock Grid.Row="3" Grid.Column="2" x:Name="TbChauffeur"/>
+        <TextBlock Grid.Row="4" Grid.Column="2" x:Name="TbKenteken"/>
+        <TextBlock Grid.Row="5" Grid.Column="2" x:Name="TbMerk"/>
+        <TextBlock Grid.Row="6" Grid.Column="2" x:Name="TbType"/>
+        <TextBlock Grid.Row="7" Grid.Column="2" x:Name="TbBouwjaar"/>
+        <TextBlock Grid.Row="8" Grid.Column="2" x:Name="TbBrandstof"/>
+        <TextBlock Grid.Row="9" Grid.Column="2" x:Name="TbVermogen"/>
+        <TextBlock Grid.Row="10" Grid.Column="2" x:Name="TbAPK"/>
+        <TextBlock Grid.Row="11" Grid.Column="2" x:Name="TbVoertuighoogte"/>
+        <TextBlock Grid.Row="12" Grid.Column="2" x:Name="TbMassaRijklaar"/>
+        <TextBlock Grid.Row="13" Grid.Column="2" x:Name="TbToegestaanmaxMassa"/>
+        <TextBlock Grid.Row="14" Grid.Column="2" x:Name="TbToegestaanLaadvermogen"/>
+        <TextBlock Grid.Row="15" Grid.Column="2" x:Name="TbLaadruimte"/>
 
 
 
+        <Button x:Name="Btninformatie" Content="Informatie wijzigen" Grid.Row="16" Grid.Column="1" Margin="1" Style="{StaticResource FlatButtonStyle}"/>
+        <Button x:Name="BtnToevoegen" Content="Wagen Toevoegen" Grid.Row="16" Grid.Column="2" Margin="1" Style="{StaticResource FlatButtonStyle}"/>
+        <Button x:Name="BtnVerwijderen" Content="Wagen Verwijderen" Grid.Row="16" Grid.Column="3" Margin="1" Style="{StaticResource FlatButtonStyle}"/>
 
-
-        <Button Content="Informatie wijzigen" Grid.Row="16" Grid.Column="1" Style="{StaticResource FlatButtonStyle}"/>
-        
         <ComboBox Grid.Row="2" Grid.Column="2" Height="20" VerticalAlignment="Top">
             <ComboBoxItem IsSelected="True">Bruikbaar</ComboBoxItem>
             <ComboBoxItem>Reparatie</ComboBoxItem>
         </ComboBox>
 
-        <TextBlock Text="Wagen zoeken:" Grid.Row="1" Grid.Column="4" FontSize="20"></TextBlock>
-        <TextBox Grid.Row="2" Grid.Column="4" VerticalAlignment="Bottom" BorderBrush="#FFC3C1C1" BorderThickness="1,1,1,1" Foreground="#FF909090" FontSize="20" Height="25"></TextBox>
-        <ListView Grid.Column="4" Grid.Row="3" Grid.RowSpan="3">
+        <TextBlock Text="Wagen zoeken:" Grid.Row="1" Grid.Column="3" FontSize="20"></TextBlock>
+        <TextBox Grid.Row="2" Grid.Column="3" VerticalAlignment="Bottom" BorderBrush="#FFC3C1C1" BorderThickness="1,1,1,1" Foreground="#FF909090" FontSize="20" Height="25"></TextBox>
+        <ListView Grid.Column="3" Grid.Row="3" Grid.RowSpan="3">
             
         </ListView>
     </Grid>
