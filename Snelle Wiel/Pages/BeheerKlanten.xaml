@@ -61,7 +61,7 @@
         <ListView Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" x:Name="LvLocaties">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Locatie" DisplayMemberBinding="{Binding Locatie}"/>
+                    <GridViewColumn Header="Locatie" DisplayMemberBinding="{Binding Plaats}"/>
                     <GridViewColumn Header="Adres" DisplayMemberBinding="{Binding Adres}"/>
                     <GridViewColumn Header="Postcode" DisplayMemberBinding="{Binding Postcode}"/>
                 </GridView>

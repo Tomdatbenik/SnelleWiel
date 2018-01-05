@@ -76,6 +76,7 @@
         <TextBlock Grid.Row="15" Text="Laadruimte inhoud:" Grid.Column="1"/>
 
         <TextBlock Grid.Row="1" Grid.Column="2" x:Name="TbWagenNummer"/>
+        <TextBlock Grid.Row="2" Grid.Column="2" x:Name="TbSatus"/>
         <TextBlock Grid.Row="3" Grid.Column="2" x:Name="TbChauffeur"/>
         <TextBlock Grid.Row="4" Grid.Column="2" x:Name="TbKenteken"/>
         <TextBlock Grid.Row="5" Grid.Column="2" x:Name="TbMerk"/>
@@ -95,11 +96,6 @@
         <Button x:Name="Btninformatie" Content="Informatie wijzigen" Grid.Row="16" Grid.Column="1" Margin="1" Style="{StaticResource FlatButtonStyle}"/>
         <Button x:Name="BtnToevoegen" Content="Wagen Toevoegen" Grid.Row="16" Grid.Column="2" Margin="1" Style="{StaticResource FlatButtonStyle}"/>
         <Button x:Name="BtnVerwijderen" Content="Wagen Verwijderen" Grid.Row="16" Grid.Column="3" Margin="1" Style="{StaticResource FlatButtonStyle}"/>
-
-        <ComboBox Grid.Row="2" Grid.Column="2" Height="20" VerticalAlignment="Top">
-            <ComboBoxItem IsSelected="True">Bruikbaar</ComboBoxItem>
-            <ComboBoxItem>Reparatie</ComboBoxItem>
-        </ComboBox>
 
         <TextBlock Text="Wagen zoeken:" Grid.Row="1" Grid.Column="3" FontSize="20"></TextBlock>
         <TextBox Grid.Row="2" Grid.Column="3" VerticalAlignment="Bottom" BorderBrush="#FFC3C1C1" BorderThickness="1,1,1,1" Foreground="#FF909090" FontSize="20" Height="25"></TextBox>

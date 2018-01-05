@@ -71,10 +71,17 @@ namespace Snelle_Wiel.Pages
 
         private void BtnRemove_Click(object sender, RoutedEventArgs e)
         {
-            int UserId = Users[lvUserlist.SelectedIndex].Id;
-            string query = "DELETE FROM `snellewiel`.`Users` WHERE  `UserId`= "+UserId+";";
-            db.ExecuteStringQuery(query);
-            loadusers();
+            if (lvUserlist.SelectedItem != null)
+            {
+                int UserId = Users[lvUserlist.SelectedIndex].Id;
+                string query = "DELETE FROM `snellewiel`.`Users` WHERE  `UserId`= " + UserId + ";";
+                db.ExecuteStringQuery(query);
+                loadusers();
+            }
+            else
+            {
+                MessageBox.Show("Selecteer een gebruiker");
+            }
         }
 
         public class ItemFromList
