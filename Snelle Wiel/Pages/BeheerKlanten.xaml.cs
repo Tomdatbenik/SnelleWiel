@@ -46,13 +46,11 @@ namespace Snelle_Wiel.Pages
             {
                 int id = int.Parse(dr["KlantId"].ToString());
                 string Naam = dr["KNaam"].ToString();
-                string Actief = dr["KActief"].ToString();
 
-                Klant k = new Klant(id, Naam, Actief);
+                Klant k = new Klant(id, Naam);
                 Klanten.Add(k);
             }
             TbNaam.Text = Klanten[0].Naam;
-            TbStatus.Text = Klanten[0].Actief;
             LvKlanten.ItemsSource = Klanten;
 
             string LocatieQuery = "SELECT * FROM KlantLocaties WHERE Klantid = '" + Klanten[0].Id +"'";
@@ -99,8 +97,7 @@ namespace Snelle_Wiel.Pages
             {
                 int id = int.Parse(dr["KlantId"].ToString());
                 string naam = dr["KNaam"].ToString();
-                string actief = dr["KActief"].ToString();
-                Klant k = new Klant(id, naam, actief);
+                Klant k = new Klant(id, naam);
                 klanten.Add(k);
             }
             LvKlanten.ItemsSource = klanten;
@@ -111,7 +108,6 @@ namespace Snelle_Wiel.Pages
             Klant selectedklant = LvKlanten.SelectedItem as Klant;
 
             TbNaam.Text = selectedklant.Naam;
-            TbStatus.Text = selectedklant.Actief;
 
 
             string LocatieQuery = "SELECT * FROM KlantLocaties WHERE Klantid = '" + selectedklant.Id + "'";

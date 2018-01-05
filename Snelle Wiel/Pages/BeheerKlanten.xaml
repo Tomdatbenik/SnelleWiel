@@ -51,7 +51,6 @@
         </Grid.ColumnDefinitions>
         <Label Content="Bedrijfsnaam:" Grid.Row="0" Grid.Column="1"></Label>
         <Label Content="Lokaties:" Grid.Row="1" Grid.Column="1"></Label>
-        <Label Content="Klant status:" Grid.Row="3" Grid.Column="1"></Label>
         <Label Content="Contact Personen:" Grid.Row="4" Grid.Column="1"></Label>
 
         <TextBlock x:Name="TbNaam" Grid.Column="3" Grid.Row="0" ></TextBlock>

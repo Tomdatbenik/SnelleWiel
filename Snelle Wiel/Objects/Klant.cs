@@ -10,15 +10,13 @@ namespace Snelle_Wiel.Objects
     {
         public int Id;
         public string Naam { get; private set; }
-        public string Actief { get; private set; }
 
         public Klant() { }
 
-        public Klant(int id, string naam, string actief)
+        public Klant(int id, string naam)
         {
             this.Id = id;
             this.Naam = naam;
-            this.Actief = actief;
         }
     }
 }

@@ -33,52 +33,64 @@
     
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="10"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="10*"/>
+            <RowDefinition Height="0.5"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="11*"/>
-            <ColumnDefinition Width="93*"/>
-            <ColumnDefinition Width="103*"/>
-            <ColumnDefinition Width="48*"/>
-            <ColumnDefinition Width="60*"/>
-            <ColumnDefinition Width="20*"/>
-            <ColumnDefinition Width="178*"/>
-            <ColumnDefinition Width="12*"/>
+            <ColumnDefinition Width="0.3*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="0.3*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="0.3*"/>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="1" Grid.Column="1" Text="Wagen nummer:"/>
-        <TextBlock Grid.Column="2" Grid.Row="1" Text="1"/>
         <TextBlock Grid.Row="3" Text="Kenteken:" Grid.Column="1"/>
-        <TextBlock Grid.Column="2" Grid.Row="3" Text="(Kenteken)"/>
         <TextBlock Grid.Row="4" Text="Merk:" Grid.Column="1" />
-        <TextBlock Grid.Column="2" Grid.Row="4" Text="(Merk)"/>
-        <TextBlock Grid.Row="5" Text="Model:" Grid.Column="1"/>
-        <TextBlock Grid.Column="2" Grid.Row="5" Text="(Model)"/>
-        <TextBlock Grid.Row="6" Text="APK:" Grid.Column="1"/>
-        <TextBlock Grid.Column="2" Grid.Row="6" Text="(Datum APK)"/>
-        <TextBlock Grid.Row="7" Text="Gewicht:" Grid.Column="1"/>
-        <TextBlock Grid.Column="2" Grid.Row="7" Text="1000 kg"/>
-        <TextBlock Grid.Column="3" Grid.Row="1" Text="Status:"/>
-        <Button Content="Informatie wijzigen" Grid.Row="9" Grid.Column="1" Style="{StaticResource FlatButtonStyle}"/>
-        <ComboBox Grid.Row="1" Grid.Column="4">
-            <ComboBoxItem>In gebruik</ComboBoxItem>
-            <ComboBoxItem>Buiten gebruik</ComboBoxItem>
+        <TextBlock Grid.Row="5" Text="Type:" Grid.Column="1"/>
+        <TextBlock Grid.Row="6" Text="Bouwjaar:" Grid.Column="1"/>
+        <TextBlock Grid.Row="7" Text="Brandstof:" Grid.Column="1"/>
+        <TextBlock Grid.Row="8" Text="Vermogen:" Grid.Column="1"/>
+        <TextBlock Grid.Row="9" Text="APK:" Grid.Column="1"/>
+        <TextBlock Grid.Row="10" Text="Voertuig hoogte:" Grid.Column="1"/>
+        <TextBlock Grid.Row="11" Text="Brandstof:" Grid.Column="1"/>
+        <TextBlock Grid.Row="12" Text="Massa Rijklaar:" Grid.Column="1"/>
+        <TextBlock Grid.Row="13" Text="Toegestaand maximale massa:" Grid.Column="1"/>
+        <TextBlock Grid.Row="14" Text="Toegestaand laad vermogen:" Grid.Column="1"/>
+        <TextBlock Grid.Row="15" Text="Laadruimte inhoud:" Grid.Column="1"/>
+        <TextBlock Grid.Column="1" Grid.Row="2" Text="Status:"/>
+
+
+
+
+
+        <Button Content="Informatie wijzigen" Grid.Row="16" Grid.Column="1" Style="{StaticResource FlatButtonStyle}"/>
+        
+        <ComboBox Grid.Row="2" Grid.Column="2" Height="20" VerticalAlignment="Top">
+            <ComboBoxItem IsSelected="True">Bruikbaar</ComboBoxItem>
             <ComboBoxItem>Reparatie</ComboBoxItem>
         </ComboBox>
-        <TextBox Text="Zoek wagen" Grid.Row="1" Grid.Column="6"/>
-        <ListView Grid.Column="6" Grid.Row="2">
-            <ListViewItem>Wagen 1</ListViewItem>
-            <ListViewItem>Wagen 2</ListViewItem>
-            <ListViewItem>Wagen 3</ListViewItem>
+
+        <TextBlock Text="Wagen zoeken:" Grid.Row="1" Grid.Column="4" FontSize="20"></TextBlock>
+        <TextBox Grid.Row="2" Grid.Column="4" VerticalAlignment="Bottom" BorderBrush="#FFC3C1C1" BorderThickness="1,1,1,1" Foreground="#FF909090" FontSize="20" Height="25"></TextBox>
+        <ListView Grid.Column="4" Grid.Row="3" Grid.RowSpan="3">
+            
         </ListView>
     </Grid>
 </Page>
