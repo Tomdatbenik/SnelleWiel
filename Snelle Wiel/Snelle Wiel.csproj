@@ -50,6 +50,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MySql.Data, Version=6.10.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Geolocator, Version=4.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xam.Plugin.Geolocator.4.2.0\lib\netstandard1.0\Plugin.Geolocator.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Geolocator.Abstractions, Version=4.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xam.Plugin.Geolocator.4.2.0\lib\netstandard1.0\Plugin.Geolocator.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -75,14 +84,19 @@
     <Compile Include="Classes\Bcrypt.cs" />
     <Compile Include="Classes\cLogin.cs" />
     <Compile Include="Classes\UserData.cs" />
+    <Compile Include="Classes\Webservice.cs" />
     <Compile Include="Objects\Chauffeur.cs" />
     <Compile Include="Objects\Contact.cs" />
+    <Compile Include="Objects\Coordinaat.cs" />
     <Compile Include="Objects\Klant.cs" />
     <Compile Include="Objects\Locatie.cs" />
     <Compile Include="Objects\Order.cs" />
     <Compile Include="Objects\Rijbewijs.cs" />
     <Compile Include="Objects\User.cs" />
     <Compile Include="Objects\Wagen.cs" />
+    <Compile Include="Windows\Klantwijzigen.xaml.cs">
+      <DependentUpon>Klantwijzigen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\WAddUser.xaml.cs">
       <DependentUpon>WAddUser.xaml</DependentUpon>
     </Compile>
@@ -137,6 +151,10 @@
     <Page Include="Pages\LoginPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Klantwijzigen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\WAddUser.xaml">
       <SubType>Designer</SubType>

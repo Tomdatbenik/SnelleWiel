@@ -63,12 +63,6 @@
         <ListView AllowDrop="True" Drop="ListView_drop"  PreviewMouseDown="ListView_PreviewMouseMove" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2"/>
         <ListView AllowDrop="True" Drop="ListView_drop"  PreviewMouseDown="ListView_PreviewMouseMove" Grid.Column="4" Grid.Row="3" Grid.ColumnSpan="2"/>
         <ListView AllowDrop="True" Drop="ListView_drop"  PreviewMouseDown="ListView_PreviewMouseMove" Grid.Column="7" Grid.Row="3"/>
-        <ListView AllowDrop="True" Drop="ListView_drop"  PreviewMouseDown="ListView_PreviewMouseMove" Grid.Column="9" Grid.Row="3">
-            <ListViewItem>Order 1</ListViewItem>
-            <ListViewItem>Order 2</ListViewItem>
-            <ListViewItem>Order 3</ListViewItem>
-            <ListViewItem>Order 4</ListViewItem>
-            <ListViewItem>Order 5</ListViewItem>
-        </ListView>
+        <ListView AllowDrop="True" Drop="ListView_drop"  PreviewMouseDown="ListView_PreviewMouseMove" Grid.Column="9" Grid.Row="3"/>
     </Grid>
 </Page>

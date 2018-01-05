@@ -1,4 +1,6 @@
-﻿using Snelle_Wiel.Classes;
+﻿using Plugin.Geolocator;
+using Snelle_Wiel.Classes;
+using Snelle_Wiel.Objects;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,10 +31,23 @@ namespace Snelle_Wiel.Pages
         #endregion
 
         Database db;
+
+        
+
+        string APISTRING = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=51.507764,5.397848&destinations=51.441642%2C5.469722";
+        string origins = "&origins=51.507764,5.397848";
+
+
         public BeheerPlanning(Database database)
         {
             InitializeComponent();
             this.db = database;
+            setup();
+        }
+
+        public async void setup()
+        {
+
         }
 
 
