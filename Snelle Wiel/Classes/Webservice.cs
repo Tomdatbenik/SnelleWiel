@@ -12,12 +12,12 @@ namespace Snelle_Wiel.Classes
     class Webservice
     {
 
-        public async Task<Rit> GetTravelTime(Coordinaat origins, Coordinaat destinations)
+        public async Task<Rit> GetTravelTime(Locatie origins, Locatie destinations)
         {
             List<Rit> r = new List<Rit>();
 
             string BaseUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=";
-            string Url = BaseUrl + origins.NB + "," + origins.OL + "&destinations=" + destinations.NB + "%2C" + destinations.OL;
+            string Url = BaseUrl + origins.Adres + "," + origins.Postcode + "," + origins.Plaats + "," + origins.Land + "&destinations=" + destinations.Adres + "," + destinations.Postcode + "," + destinations.Plaats + "," + destinations.Land;
 
             Uri httprequest = new Uri(Url);
 

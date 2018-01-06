@@ -49,8 +49,8 @@ namespace Snelle_Wiel.Pages
         public async void setup()
         {
             Webservice ws = new Webservice();
-            Coordinaat start = new Coordinaat("51.507764", "5.397848");
-            Coordinaat einde = new Coordinaat("51.441642", "5.469722");
+            Locatie start = new Locatie("Sint-Oedenrode", "Liempdseweg 43", "5492 SM", "Nederland");
+            Locatie einde = new Locatie("Vessem", "Braak 9", "5512 CC", "Nederland");
 
             Rit r = await ws.GetTravelTime(start,einde);
             Console.WriteLine(r.Distance);

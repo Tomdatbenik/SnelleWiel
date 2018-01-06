@@ -64,8 +64,8 @@ namespace Snelle_Wiel.Pages
                 string Locatie = dar["Locatie"].ToString();
                 string Adres = dar["Adres"].ToString();
                 string Postcode = dar["Postcode"].ToString();
-
-                Locatie l = new Locatie(Locatie,Adres,Postcode);
+                string Land = dar["Land"].ToString();
+                Locatie l = new Locatie(Locatie,Adres,Postcode, Land);
                 klantlocaties.Add(l);
             }
 
@@ -122,8 +122,8 @@ namespace Snelle_Wiel.Pages
                 string Locatie = dar["Locatie"].ToString();
                 string Adres = dar["Adres"].ToString();
                 string Postcode = dar["Postcode"].ToString();
-
-                Locatie l = new Locatie(Locatie, Adres, Postcode);
+                string Land = dar["Land"].ToString();
+                Locatie l = new Locatie(Locatie, Adres, Postcode, Land);
                 klantlocaties.Add(l);
             }
 

@@ -12,13 +12,16 @@ namespace Snelle_Wiel.Objects
         public string Adres { get; private set; }
         public string Postcode { get; private set; }
 
+        public string Land { get; private set; }
+
         public Locatie() { }
 
-        public Locatie(string loc,string adres, string postcode)
+        public Locatie(string loc,string adres, string postcode,string land)
         {
             this.Plaats = loc;
             this.Adres = adres;
             this.Postcode = postcode;
+            this.Land = land;
         }
     }
 }
