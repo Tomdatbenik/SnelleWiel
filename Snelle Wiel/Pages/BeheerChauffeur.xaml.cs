@@ -82,7 +82,7 @@ namespace Snelle_Wiel.Pages
             }
             else
             {
-                MessageBox.Show("Selecteer een gebruiker");
+                MessageBox.Show("Selecteer een chauffeur");
             }
         }
 

@@ -8,10 +8,10 @@ namespace Snelle_Wiel.Objects
 {
     public class Coordinaat
     {
-        public double NB{ get; private set; }
-        public double OL { get; private set; }
+        public string NB{ get; private set; }
+        public string OL { get; private set; }
 
-        public Coordinaat(double nb, double ol)
+        public Coordinaat(string nb, string ol)
         {
             this.NB = nb;
             this.OL = ol;

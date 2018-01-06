@@ -18,6 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace Snelle_Wiel.Pages
 {
     /// <summary>
@@ -47,7 +48,13 @@ namespace Snelle_Wiel.Pages
 
         public async void setup()
         {
+            Webservice ws = new Webservice();
+            Coordinaat start = new Coordinaat("51.507764", "5.397848");
+            Coordinaat einde = new Coordinaat("51.441642", "5.469722");
 
+            Rit r = await ws.GetTravelTime(start,einde);
+            Console.WriteLine(r.Distance);
+            Console.WriteLine(r.Duration);
         }
 
 

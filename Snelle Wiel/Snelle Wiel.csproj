@@ -92,6 +92,7 @@
     <Compile Include="Objects\Locatie.cs" />
     <Compile Include="Objects\Order.cs" />
     <Compile Include="Objects\Rijbewijs.cs" />
+    <Compile Include="Objects\Rit.cs" />
     <Compile Include="Objects\User.cs" />
     <Compile Include="Objects\Wagen.cs" />
     <Compile Include="Windows\Klantwijzigen.xaml.cs">

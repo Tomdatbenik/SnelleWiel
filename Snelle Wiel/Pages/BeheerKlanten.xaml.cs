@@ -1,5 +1,6 @@
 ﻿using Snelle_Wiel.Classes;
 using Snelle_Wiel.Objects;
+using Snelle_Wiel.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,6 +27,7 @@ namespace Snelle_Wiel.Pages
     {
         Database db;
         ObservableCollection<Klant> Klanten = new ObservableCollection<Klant>();
+        int currentId;
         public BeheerKlanten(Database database)
         {
             InitializeComponent();
@@ -71,6 +73,7 @@ namespace Snelle_Wiel.Pages
 
 
             string ContactQuery = "SELECT * FROM ContactInformatie WHERE Klantid = '" + Klanten[0].Id + "'";
+            currentId = Klanten[0].Id;
             DataTable DtCData = db.ExecuteStringQuery(ContactQuery);
 
             ObservableCollection<Contact> Contactenlijst = new ObservableCollection<Contact>();
@@ -108,7 +111,7 @@ namespace Snelle_Wiel.Pages
             Klant selectedklant = LvKlanten.SelectedItem as Klant;
 
             TbNaam.Text = selectedklant.Naam;
-
+            currentId = selectedklant.Id;
 
             string LocatieQuery = "SELECT * FROM KlantLocaties WHERE Klantid = '" + selectedklant.Id + "'";
             DataTable DtLData = db.ExecuteStringQuery(LocatieQuery);
@@ -142,6 +145,13 @@ namespace Snelle_Wiel.Pages
             }
 
             LvContacten.ItemsSource = Contactenlijst;
+        }
+
+        private void BtnWijzigen_Click(object sender, RoutedEventArgs e)
+        {
+            Klantwijzigen kw = new Klantwijzigen(this.db,this.currentId);
+            kw.ShowDialog();
+            this.setup();
         }
     }
 }

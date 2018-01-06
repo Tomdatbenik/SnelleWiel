@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Snelle_Wiel.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,13 @@ namespace Snelle_Wiel.Windows
     /// </summary>
     public partial class Klantwijzigen : Window
     {
-        public Klantwijzigen()
+        Database db;
+        int id;
+        public Klantwijzigen(Database database, int Id)
         {
             InitializeComponent();
+            this.db = database;
+            this.id = Id;
         }
     }
 }

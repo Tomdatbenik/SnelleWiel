@@ -56,7 +56,7 @@
         <TextBlock x:Name="TbNaam" Grid.Column="3" Grid.Row="0" ></TextBlock>
         <TextBlock x:Name="TbStatus" Grid.Column="3" Grid.Row="3" ></TextBlock>
 
-        <Button x:Name="BtnWijzigen" Content="informatie wijzigen" Grid.Row="7" Grid.Column="1" Style="{StaticResource FlatButtonStyle}"/>
+        <!--<Button x:Name="BtnWijzigen" Content="informatie wijzigen" Grid.Row="7" Grid.Column="1" Style="{StaticResource FlatButtonStyle}" Click="BtnWijzigen_Click"/>-->
 
         <ListView Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" x:Name="LvLocaties">
             <ListView.View>
