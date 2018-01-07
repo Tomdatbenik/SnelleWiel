@@ -53,8 +53,16 @@ namespace Snelle_Wiel.Pages
             Locatie einde = new Locatie("Vessem", "Braak 9", "5512 CC", "Nederland");
 
             Rit r = await ws.GetTravelTime(start,einde);
+
+            Locatie S = new Locatie("Sint-Oedenrode", "Liempdseweg 43", "5492 SM", "Nederland");
+            Locatie E = new Locatie("Best", "Willem de Zwijgerweg 83", "5864 SC", "Nederland");
+
+            Rit rit = await ws.GetTravelTime(S, E);
+
             Console.WriteLine(r.Distance);
             Console.WriteLine(r.Duration);
+            Console.WriteLine(rit.Distance);
+            Console.WriteLine(rit.Duration);
         }
 
 

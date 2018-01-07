@@ -9,10 +9,10 @@ namespace Snelle_Wiel.Objects
 {
     public class Rit
     {
-        public string Distance;
-        public string Duration;
+        public double Distance;
+        public double Duration;
 
-        public Rit(string distance, string duration)
+        public Rit(double distance, double duration)
         {
             this.Distance = distance;
             this.Duration = duration;
