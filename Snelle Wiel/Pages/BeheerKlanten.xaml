@@ -64,15 +64,16 @@
                     <GridViewColumn Header="Locatie" DisplayMemberBinding="{Binding Plaats}"/>
                     <GridViewColumn Header="Adres" DisplayMemberBinding="{Binding Adres}"/>
                     <GridViewColumn Header="Postcode" DisplayMemberBinding="{Binding Postcode}"/>
+                    <GridViewColumn Header="Land" DisplayMemberBinding="{Binding Land}"/>
                 </GridView>
             </ListView.View>
         </ListView>
         <ListView Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="3" x:Name="LvContacten">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Locatie" DisplayMemberBinding="{Binding Naam}"/>
-                    <GridViewColumn Header="Adres" DisplayMemberBinding="{Binding Telefoon}"/>
-                    <GridViewColumn Header="Postcode" DisplayMemberBinding="{Binding Email}"/>
+                    <GridViewColumn Header="Naam" DisplayMemberBinding="{Binding Naam}"/>
+                    <GridViewColumn Header="Telefoon" DisplayMemberBinding="{Binding Telefoon}"/>
+                    <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"/>
                 </GridView>
             </ListView.View>
         </ListView>

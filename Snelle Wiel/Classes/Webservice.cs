@@ -32,7 +32,6 @@ namespace Snelle_Wiel.Classes
             IList<JToken> parentjson = content["rows"].Children().Children().ToList();
             JToken Row = parentjson[0].First;
 
-
             foreach (JToken Elements in Row)
             {
                 JToken distance = Elements["distance"];
