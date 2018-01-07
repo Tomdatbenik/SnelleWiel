@@ -8,14 +8,17 @@ namespace Snelle_Wiel.Objects
 {
     public class Order
     {
-        public int Id { get; }
-        public Locatie Start;
-        public Locatie Einde;
+        public int Id { get; private set; }
+        public string Omschrijving { get; private set; }
+        public string Status { get; private set; }
+        public Locatie Start { get;  set; }
+        public Locatie Einde { get;  set; }
 
 
-        public Order(int Id,Locatie start, Locatie einde)
+        public Order(int id,string omschrijving, Locatie start, Locatie einde)
         {
-            this.Id = Id;
+            this.Id = id;
+            this.Omschrijving = omschrijving;
             this.Start = start;
             this.Einde = einde;
         }
