@@ -69,7 +69,7 @@
         <TextBlock Grid.Column="1" Grid.Row="12" Text="Postcode:" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="15"></TextBlock>
         <TextBlock Grid.Column="1" Grid.Row="14" Text="Email:" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="15"></TextBlock>
         <TextBlock Grid.Column="1" Grid.Row="16" Text="Telefoon nummer:" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="15"></TextBlock>
-        <TextBlock x:Name="TbError" Grid.Column="1" Grid.Row="16" Text="" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="15" Foreground="Red"></TextBlock>
+        <TextBlock x:Name="TbError" Grid.Column="1" Grid.Row="18" Text="" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="15" Foreground="Red"></TextBlock>
 
         <TextBox x:Name="TbLName" Grid.Column="1" Grid.Row="1" BorderBrush="#FFC3C1C1" BorderThickness="0,0,0,1" Foreground="#FF909090" Background="#FFF6F6F6" FontSize="22"/>
         <PasswordBox x:Name="PbPass" Grid.Column="1" Grid.Row="3" BorderBrush="#FFC3C1C1" BorderThickness="0,0,0,1" Foreground="#FF909090" Background="#FFF6F6F6" FontSize="22" PasswordChar="*"></PasswordBox>

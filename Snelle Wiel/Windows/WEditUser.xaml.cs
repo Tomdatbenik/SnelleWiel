@@ -36,14 +36,29 @@ namespace Snelle_Wiel.Windows
             DataTable dt = db.ExecuteStringQuery(query);
             foreach (DataRow dr in dt.Rows)
             {
-                TbLName.Text = dr["ULoginname"].ToString();
-                CbRole.SelectedIndex = int.Parse(dr["RoleId"].ToString()) -1;
-                TbName.Text = dr["Unaam"].ToString();
-                TbWoonplaats.Text = dr["UWoonplaats"].ToString();
-                TbAdres.Text = dr["UAdres"].ToString();
-                TbPostcode.Text = dr["UPostcode"].ToString();
-                TbEmail.Text = dr["UEmail"].ToString();
-                TbTelefoon.Text = dr["UTelefoon"].ToString();
+                if(this.id == db.Userid)
+                {
+                    TbLName.Text = dr["ULoginname"].ToString();
+                    CbRole.SelectedIndex = int.Parse(dr["RoleId"].ToString()) - 1;
+                    CbRole.IsEnabled = false;
+                    TbName.Text = dr["Unaam"].ToString();
+                    TbWoonplaats.Text = dr["UWoonplaats"].ToString();
+                    TbAdres.Text = dr["UAdres"].ToString();
+                    TbPostcode.Text = dr["UPostcode"].ToString();
+                    TbEmail.Text = dr["UEmail"].ToString();
+                    TbTelefoon.Text = dr["UTelefoon"].ToString();
+                }
+                else
+                {
+                    TbLName.Text = dr["ULoginname"].ToString();
+                    CbRole.SelectedIndex = int.Parse(dr["RoleId"].ToString()) - 1;
+                    TbName.Text = dr["Unaam"].ToString();
+                    TbWoonplaats.Text = dr["UWoonplaats"].ToString();
+                    TbAdres.Text = dr["UAdres"].ToString();
+                    TbPostcode.Text = dr["UPostcode"].ToString();
+                    TbEmail.Text = dr["UEmail"].ToString();
+                    TbTelefoon.Text = dr["UTelefoon"].ToString();
+                }
             }
         }
 

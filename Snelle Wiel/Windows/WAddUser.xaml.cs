@@ -36,8 +36,14 @@ namespace Snelle_Wiel.Windows
             {
                 string tag = CbRole.SelectedValue.ToString();
                 int Roleid = int.Parse(tag);
-                lg.AddUser(TbLName.Text, PbPass.Password, Roleid,TbName.Text,TbWoonplaats.Text, TbAdres.Text, TbPostcode.Text, TbEmail.Text,TbTelefoon.Text);
-                this.Close();
+                if(lg.AddUser(TbLName.Text, PbPass.Password, Roleid,TbName.Text,TbWoonplaats.Text, TbAdres.Text, TbPostcode.Text, TbEmail.Text,TbTelefoon.Text) == "OK")
+                {
+                    this.Close();
+                }
+                else
+                {
+                    TbError.Text = "Login naam bestaat al";
+                }
             }
             else
             {

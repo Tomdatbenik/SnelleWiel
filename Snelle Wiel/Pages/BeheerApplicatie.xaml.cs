@@ -42,7 +42,7 @@ namespace Snelle_Wiel.Pages
 
             DataTable dtResult = new DataTable();
  
-            string query = "SELECT `UserId`,`UNaam`,`UWoonplaats`,`UAdres`,`UPostcode`,`UEmail`,`UTelefoon` FROM Users";
+            string query = "SELECT `UserId`,`UNaam`,`UWoonplaats`,`UAdres`,`UPostcode`,`UEmail`,`UTelefoon`,`RoleId` FROM Users";
 
             dtResult =  db.ExecuteStringQuery(query);
             foreach (DataRow dr in dtResult.Rows)
@@ -54,8 +54,22 @@ namespace Snelle_Wiel.Pages
                 string postcode = dr["UPostcode"].ToString();
                 string email = dr["UEmail"].ToString();
                 string telefoonnr = dr["UTelefoon"].ToString();
+                string Rol = "";
+                switch(int.Parse(dr["RoleId"].ToString()))
+                {
+                    case 1:
+                        Rol = "Planner";
+                        break;
+                    case 2:
+                        Rol = "Chauffeur";
+                        break;
+                    case 3:
+                        Rol = "Administratie";
+                        break;
+                }
 
                 User u = new User(id,naam,woonplaats,adres,postcode,email,telefoonnr);
+                u.Roltext = Rol;
                 Users.Add(u);
             }
 
@@ -73,10 +87,17 @@ namespace Snelle_Wiel.Pages
         {
             if (lvUserlist.SelectedItem != null)
             {
-                int UserId = Users[lvUserlist.SelectedIndex].Id;
-                string query = "DELETE FROM `snellewiel`.`Users` WHERE  `UserId`= " + UserId + ";";
-                db.ExecuteStringQuery(query);
-                loadusers();
+                if(Users[lvUserlist.SelectedIndex].Id == db.Userid)
+                {
+                    MessageBox.Show("U kunt niet uwzelf verwijderen");
+                }
+                else
+                {
+                    int UserId = Users[lvUserlist.SelectedIndex].Id;
+                    string query = "DELETE FROM `snellewiel`.`Users` WHERE  `UserId`= " + UserId + ";";
+                    db.ExecuteStringQuery(query);
+                    loadusers();
+                }
             }
             else
             {

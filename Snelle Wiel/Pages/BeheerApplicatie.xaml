@@ -51,6 +51,7 @@
                     <GridViewColumn Header="Postcode" DisplayMemberBinding="{Binding Postcode}"/>
                     <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"/>
                     <GridViewColumn Header="Telefoonnr" DisplayMemberBinding="{Binding Telefoonnr}"/>
+                    <GridViewColumn Header="Rol" DisplayMemberBinding="{Binding Roltext}" Width="100"/>
                 </GridView>
             </ListView.View>
         </ListView>

@@ -39,13 +39,21 @@ namespace SnelleWiel.Pages
         {
             User u = lg.Login(TbName.Text, PbPass.Password);
             //TextBlockHide(TbError);
-            if (u.Id != 0)
+            if (u.Id != 0 && u.Rol != 2)
             {
                 db.Userid = u.Id;
                 pagefade(this);
             }
             else
             {
+                if(u.Rol == 2)
+                {
+                    TbError.Text = "U heeft geen toestemming om in te loggen";
+                }
+                else
+                {
+                    TbError.Text = "Login Gegevens niet correct!!";
+                }
                 TbError.Visibility = System.Windows.Visibility.Visible;
             }
         }

@@ -50,57 +50,99 @@ namespace Snelle_Wiel.Classes
         }
 
 
-        public void AddUser(string Name, string Pass,int Role,string naam, string woonplaats, string adres, string postcode, string email,string telefoon)
+        public string AddUser(string Name, string Pass,int Role,string naam, string woonplaats, string adres, string postcode, string email,string telefoon)
         {
-            string Salt = BCrypt.GenerateSalt();
-            string HashedPass = BCrypt.HashPassword(Pass, Salt);
-            string query = "INSERT INTO `Users`(ULoginname, ULoginpass, USalt, RoleId, UNaam, UWoonplaats, UAdres, UPostcode, UEmail,UTelefoon) " +
-                "VALUES(" +
-                "'"+ Name +"'," +
-                "'" + HashedPass + "'," +
-                "'" + Salt + "'," +
-                "'" + Role + "'," +
-                "'" + naam + "'," +
-                "'" + woonplaats + "'," +
-                "'" + adres + "'," +
-                "'" + postcode + "'," +
-                "'" + email + "'," +
-                "'" + telefoon + "'" +
-                ");";
-            db.ExecuteStringQuery(query);
+            string q = "SELECT ULoginname FROM Users WHERE ULoginname = '"+ Name +"'";
+            DataTable dt = db.ExecuteStringQuery(q);
+            if (dt.Rows.Count == 0)
+            {
+                string Salt = BCrypt.GenerateSalt();
+                string HashedPass = BCrypt.HashPassword(Pass, Salt);
+                string query = "INSERT INTO `Users`(ULoginname, ULoginpass, USalt, RoleId, UNaam, UWoonplaats, UAdres, UPostcode, UEmail,UTelefoon) " +
+                    "VALUES(" +
+                    "'" + Name + "'," +
+                    "'" + HashedPass + "'," +
+                    "'" + Salt + "'," +
+                    "'" + Role + "'," +
+                    "'" + naam + "'," +
+                    "'" + woonplaats + "'," +
+                    "'" + adres + "'," +
+                    "'" + postcode + "'," +
+                    "'" + email + "'," +
+                    "'" + telefoon + "'" +
+                    ");";
+                db.ExecuteStringQuery(query);
+                return "OK";
+            }
+            else
+            {
+                return "ERROR";
+            }
         }
 
         public void EditUser(int id,string Name, string Pass, int Role, string naam, string woonplaats, string adres, string postcode, string email, string telefoon)
         {
-
-            if(Pass == "")
+            if(db.Userid == id)
             {
-                string query = "UPDATE `snellewiel`.`Users` SET ULoginname = '" + Name + "'," +
-                "RoleId= '" + Role + "'" +
-                ", UNaam= '" + naam + " '" +
-                ", UWoonplaats= '" + woonplaats + "', " +
-                "UAdres= '" + adres + "', " +
-                "UPostcode= '" + postcode + " ', " +
-                "UEmail= '" + email + "'," +
-                "UTelefoon= '" + telefoon + " ' " +
-                "WHERE  `UserId`='" + id.ToString() + "';";
-                db.ExecuteStringQuery(query);
+                if (Pass == "")
+                {
+                    string query = "UPDATE `snellewiel`.`Users` SET ULoginname = '" + Name + "'," +
+                    ", UNaam= '" + naam + " '" +
+                    ", UWoonplaats= '" + woonplaats + "', " +
+                    "UAdres= '" + adres + "', " +
+                    "UPostcode= '" + postcode + " ', " +
+                    "UEmail= '" + email + "'," +
+                    "UTelefoon= '" + telefoon + " ' " +
+                    "WHERE  `UserId`='" + id.ToString() + "';";
+                    db.ExecuteStringQuery(query);
+                }
+                else
+                {
+                    string Salt = BCrypt.GenerateSalt();
+                    string HashedPass = BCrypt.HashPassword(Pass, Salt);
+                    string query = "UPDATE `snellewiel`.`Users` SET ULoginname = '" + Name +
+                    "', ULoginpass= '" + HashedPass + "', " +
+                    ", UNaam= '" + naam + " '" +
+                    ", UWoonplaats= '" + woonplaats + "', " +
+                    "UAdres= '" + adres + "', " +
+                    "UPostcode= '" + postcode + " ', " +
+                    "UEmail= '" + email + "'," +
+                    "UTelefoon= '" + telefoon + " ' " +
+                    "WHERE  `UserId`='" + id.ToString() + "';";
+                    db.ExecuteStringQuery(query);
+                }
             }
             else
             {
-                string Salt = BCrypt.GenerateSalt();
-                string HashedPass = BCrypt.HashPassword(Pass, Salt);
-                string query = "UPDATE `snellewiel`.`Users` SET ULoginname = '" + Name +
-                "', ULoginpass= '" + HashedPass + "', " +
-                "RoleId= '" + Role + "'" +
-                ", UNaam= '" + naam + " '" +
-                ", UWoonplaats= '" + woonplaats + "', " +
-                "UAdres= '" + adres + "', " +
-                "UPostcode= '" + postcode + " ', " +
-                "UEmail= '" + email + "'," +
-                "UTelefoon= '" + telefoon + " ' " +
-                "WHERE  `UserId`='" + id.ToString() + "';";
-                db.ExecuteStringQuery(query);
+                if (Pass == "")
+                {
+                    string query = "UPDATE `snellewiel`.`Users` SET ULoginname = '" + Name + "'," +
+                    "RoleId= '" + Role + "'" +
+                    ", UNaam= '" + naam + " '" +
+                    ", UWoonplaats= '" + woonplaats + "', " +
+                    "UAdres= '" + adres + "', " +
+                    "UPostcode= '" + postcode + " ', " +
+                    "UEmail= '" + email + "'," +
+                    "UTelefoon= '" + telefoon + " ' " +
+                    "WHERE  `UserId`='" + id.ToString() + "';";
+                    db.ExecuteStringQuery(query);
+                }
+                else
+                {
+                    string Salt = BCrypt.GenerateSalt();
+                    string HashedPass = BCrypt.HashPassword(Pass, Salt);
+                    string query = "UPDATE `snellewiel`.`Users` SET ULoginname = '" + Name +
+                    "', ULoginpass= '" + HashedPass + "', " +
+                    "RoleId= '" + Role + "'" +
+                    ", UNaam= '" + naam + " '" +
+                    ", UWoonplaats= '" + woonplaats + "', " +
+                    "UAdres= '" + adres + "', " +
+                    "UPostcode= '" + postcode + " ', " +
+                    "UEmail= '" + email + "'," +
+                    "UTelefoon= '" + telefoon + " ' " +
+                    "WHERE  `UserId`='" + id.ToString() + "';";
+                    db.ExecuteStringQuery(query);
+                }
             }
         }
     }

@@ -16,6 +16,7 @@ namespace Snelle_Wiel.Objects
         public string Postcode { get; set; }
         public string Email { get; set; }
         public string Telefoonnr { get; set; }
+        public string Roltext { get; set; }
 
         public User()
         {

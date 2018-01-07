@@ -17,7 +17,7 @@ namespace Snelle_Wiel.Objects
         {
             this.Id = Id;
             this.Start = start;
-            this.Einde = einde
+            this.Einde = einde;
         }
     }
 }
