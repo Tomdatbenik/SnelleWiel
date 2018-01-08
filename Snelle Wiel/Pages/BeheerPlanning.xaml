@@ -71,8 +71,9 @@
         <ListView AllowDrop="True" Drop="ListView_drop"  PreviewMouseDown="ListView_PreviewMouseMove" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" x:Name="Chauffeurone">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
-                    <GridViewColumn Header="Omschrijving" DisplayMemberBinding="{Binding Omschrijving}"/>
+                    <GridViewColumn Header="Beschrijving" DisplayMemberBinding="{Binding OrderBeschrijving}"/>
+                    <GridViewColumn Header="OA" DisplayMemberBinding="{Binding OAText}"/>
+                    <GridViewColumn Header="Tijd" DisplayMemberBinding="{Binding Tijd}"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -80,8 +81,9 @@
         <ListView AllowDrop="True" Drop="ListView_drop"  PreviewMouseDown="ListView_PreviewMouseMove" Grid.Column="4" Grid.Row="3" Grid.ColumnSpan="2" x:Name="Chauffeurtwo">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
-                    <GridViewColumn Header="Omschrijving" DisplayMemberBinding="{Binding Omschrijving}"/>
+                    <GridViewColumn Header="Beschrijving" DisplayMemberBinding="{Binding OrderBeschrijving}"/>
+                    <GridViewColumn Header="OA" DisplayMemberBinding="{Binding OAText}"/>
+                    <GridViewColumn Header="Tijd" DisplayMemberBinding="{Binding Tijd}"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -89,8 +91,9 @@
         <ListView AllowDrop="True" Drop="ListView_drop"  PreviewMouseDown="ListView_PreviewMouseMove" Grid.Column="7" Grid.Row="3" x:Name="Chauffeurthree">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
-                    <GridViewColumn Header="Omschrijving" DisplayMemberBinding="{Binding Omschrijving}"/>
+                    <GridViewColumn Header="Beschrijving" DisplayMemberBinding="{Binding OrderBeschrijving}"/>
+                    <GridViewColumn Header="OA" DisplayMemberBinding="{Binding OAText}"/>
+                    <GridViewColumn Header="Tijd" DisplayMemberBinding="{Binding Tijd}"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -98,8 +101,9 @@
         <ListView AllowDrop="True" Drop="ListView_drop"  PreviewMouseDown="ListView_PreviewMouseMove" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" x:Name="Chauffeurfour">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
-                    <GridViewColumn Header="Omschrijving" DisplayMemberBinding="{Binding Omschrijving}"/>
+                    <GridViewColumn Header="Beschrijving" DisplayMemberBinding="{Binding OrderBeschrijving}"/>
+                    <GridViewColumn Header="OA" DisplayMemberBinding="{Binding OAText}"/>
+                    <GridViewColumn Header="Tijd" DisplayMemberBinding="{Binding Tijd}"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -107,8 +111,9 @@
         <ListView AllowDrop="True" Drop="ListView_drop"  PreviewMouseDown="ListView_PreviewMouseMove" Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="5" x:Name="Chauffeurfive">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
-                    <GridViewColumn Header="Omschrijving" DisplayMemberBinding="{Binding Omschrijving}"/>
+                    <GridViewColumn Header="Beschrijving" DisplayMemberBinding="{Binding OrderBeschrijving}"/>
+                    <GridViewColumn Header="OA" DisplayMemberBinding="{Binding OAText}"/>
+                    <GridViewColumn Header="Tijd" DisplayMemberBinding="{Binding Tijd}"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -116,8 +121,9 @@
         <ListView AllowDrop="True" Drop="ListView_drop"  PreviewMouseDown="ListView_PreviewMouseMove" Grid.Column="7" Grid.Row="5" x:Name="Chauffeursix">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
-                    <GridViewColumn Header="Omschrijving" DisplayMemberBinding="{Binding Omschrijving}"/>
+                    <GridViewColumn Header="Beschrijving" DisplayMemberBinding="{Binding OrderBeschrijving}"/>
+                    <GridViewColumn Header="OA" DisplayMemberBinding="{Binding OAText}"/>
+                    <GridViewColumn Header="Tijd" DisplayMemberBinding="{Binding Tijd}"/>
                 </GridView>
             </ListView.View>
         </ListView>

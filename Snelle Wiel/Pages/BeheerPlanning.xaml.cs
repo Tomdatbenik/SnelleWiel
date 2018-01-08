@@ -50,30 +50,33 @@ namespace Snelle_Wiel.Pages
         {
             InitializeComponent();
             this.db = database;
-            setup();
             p = new Planning(db);
-
             Setupplanning();
-
-
-
         }
 
-        public void Setupplanning()
+        public async void Setupplanning()
         {
-            List<PlanningItem> Items = new List<PlanningItem>();
-            Items = p.GetPlanningItems(Chaufs[0].Id);
+            ObservableCollection<PlanningItem> Items = new ObservableCollection<PlanningItem>();
+            setup();
+            LvOrders.ItemsSource = null;
+            int i = 0;
+
+            foreach(User c in Chaufs)
+            {
+                Items = await p.GetPlanningItems(c.Id, DateTime.Now);
+                Chauflisten[i].ItemsSource = Items;
+                i++;
+            }
+            setup();
         }
 
         public async void setup()
         {
-            Chauffeurone.ItemsSource = new ObservableCollection<Order>();
-            Chauffeurtwo.ItemsSource = new ObservableCollection<Order>();
-            Chauffeurthree.ItemsSource = new ObservableCollection<Order>();
-            Chauffeurfour.ItemsSource = new ObservableCollection<Order>();
-            Chauffeurfive.ItemsSource = new ObservableCollection<Order>();
-            Chauffeursix.ItemsSource = new ObservableCollection<Order>();
-
+            LvOrders.ItemsSource = null;
+            Orders.Clear();
+            Chaufs.Clear();
+            Chauflisten.Clear();
+            textblocks.Clear();
 
             Chauflisten.Add(Chauffeurone);
             Chauflisten.Add(Chauffeurtwo);

@@ -13,5 +13,6 @@ namespace Snelle_Wiel.Objects
         public string Tijd { get; set; }
         public int OrderId { get; set; }
         public int ChauffeurId { get; set; }
+        public Locatie locatie { get; set; }
 }
 }

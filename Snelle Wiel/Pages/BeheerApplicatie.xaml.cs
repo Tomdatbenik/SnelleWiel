@@ -95,6 +95,8 @@ namespace Snelle_Wiel.Pages
                 {
                     int UserId = Users[lvUserlist.SelectedIndex].Id;
                     string query = "DELETE FROM `snellewiel`.`Users` WHERE  `UserId`= " + UserId + ";";
+                    string qureyresetplanning = "UPDATE `Order` SET `Gebruik`='0';";
+                    db.ExecuteStringQuery(qureyresetplanning);
                     db.ExecuteStringQuery(query);
                     loadusers();
                 }

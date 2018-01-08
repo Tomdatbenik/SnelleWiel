@@ -18,7 +18,7 @@ namespace Snelle_Wiel.Objects
         User Chauf;
         int orderperschauf = 0;
         Webservice wb = new Webservice();
-
+        int startvandedag = 510;
         //Ritvolgorde worden de ritten gestopt op volgorde van start en van eind
 
 
@@ -42,18 +42,21 @@ namespace Snelle_Wiel.Objects
             }
 
             orderperschauf = Orders.Count()/i;
-            string tijd = MinutenNaarTijd(1050);
-            Console.WriteLine(tijd);
+ 
             Console.WriteLine(orderperschauf);
         }
 
         List<Rit> volgorde = new List<Rit>();
 
-        public List<PlanningItem> GetPlanningItems(int chauffeurId)
+        public async Task<ObservableCollection<PlanningItem>> GetPlanningItems(int chauffeurId, DateTime myDateTime)
         {
-            List<PlanningItem> PlanningItems = new List<PlanningItem>();
+            ObservableCollection<PlanningItem> PlanningItems = new ObservableCollection<PlanningItem>();
             List<Order> Orders = Getorders();
             List<User> Chaufs = GetChaufs();
+
+
+            //Check of planning bestaad if(query database ding)
+
 
             int i = 0;
             foreach (User c in Chaufs)
@@ -61,19 +64,74 @@ namespace Snelle_Wiel.Objects
                 i++;
             }
 
-            orderperschauf = Orders.Count() / i;
+            Console.WriteLine("Order per chauf " + orderperschauf);
 
             List<Order> SelectedOrders = SelectordersAndSet();
+            double k = startvandedag;
 
-            foreach(Order o in SelectedOrders)
+            Order Lastorder;
+            int x = 0;
+            foreach (Order o in SelectedOrders)
             {
+                if (x == 0)
+                {
+                    Rit r1 = await wb.GetTravelTime(new Locatie("Sint-Oedenrode", "Liempdseweg43", "5492 SM", "Nederland"), o.Start);
+                    k = k += r1.Duration;
+                    Lastorder = o;
+                    x++;
+                }
+                else
+                {
+                    Rit r1 = await wb.GetTravelTime(o.Start, o.Start);
+                    k = k += r1.Duration;
+                }
+
                 PlanningItem pi = new PlanningItem();
                 pi.OrderId = o.Id;
                 pi.OrderBeschrijving = o.Omschrijving;
+                pi.Tijd = MinutenNaarTijd(int.Parse(k.ToString()));
+                pi.ChauffeurId = chauffeurId;
+                pi.OAText = "Ophalen";
+                pi.locatie = o.Start;
+
+                PlanningItems.Add(pi);
+
+                Rit r2 = await wb.GetTravelTime(o.Start, o.Einde);
+                k = k += r2.Duration;
+                PlanningItem pi2 = new PlanningItem();
+                pi2.OrderId = o.Id;
+                pi2.OrderBeschrijving = o.Omschrijving;
+                pi2.Tijd = MinutenNaarTijd(int.Parse(k.ToString()));
+                pi2.ChauffeurId = chauffeurId;
+                pi2.OAText = "Afleveren";
+                pi2.locatie = o.Start;
+
+                PlanningItems.Add(pi2);
+                Lastorder = o;
             }
+            List<PlanningItem> pls = new List<PlanningItem>();
+
+            foreach(PlanningItem pl in planningItems)
+            {
+                pls.Add(pl);
+            }
+            saveplanning(pls);
 
             return PlanningItems;
         }
+
+        public void saveplanning(List<PlanningItem> PlanningItems)
+        {
+            string query = "";
+            foreach(PlanningItem pi in PlanningItems)
+            {
+
+            }
+        }
+
+
+
+
 
         public List<Order> SelectordersAndSet()
         {
@@ -105,8 +163,8 @@ namespace Snelle_Wiel.Objects
 
             foreach(Order o in Orders)
             {
-                //string q = "UPDATE `snellewiel`.`Order` SET `Gebruik`='1' WHERE  `OrderId`="+o.Id+";";
-                //DataTable dt = db.ExecuteStringQuery(q);
+                string q = "UPDATE `snellewiel`.`Order` SET `Gebruik`='1' WHERE  `OrderId`="+o.Id+";";
+                DataTable dt = db.ExecuteStringQuery(q);
             }
 
             return Orders;
@@ -195,16 +253,32 @@ namespace Snelle_Wiel.Objects
             {
                m = double.Parse(DeelVanUur[1]);
             }
-            double Minuut = 0;
+            double Minuut = 00;
             if(m != 0)
             {
                 Minuut = m / 100 * 60 * 10;
             }
 
-            Console.WriteLine(DeelVanUur[0] + " Uur " + Minuut +" Minuten");
+            char[] fixminuten = Minuut.ToString().ToArray();
 
+            int minuten = 0;
+            Console.WriteLine(fixminuten.Count());
+            Console.WriteLine(fixminuten.Length);
+            if (fixminuten.Count() > 1)
+            {
+                minuten = int.Parse(fixminuten[0].ToString() + fixminuten[1].ToString());
+                return DeelVanUur[0] + ":" + minuten;
+            }
+            else
+            {
+                if(Minuut == 0)
+                {
+                    return DeelVanUur[0] + ":" + Minuut + "0";
+                }
+                
+                return DeelVanUur[0] + ":" + Minuut;
+            }
 
-            return "";
         }
        
     }
