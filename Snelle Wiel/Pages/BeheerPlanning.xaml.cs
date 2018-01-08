@@ -252,18 +252,13 @@ namespace Snelle_Wiel.Pages
             else
             {
                 i -= 6;
-                int current = i;
 
-                for (int o = 0; o < 6; o++)
+                for (int o = i - 1; o < i; o++)
                 {
-                    if(Chaufs.Count() < o)
+                    if(Chaufs.Count() < i)
                     {
-                        textblocks[o].Text = Chaufs[o].Naam;
+                        textblocks[o].Text = Chaufs[i].Naam;
                     }
-                    //current = dadelijk welke chauffeur
-
-
-                    current += 1;
                 }
             }
         }
@@ -273,18 +268,13 @@ namespace Snelle_Wiel.Pages
             if(Chaufs.Count <= i)
             {
                 i += 6;
-                int current = i;
 
-                for (int o = 0; o < 6; o++)
+                for (int o = i - 1; o < i; o++)
                 {
-                    if (Chaufs.Count() < o)
+                    if (Chaufs.Count() < i)
                     {
-                        textblocks[o].Text = Chaufs[o].Naam;
+                        textblocks[o].Text = Chaufs[i].Naam;
                     }
-                    //current = dadelijk welke chauffeur
-
-
-                    current += 1;
                 }
             }
             else
