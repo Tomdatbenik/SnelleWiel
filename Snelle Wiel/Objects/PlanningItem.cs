@@ -8,8 +8,10 @@ namespace Snelle_Wiel.Objects
 {
     class PlanningItem
     {
-        string OrderBeschrijving { get; set; }
-        string OAText { get; set; }
-        string Tijd { get; set; }
+        public string OrderBeschrijving { get; set; }
+        public string OAText { get; set; }
+        public string Tijd { get; set; }
+        public int OrderId { get; set; }
+        public int ChauffeurId;
 }
 }

@@ -16,6 +16,7 @@ namespace Snelle_Wiel.Objects
         List<PlanningItem> planningItems = new List<PlanningItem>();
         List<Order> Orders;
         User Chauf;
+        int orderperschauf;
 
         //Ritvolgorde worden de ritten gestopt op volgorde van start en van eind
 
@@ -39,8 +40,72 @@ namespace Snelle_Wiel.Objects
                 i++;
             }
 
-            int o = Orders.Count()/i;
+            orderperschauf = Orders.Count()/i;
+
+            Console.WriteLine(orderperschauf);
         }
+
+        public async Task<List<PlanningItem>> GetPlanningItems(int chauffeurId)
+        {
+            List<PlanningItem> PlanningItems = new List<PlanningItem>();
+            int i = orderperschauf;
+            List<Order> SelectedOrders = SelectordersAndSet();
+            List<Order> Volgorde = new List<Order>();
+            Webservice wb = new Webservice();
+            foreach(Order o in SelectedOrders)
+            {
+                Rit r = await wb.GetTravelTime(o.Start,o.Einde);
+            }
+
+
+            foreach(Order o in SelectedOrders)
+            {
+                PlanningItem pi = new PlanningItem();
+                pi.OrderId = o.Id;
+                pi.OrderBeschrijving = o.Omschrijving;
+                
+            }
+
+            return planningItems;
+        }
+
+        public List<Order> SelectordersAndSet()
+        {
+            List<Order> Orders = new List<Order>();
+            string query = "SELECT * FROM `Order` WHERE Gebruik = '0' LIMIT "+ orderperschauf + ";";
+            DataTable data = db.ExecuteStringQuery(query);
+            foreach (DataRow dr in data.Rows)
+            {
+                string OphaalpuntPlaats = dr["OphaalpuntPlaats"].ToString();
+                string OphaalpuntAdres = dr["OphaalpuntAdres"].ToString();
+                string OphaalpuntPostcode = dr["OphaalpuntPostcode"].ToString();
+                string OphaalpuntLand = dr["OphaalpuntLand"].ToString();
+
+                string EindbestemmingPlaats = dr["EindbestemmingPlaats"].ToString();
+                string EindbestemmingAdres = dr["EindbestemmingAdres"].ToString();
+                string EindbestemmingPostcode = dr["EindbestemmingPostcode"].ToString();
+                string EindbestemmingLand = dr["EindbestemmingLand"].ToString();
+
+
+
+                Locatie s = new Locatie(OphaalpuntPlaats, OphaalpuntAdres, OphaalpuntPostcode, OphaalpuntLand);
+                Locatie e = new Locatie(EindbestemmingPlaats, EindbestemmingAdres, EindbestemmingPostcode, EindbestemmingLand);
+
+
+
+                Order o = new Order(int.Parse(dr["OrderId"].ToString()), dr["Omschrijving"].ToString(), s, e);
+                Orders.Add(o);
+            }
+
+            foreach(Order o in Orders)
+            {
+                string q = "UPDATE `snellewiel`.`Order` SET `Gebruik`='1' WHERE  `OrderId`="+o.Id+";";
+                DataTable dt = db.ExecuteStringQuery(query);
+            }
+
+            return Orders;
+        }
+
 
 
         public async Task<List<Rit>> Berekenachtuur(List<Order> Orders)
