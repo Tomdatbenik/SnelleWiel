@@ -42,7 +42,7 @@ namespace Snelle_Wiel.Objects
             }
 
             orderperschauf = Orders.Count()/i;
-            string tijd = MinutenNaarTijd(510);
+            string tijd = MinutenNaarTijd(1050);
             Console.WriteLine(tijd);
             Console.WriteLine(orderperschauf);
         }
@@ -191,14 +191,14 @@ namespace Snelle_Wiel.Objects
 
             string[] DeelVanUur = Uur.ToString().Split(',');
             double m = 0;
-            if (DeelVanUur.Count() != 0)
+            if (DeelVanUur.Count() == 2)
             {
                m = double.Parse(DeelVanUur[1]);
             }
             double Minuut = 0;
             if(m != 0)
             {
-                Minuut = m / 100 * 60;
+                Minuut = m / 100 * 60 * 10;
             }
 
             Console.WriteLine(DeelVanUur[0] + " Uur " + Minuut +" Minuten");
