@@ -72,6 +72,12 @@ namespace Snelle_Wiel.Classes
                     "'" + telefoon + "'" +
                     ");";
                 db.ExecuteStringQuery(query);
+
+                if(Role == 2)
+                {
+                    string qureyresetplanning = "UPDATE `Order` SET `Gebruik`='0';";
+                    db.ExecuteStringQuery(qureyresetplanning);
+                }
                 return "OK";
             }
             else

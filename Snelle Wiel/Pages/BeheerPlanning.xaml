@@ -54,9 +54,11 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="1" Grid.Column="1" Text="Datum:" HorizontalAlignment="Left" VerticalAlignment="Stretch"></TextBlock>
-        <DatePicker Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch"/>
+        <DatePicker x:Name="dpdate" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" />
+        
         <Button x:Name="btnVorige" Grid.Row="1" Content="Vorige chauffeurs" Grid.Column="4"  VerticalAlignment="Stretch" Style="{StaticResource FlatButtonStyle}" Click="btnVorige_Click"/>
         <Button x:Name="btnVolgende" Grid.Row="1" Content="Volgende chauffeurs" Grid.Column="5"  VerticalAlignment="Stretch" Style="{StaticResource FlatButtonStyle}" Click="btnVolgende_Click"/>
+        <Button x:Name="btReset" Grid.Row="1" Content="Refresh" Grid.Column="9" IsEnabled="False" VerticalAlignment="Stretch" Style="{StaticResource FlatButtonStyle}" Click="btReset_Click"/>
 
         <TextBlock x:Name="tbchaufone" Grid.Row="2" Grid.Column="1" Text="Chauffeur 1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="2"/>
         <TextBlock x:Name="tbchauftwo" Grid.Row="2" Grid.Column="4" Text="Chauffeur 2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="2"/>
@@ -73,7 +75,7 @@
                 <GridView>
                     <GridViewColumn Header="Beschrijving" DisplayMemberBinding="{Binding OrderBeschrijving}"/>
                     <GridViewColumn Header="OA" DisplayMemberBinding="{Binding OAText}"/>
-                    <GridViewColumn Header="Tijd" DisplayMemberBinding="{Binding Tijd}"/>
+                    <GridViewColumn Header="Tijd" DisplayMemberBinding="{Binding Tijd}" Width="40"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -83,7 +85,7 @@
                 <GridView>
                     <GridViewColumn Header="Beschrijving" DisplayMemberBinding="{Binding OrderBeschrijving}"/>
                     <GridViewColumn Header="OA" DisplayMemberBinding="{Binding OAText}"/>
-                    <GridViewColumn Header="Tijd" DisplayMemberBinding="{Binding Tijd}"/>
+                    <GridViewColumn Header="Tijd" DisplayMemberBinding="{Binding Tijd}" Width="40"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -93,7 +95,7 @@
                 <GridView>
                     <GridViewColumn Header="Beschrijving" DisplayMemberBinding="{Binding OrderBeschrijving}"/>
                     <GridViewColumn Header="OA" DisplayMemberBinding="{Binding OAText}"/>
-                    <GridViewColumn Header="Tijd" DisplayMemberBinding="{Binding Tijd}"/>
+                    <GridViewColumn Header="Tijd" DisplayMemberBinding="{Binding Tijd}" Width="40"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -103,7 +105,7 @@
                 <GridView>
                     <GridViewColumn Header="Beschrijving" DisplayMemberBinding="{Binding OrderBeschrijving}"/>
                     <GridViewColumn Header="OA" DisplayMemberBinding="{Binding OAText}"/>
-                    <GridViewColumn Header="Tijd" DisplayMemberBinding="{Binding Tijd}"/>
+                    <GridViewColumn Header="Tijd" DisplayMemberBinding="{Binding Tijd}" Width="40"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -113,7 +115,7 @@
                 <GridView>
                     <GridViewColumn Header="Beschrijving" DisplayMemberBinding="{Binding OrderBeschrijving}"/>
                     <GridViewColumn Header="OA" DisplayMemberBinding="{Binding OAText}"/>
-                    <GridViewColumn Header="Tijd" DisplayMemberBinding="{Binding Tijd}"/>
+                    <GridViewColumn Header="Tijd" DisplayMemberBinding="{Binding Tijd}" Width="40"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -123,7 +125,7 @@
                 <GridView>
                     <GridViewColumn Header="Beschrijving" DisplayMemberBinding="{Binding OrderBeschrijving}"/>
                     <GridViewColumn Header="OA" DisplayMemberBinding="{Binding OAText}"/>
-                    <GridViewColumn Header="Tijd" DisplayMemberBinding="{Binding Tijd}"/>
+                    <GridViewColumn Header="Tijd" DisplayMemberBinding="{Binding Tijd}" Width="40"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -137,7 +139,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        
+
         
     </Grid>
 </Page>

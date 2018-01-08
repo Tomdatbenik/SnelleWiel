@@ -21,7 +21,7 @@ namespace Snelle_Wiel.Classes
         Home home;
         Database db;
 
-        public Navigator(Home givenhome, Database database)
+        public Navigator(Home givenhome, Database database,MainWindow main)
         {
             this.home = givenhome;
             this.db = database;
@@ -30,7 +30,7 @@ namespace Snelle_Wiel.Classes
             this.Beheerklanten = new BeheerKlanten(this.db);
             this.Beheerwagens = new BeheerWagens(this.db);
             this.Beheerapplicatie = new BeheerApplicatie(this.db);
-            this.Beheerplanning = new BeheerPlanning(this.db);
+            this.Beheerplanning = new BeheerPlanning(this.db, main);
         }
 
         public void NavigateTo(string Location)

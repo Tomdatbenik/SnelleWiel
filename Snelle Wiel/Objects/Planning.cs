@@ -32,100 +32,108 @@ namespace Snelle_Wiel.Objects
         public Planning(Database database)
         {
             this.db = database;
-            List<Order> Orders = Getorders();
-            List<User> Chaufs = GetChaufs();
-
-            int i = 0;
-            foreach(User c in Chaufs)
-            {
-                i++;
-            }
-
-            orderperschauf = Orders.Count()/i;
- 
-            Console.WriteLine(orderperschauf);
+            calculateordersperchauf();
         }
 
-        List<Rit> volgorde = new List<Rit>();
-
-        public async Task<ObservableCollection<PlanningItem>> GetPlanningItems(int chauffeurId, DateTime myDateTime)
+        public void calculateordersperchauf()
         {
-            ObservableCollection<PlanningItem> PlanningItems = new ObservableCollection<PlanningItem>();
             List<Order> Orders = Getorders();
             List<User> Chaufs = GetChaufs();
-
-
-            //Check of planning bestaad if(query database ding)
-
 
             int i = 0;
             foreach (User c in Chaufs)
             {
                 i++;
             }
-
+            orderperschauf = Orders.Count() / i;
             Console.WriteLine("Order per chauf " + orderperschauf);
+        }
 
-            List<Order> SelectedOrders = SelectordersAndSet();
-            double k = startvandedag;
+        public async Task<ObservableCollection<PlanningItem>> GetPlanningItems(int chauffeurId, DateTime datum)
+        {
+            Console.WriteLine("Order per chauf " + orderperschauf);
+            ObservableCollection<PlanningItem> PlanningItems = new ObservableCollection<PlanningItem>();
+            List<Order> Orders = Getorders();
+            List<User> Chaufs = GetChaufs();
 
-            Order Lastorder;
-            int x = 0;
-            foreach (Order o in SelectedOrders)
+            string[] date = datum.Date.ToString().ToString().Split(' ');
+            //Check of planning bestaad if(query database ding)
+            string q = "SELECT PlanningId FROM Planning WHERE `Date` = '" + date[0] + "';";
+            DataTable data = db.ExecuteStringQuery(q);
+
+            if(data.Rows.Count == 0)
             {
-                if (x == 0)
+                int i = 0;
+                foreach (User c in Chaufs)
                 {
-                    Rit r1 = await wb.GetTravelTime(new Locatie("Sint-Oedenrode", "Liempdseweg43", "5492 SM", "Nederland"), o.Start);
-                    k = k += r1.Duration;
+                    i++;
+                }
+
+                List<Order> SelectedOrders = SelectordersAndSet();
+                double k = startvandedag;
+
+                Order Lastorder;
+                int x = 0;
+                foreach (Order o in SelectedOrders)
+                {
+                    if (x == 0)
+                    {
+                        Rit r1 = await wb.GetTravelTime(new Locatie("Sint-Oedenrode", "Liempdseweg43", "5492 SM", "Nederland"), o.Start);
+                        k = k += r1.Duration;
+                        Lastorder = o;
+                        x++;
+                    }
+                    else
+                    {
+                        Rit r1 = await wb.GetTravelTime(o.Start, o.Start);
+                        k = k += r1.Duration;
+                    }
+
+                    PlanningItem pi = new PlanningItem();
+                    pi.OrderId = o.Id;
+                    pi.OrderBeschrijving = o.Omschrijving;
+                    pi.Tijd = MinutenNaarTijd(int.Parse(k.ToString()));
+                    pi.ChauffeurId = chauffeurId;
+                    pi.OAText = "Ophalen";
+                    pi.locatie = o.Start;
+
+                    PlanningItems.Add(pi);
+
+                    Rit r2 = await wb.GetTravelTime(o.Start, o.Einde);
+                    k = k += r2.Duration;
+                    PlanningItem pi2 = new PlanningItem();
+                    pi2.OrderId = o.Id;
+                    pi2.OrderBeschrijving = o.Omschrijving;
+                    pi2.Tijd = MinutenNaarTijd(int.Parse(k.ToString()));
+                    pi2.ChauffeurId = chauffeurId;
+                    pi2.OAText = "Afleveren";
+                    pi2.locatie = o.Start;
+
+                    PlanningItems.Add(pi2);
                     Lastorder = o;
-                    x++;
                 }
-                else
+                List<PlanningItem> pls = new List<PlanningItem>();
+
+                foreach (PlanningItem pl in planningItems)
                 {
-                    Rit r1 = await wb.GetTravelTime(o.Start, o.Start);
-                    k = k += r1.Duration;
+                    pls.Add(pl);
                 }
-
-                PlanningItem pi = new PlanningItem();
-                pi.OrderId = o.Id;
-                pi.OrderBeschrijving = o.Omschrijving;
-                pi.Tijd = MinutenNaarTijd(int.Parse(k.ToString()));
-                pi.ChauffeurId = chauffeurId;
-                pi.OAText = "Ophalen";
-                pi.locatie = o.Start;
-
-                PlanningItems.Add(pi);
-
-                Rit r2 = await wb.GetTravelTime(o.Start, o.Einde);
-                k = k += r2.Duration;
-                PlanningItem pi2 = new PlanningItem();
-                pi2.OrderId = o.Id;
-                pi2.OrderBeschrijving = o.Omschrijving;
-                pi2.Tijd = MinutenNaarTijd(int.Parse(k.ToString()));
-                pi2.ChauffeurId = chauffeurId;
-                pi2.OAText = "Afleveren";
-                pi2.locatie = o.Start;
-
-                PlanningItems.Add(pi2);
-                Lastorder = o;
+                saveplanning(pls);
             }
-            List<PlanningItem> pls = new List<PlanningItem>();
-
-            foreach(PlanningItem pl in planningItems)
+            else
             {
-                pls.Add(pl);
+                Console.WriteLine("test");
             }
-            saveplanning(pls);
 
             return PlanningItems;
         }
 
         public void saveplanning(List<PlanningItem> PlanningItems)
         {
-            string query = "";
+            string query = "INSERT INTO `snellewiel`.`PlanningItems` (`PlanningItemId`, `PlanningId`, `OrderBeschrijving`, `OAText`, `Tijd`, `OrderId`, `ChauffeurId`, `Plaats`, `Adres`, `Postcode`, `Land`) VALUES";
             foreach(PlanningItem pi in PlanningItems)
             {
-
+                query += "('2', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),";
             }
         }
 

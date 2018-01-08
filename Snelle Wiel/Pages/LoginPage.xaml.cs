@@ -29,9 +29,11 @@ namespace SnelleWiel.Pages
     {
         Database db = new Database();
         cLogin lg;
-        public LoginPage()
+        MainWindow main;
+        public LoginPage(MainWindow home)
         {
             InitializeComponent();
+            main = home;
             lg = new cLogin(this.db);
         }
 
@@ -94,7 +96,7 @@ namespace SnelleWiel.Pages
         storyboard.Children.Add(a);
         Storyboard.SetTarget(a, page);
         Storyboard.SetTargetProperty(a, new PropertyPath(OpacityProperty));
-        storyboard.Completed += delegate { this.Visibility = Visibility.Hidden; this.NavigationService.Navigate(new Home(db)); };
+        storyboard.Completed += delegate { this.Visibility = Visibility.Hidden; this.NavigationService.Navigate(new Home(db,main)); };
         storyboard.Begin();
         }
 

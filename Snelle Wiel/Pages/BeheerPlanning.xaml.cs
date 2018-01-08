@@ -1,6 +1,7 @@
 ﻿using Plugin.Geolocator;
 using Snelle_Wiel.Classes;
 using Snelle_Wiel.Objects;
+using Snelle_Wiel.Windows;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -45,10 +46,11 @@ namespace Snelle_Wiel.Pages
         string APISTRING = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=51.507764,5.397848&destinations=51.441642%2C5.469722";
         string origins = "&origins=51.507764,5.397848";
         Planning p;
-
-        public BeheerPlanning(Database database)
+        MainWindow main;
+        public BeheerPlanning(Database database, MainWindow home)
         {
             InitializeComponent();
+            main = home;
             this.db = database;
             p = new Planning(db);
             Setupplanning();
@@ -58,15 +60,24 @@ namespace Snelle_Wiel.Pages
         {
             ObservableCollection<PlanningItem> Items = new ObservableCollection<PlanningItem>();
             setup();
+            btReset.IsEnabled = false;
             LvOrders.ItemsSource = null;
             int i = 0;
 
-            foreach(User c in Chaufs)
+
+            foreach (ListView lv in Chauflisten)
+            {
+                lv.ItemsSource = new ObservableCollection<PlanningItem>(); ;
+            }
+            MessageBox.Show("De berekeningen worden in de achtergrond gemaakt. U kunt verder nadat alles berekend is. De applicatie niet sluiten!");
+            main.Hide();
+            foreach (User c in Chaufs)
             {
                 Items = await p.GetPlanningItems(c.Id, DateTime.Now);
                 Chauflisten[i].ItemsSource = Items;
                 i++;
             }
+            main.Show();
             setup();
         }
 
@@ -134,7 +145,7 @@ namespace Snelle_Wiel.Pages
             }
 
             LvOrders.ItemsSource = Orders;
-
+            btReset.IsEnabled = true;
         }
 
 
@@ -214,6 +225,14 @@ namespace Snelle_Wiel.Pages
             {
                 MessageBox.Show("U heeft niet meer chauffeurs");
             }
+        }
+
+        private void btReset_Click(object sender, RoutedEventArgs e)
+        {
+            btReset.IsEnabled = false;
+            p.calculateordersperchauf();
+            setup();
+            Setupplanning();
         }
     }
 }
