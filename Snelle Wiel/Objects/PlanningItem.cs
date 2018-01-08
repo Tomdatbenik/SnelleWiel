@@ -12,6 +12,6 @@ namespace Snelle_Wiel.Objects
         public string OAText { get; set; }
         public string Tijd { get; set; }
         public int OrderId { get; set; }
-        public int ChauffeurId;
+        public int ChauffeurId { get; set; }
 }
 }

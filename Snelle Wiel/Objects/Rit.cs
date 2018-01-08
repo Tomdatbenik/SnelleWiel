@@ -12,6 +12,11 @@ namespace Snelle_Wiel.Objects
         public double Distance;
         public double Duration;
 
+        public Locatie Locatie;
+
+        public int OrderId;
+        public int ophalenafleveren = 0;
+
         public Rit(double distance, double duration)
         {
             this.Distance = distance;

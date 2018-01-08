@@ -16,7 +16,8 @@ namespace Snelle_Wiel.Objects
         List<PlanningItem> planningItems = new List<PlanningItem>();
         List<Order> Orders;
         User Chauf;
-        int orderperschauf;
+        int orderperschauf = 0;
+        Webservice wb = new Webservice();
 
         //Ritvolgorde worden de ritten gestopt op volgorde van start en van eind
 
@@ -41,38 +42,43 @@ namespace Snelle_Wiel.Objects
             }
 
             orderperschauf = Orders.Count()/i;
-
+            string tijd = MinutenNaarTijd(510);
+            Console.WriteLine(tijd);
             Console.WriteLine(orderperschauf);
         }
 
-        public async Task<List<PlanningItem>> GetPlanningItems(int chauffeurId)
+        List<Rit> volgorde = new List<Rit>();
+
+        public List<PlanningItem> GetPlanningItems(int chauffeurId)
         {
             List<PlanningItem> PlanningItems = new List<PlanningItem>();
-            int i = orderperschauf;
-            List<Order> SelectedOrders = SelectordersAndSet();
-            List<Order> Volgorde = new List<Order>();
-            Webservice wb = new Webservice();
-            foreach(Order o in SelectedOrders)
+            List<Order> Orders = Getorders();
+            List<User> Chaufs = GetChaufs();
+
+            int i = 0;
+            foreach (User c in Chaufs)
             {
-                Rit r = await wb.GetTravelTime(o.Start,o.Einde);
+                i++;
             }
 
+            orderperschauf = Orders.Count() / i;
+
+            List<Order> SelectedOrders = SelectordersAndSet();
 
             foreach(Order o in SelectedOrders)
             {
                 PlanningItem pi = new PlanningItem();
                 pi.OrderId = o.Id;
                 pi.OrderBeschrijving = o.Omschrijving;
-                
             }
 
-            return planningItems;
+            return PlanningItems;
         }
 
         public List<Order> SelectordersAndSet()
         {
             List<Order> Orders = new List<Order>();
-            string query = "SELECT * FROM `Order` WHERE Gebruik = '0' LIMIT "+ orderperschauf + ";";
+            string query = "SELECT * FROM `Order` WHERE Gebruik = '0' ORDER BY `OphaalpuntPostcode`  LIMIT "+ orderperschauf + "; ";
             DataTable data = db.ExecuteStringQuery(query);
             foreach (DataRow dr in data.Rows)
             {
@@ -99,8 +105,8 @@ namespace Snelle_Wiel.Objects
 
             foreach(Order o in Orders)
             {
-                string q = "UPDATE `snellewiel`.`Order` SET `Gebruik`='1' WHERE  `OrderId`="+o.Id+";";
-                DataTable dt = db.ExecuteStringQuery(query);
+                //string q = "UPDATE `snellewiel`.`Order` SET `Gebruik`='1' WHERE  `OrderId`="+o.Id+";";
+                //DataTable dt = db.ExecuteStringQuery(q);
             }
 
             return Orders;
@@ -172,26 +178,33 @@ namespace Snelle_Wiel.Objects
             return Orders;
         }
 
-
-
-
-
-
-
-
-
         public int uurnaarminuut(int uur)
         {
             return uur * 60;
         }
 
-        public double minuutnaaruur(double minuut)
+        public string MinutenNaarTijd(int minuut)
         {
-            double Tijd = minuut / 60;
-            string Uur = Tijd.ToString().Split('.')[0];
-            string Minuten = Tijd.ToString().Split('.')[1];
-            double Hoelaat = 0;
-            return minuut / 60;
+            double M = double.Parse(minuut.ToString());
+            double Uur = M / 60;
+            Console.WriteLine(Uur);
+
+            string[] DeelVanUur = Uur.ToString().Split(',');
+            double m = 0;
+            if (DeelVanUur.Count() != 0)
+            {
+               m = double.Parse(DeelVanUur[1]);
+            }
+            double Minuut = 0;
+            if(m != 0)
+            {
+                Minuut = m / 100 * 60;
+            }
+
+            Console.WriteLine(DeelVanUur[0] + " Uur " + Minuut +" Minuten");
+
+
+            return "";
         }
        
     }

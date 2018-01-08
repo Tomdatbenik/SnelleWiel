@@ -44,20 +44,25 @@ namespace Snelle_Wiel.Pages
 
         string APISTRING = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=51.507764,5.397848&destinations=51.441642%2C5.469722";
         string origins = "&origins=51.507764,5.397848";
-
+        Planning p;
 
         public BeheerPlanning(Database database)
         {
             InitializeComponent();
             this.db = database;
             setup();
+            p = new Planning(db);
 
-            Planning p = new Planning(db);
-
-            ObservableCollection<Planning> planning = new ObservableCollection<Planning>();
-            
+            Setupplanning();
 
 
+
+        }
+
+        public void Setupplanning()
+        {
+            List<PlanningItem> Items = new List<PlanningItem>();
+            Items = p.GetPlanningItems(Chaufs[0].Id);
         }
 
         public async void setup()

@@ -11,9 +11,9 @@ namespace Snelle_Wiel.Objects
         public int Id { get; private set; }
         public string Omschrijving { get; private set; }
         public string Status { get; private set; }
-        public Locatie Start { get;  set; }
-        public Locatie Einde { get;  set; }
-
+        public Locatie Start { get; set; }
+        public Locatie Einde { get; set; }
+        public int opgehaald {get;set;}
 
         public Order(int id,string omschrijving, Locatie start, Locatie einde)
         {
@@ -21,6 +21,7 @@ namespace Snelle_Wiel.Objects
             this.Omschrijving = omschrijving;
             this.Start = start;
             this.Einde = einde;
+            opgehaald = 0;
         }
     }
 }
