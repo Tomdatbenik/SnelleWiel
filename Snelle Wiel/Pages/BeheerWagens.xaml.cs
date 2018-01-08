@@ -1,6 +1,9 @@
 ﻿using Snelle_Wiel.Classes;
+using Snelle_Wiel.Objects;
+using Snelle_Wiel.Windows;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -23,6 +26,7 @@ namespace Snelle_Wiel.Pages
     public partial class BeheerWagens : Page
     {
         Database db;
+        ObservableCollection<Wagen> Vrachtwagens = new ObservableCollection<Wagen>();
         public BeheerWagens(Database database)
         {
             InitializeComponent();
@@ -38,13 +42,14 @@ namespace Snelle_Wiel.Pages
             }
         }
 
+        
         public void GetWagen()
         {
             DataTable dt = db.ExecuteStringQuery("SELECT * FROM `snellewiel`.`Wagens` WHERE `Kenteken` LIKE '%" + TbWagenZoeken.Text + "%'");
             foreach (DataRow dr in dt.Rows)
             {
                 TbWagenNummer.Text = dr["WagenId"].ToString();
-                TbChauffeur.Text = dr["ChauffeurId"].ToString();
+                TbChauffeur.Text = dr["Chauffeur"].ToString();
                 TbKenteken.Text = dr["Kenteken"].ToString();
                 TbMerk.Text = dr["Merk"].ToString();
                 TbType.Text = dr["Type"].ToString();
@@ -61,9 +66,53 @@ namespace Snelle_Wiel.Pages
             }
         }
 
+        public void Setup()
+        {
+            List<Wagen> wagenlist = new List<Wagen>();
+
+            LvWagens.ItemsSource = null;
+            Vrachtwagens.Clear();
+
+            DataTable dt = db.ExecuteStringQuery("SELECT * FROM `snellewiel`.`Wagens` WHERE `Kenteken` LIKE '%" + TbWagenZoeken.Text + "%'");
+            foreach (DataRow dr in dt.Rows)
+            {
+                string wagennummer = dr["WagenId"].ToString();
+                string chauffeur = dr["Chauffeur"].ToString();
+                string kenteken = dr["Kenteken"].ToString();
+                string merk = dr["Merk"].ToString();
+                string type = dr["Type"].ToString();
+                string bouwjaar = dr["Bouwjaar"].ToString();
+                string brandstof = dr["Brandstof"].ToString();
+                string vermorgen = dr["Vermogen"].ToString();
+                string apk = dr["APK"].ToString();
+                string voertuighoogte = dr["Voertuig hoogte"].ToString();
+                string massarijklaar = dr["MassaRijKlaar"].ToString();
+                string toegestanemaxmassavoertuig = dr["ToegestaneMaxMassaVoertuig"].ToString();
+                string maximalelaadvermogen = dr["MaximaleLaadVermogen"].ToString();
+                string laadruiminhoud = dr["LaadRuimteInhoud"].ToString();
+                string status = dr["Status"].ToString();
+
+                Wagen u = new Wagen();
+                Vrachtwagens.Add(u);
+            }
+            LvWagens.ItemsSource = Vrachtwagens;
+        }
+
         private void BtnToevoegen_Click(object sender, RoutedEventArgs e)
         {
+            WAddVrachtwagen aw = new WAddVrachtwagen(this.db);
+            aw.ShowDialog();
+            Setup();
+        }
 
+        private void BtnVerwijderen_Click(object sender, RoutedEventArgs e)
+        {
+            ////int UserId = Users[LvChauffeurs.SelectedIndex].Id;
+            //string query = "DELETE FROM `snellewiel`.`Users` WHERE  `UserId`= " + UserId + ";";
+            //string qureyresetplanning = "UPDATE `Order` SET `Gebruik`='0';";
+            //db.ExecuteStringQuery(qureyresetplanning);
+            //db.ExecuteStringQuery(query);
+            //Setup();
         }
     }
 }

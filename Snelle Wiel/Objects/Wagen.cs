@@ -9,7 +9,7 @@ namespace Snelle_Wiel.Objects
     class Wagen
     {
         int WagenId;
-        int ChauffeurId;
+        string Chauffeur;
         string Status;
         string Kenteken;
         string Merk;
@@ -26,10 +26,10 @@ namespace Snelle_Wiel.Objects
 
         public Wagen() { }
 
-        public Wagen(int wagenid, int chauffeurid, string status, string kenteken, string merk, string type, string bouwjaar,string brandstof, string vermogen, string apk, string voertuighoogte,string massarijklaar, string toegestaandemaximalemassa, string toegestaandelaadvermogen, string laadruimteinhoud)
+        public Wagen(int wagenid, string chauffeur, string status, string kenteken, string merk, string type, string bouwjaar,string brandstof, string vermogen, string apk, string voertuighoogte,string massarijklaar, string toegestaandemaximalemassa, string toegestaandelaadvermogen, string laadruimteinhoud)
         {
             this.WagenId = wagenid;
-            this.ChauffeurId = chauffeurid;
+            this.Chauffeur = chauffeur;
             this.Status = status;
             this.Kenteken = kenteken;
             this.Merk = merk;
@@ -41,7 +41,7 @@ namespace Snelle_Wiel.Objects
             this.VoertuigHoogte = voertuighoogte;
             this.MassaRijKlaar = massarijklaar;
             this.ToegestaandeMaximaleMassa = toegestaandemaximalemassa;
-            this.ToegestaandeMaximaleMassa = toegestaandelaadvermogen;
+            this.ToegestaandeLaadVermogen = toegestaandelaadvermogen;
             this.Laadruimte = laadruimteinhoud;
         }
     }
