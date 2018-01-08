@@ -6,23 +6,23 @@ using System.Threading.Tasks;
 
 namespace Snelle_Wiel.Objects
 {
-    class Wagen
+    public class Wagen
     {
-        int WagenId;
-        string Chauffeur;
-        string Status;
-        string Kenteken;
-        string Merk;
-        string Type;
-        string Bouwjaar;
-        string Brandstof;
-        string Vermogen;
-        string APK;
-        string VoertuigHoogte;
-        string MassaRijKlaar;
-        string ToegestaandeMaximaleMassa;
-        string ToegestaandeLaadVermogen;
-        string Laadruimte;
+        public int WagenId { get; set; }
+        public string Chauffeur { get; set; }
+        public string Status { get; set; }
+        public string Kenteken { get; set; }
+        public string Merk { get; set; }
+        public string Type { get; set; }
+        public string Bouwjaar { get; set; }
+        public string Brandstof { get; set; }
+        public string Vermogen { get; set; }
+        public string APK { get; set; }
+        public string VoertuigHoogte { get; set; }
+        public string MassaRijKlaar { get; set; }
+        public string ToegestaandeMaximaleMassa { get; set; }
+        public string ToegestaandeLaadVermogen { get; set; }
+        public string Laadruimte { get; set; }
 
         public Wagen() { }
 

@@ -31,6 +31,7 @@ namespace Snelle_Wiel.Pages
         {
             InitializeComponent();
             this.db = database;
+            Setup();
         }
 
         private void TbWagenZoeken_KeyDown(object sender, KeyEventArgs e)
@@ -69,11 +70,11 @@ namespace Snelle_Wiel.Pages
         public void Setup()
         {
             List<Wagen> wagenlist = new List<Wagen>();
-
+            LvWagens.ItemsSource = new ObservableCollection<Wagen>();
             LvWagens.ItemsSource = null;
             Vrachtwagens.Clear();
 
-            DataTable dt = db.ExecuteStringQuery("SELECT * FROM `snellewiel`.`Wagens` WHERE `Kenteken` LIKE '%" + TbWagenZoeken.Text + "%'");
+            DataTable dt = db.ExecuteStringQuery("SELECT * FROM Wagens");
             foreach (DataRow dr in dt.Rows)
             {
                 string wagennummer = dr["WagenId"].ToString();
@@ -93,6 +94,8 @@ namespace Snelle_Wiel.Pages
                 string status = dr["Status"].ToString();
 
                 Wagen u = new Wagen();
+                u.Kenteken = kenteken;
+                u.Merk = merk;
                 Vrachtwagens.Add(u);
             }
             LvWagens.ItemsSource = Vrachtwagens;
