@@ -59,24 +59,69 @@ namespace Snelle_Wiel.Pages
         public async void Setupplanning()
         {
             ObservableCollection<PlanningItem> Items = new ObservableCollection<PlanningItem>();
+            List<PlanningItem> Totalitems = new List<PlanningItem>();
             setup();
             btReset.IsEnabled = false;
+            btnGenereer.IsEnabled = false;
             LvOrders.ItemsSource = null;
             int i = 0;
 
 
             foreach (ListView lv in Chauflisten)
             {
-                lv.ItemsSource = new ObservableCollection<PlanningItem>(); ;
+                lv.ItemsSource = new ObservableCollection<PlanningItem>();
             }
             MessageBox.Show("De berekeningen worden in de achtergrond gemaakt. U kunt verder nadat alles berekend is. De applicatie niet sluiten!");
             main.Hide();
             foreach (User c in Chaufs)
             {
-                Items = await p.GetPlanningItems(c.Id, DateTime.Now);
-                Chauflisten[i].ItemsSource = Items;
+                Console.WriteLine("In behandeling is chauffeur: " + c.Naam);
+                if(dpdate.Text != "")
+                {
+                    Items = await p.GetPlanningItems(c.Id, dpdate.Text,0);
+                    foreach(PlanningItem pl in Items)
+                    {
+                        Totalitems.Add(pl);
+                    }
+                    Chauflisten[i].ItemsSource = Items;
+                }
+                else
+                {
+                    string[] date = DateTime.Now.Date.ToString().ToString().Split(' ');
+                    string datum = date[0];
+                    if(i == 0)
+                    {
+                        Items = await p.GetPlanningItems(c.Id, datum, 0);
+                        foreach (PlanningItem pl in Items)
+                        {
+                            Totalitems.Add(pl);
+                        }
+                    }
+                    else
+                    {
+                        Items = await p.GetPlanningItems(c.Id, datum, 1);
+                        foreach (PlanningItem pl in Items)
+                        {
+                            Totalitems.Add(pl);
+                        }
+                    }
+
+                    Chauflisten[i].ItemsSource = Items;
+                }
                 i++;
             }
+
+            if (dpdate.Text != "")
+            {
+                p.saveplanning(Totalitems, dpdate.Text);
+            }
+            else
+            {
+                string[] date = DateTime.Now.Date.ToString().ToString().Split(' ');
+                string datum = date[0];
+                p.saveplanning(Totalitems, datum);
+            }
+
             main.Show();
             setup();
         }
@@ -146,6 +191,7 @@ namespace Snelle_Wiel.Pages
 
             LvOrders.ItemsSource = Orders;
             btReset.IsEnabled = true;
+            btnGenereer.IsEnabled = true;
         }
 
 
@@ -230,9 +276,16 @@ namespace Snelle_Wiel.Pages
         private void btReset_Click(object sender, RoutedEventArgs e)
         {
             btReset.IsEnabled = false;
+            btnGenereer.IsEnabled = false;
             p.calculateordersperchauf();
             setup();
             Setupplanning();
         }
+
+        private void dpdate_KeyDown(object sender, KeyEventArgs e)
+        {
+             e.Handled = true;
+        }
+
     }
 }

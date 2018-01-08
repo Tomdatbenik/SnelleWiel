@@ -49,19 +49,26 @@ namespace Snelle_Wiel.Objects
             Console.WriteLine("Order per chauf " + orderperschauf);
         }
 
-        public async Task<ObservableCollection<PlanningItem>> GetPlanningItems(int chauffeurId, DateTime datum)
+        public async Task<ObservableCollection<PlanningItem>> GetPlanningItems(int chauffeurId, string datum,int skip)
         {
             Console.WriteLine("Order per chauf " + orderperschauf);
             ObservableCollection<PlanningItem> PlanningItems = new ObservableCollection<PlanningItem>();
             List<Order> Orders = Getorders();
             List<User> Chaufs = GetChaufs();
-
-            string[] date = datum.Date.ToString().ToString().Split(' ');
+            DataTable data = null; 
             //Check of planning bestaad if(query database ding)
-            string q = "SELECT PlanningId FROM Planning WHERE `Date` = '" + date[0] + "';";
-            DataTable data = db.ExecuteStringQuery(q);
+            if (skip == 0)
+            {
+                string q = "SELECT PlanningId FROM Planning WHERE `Date` = '" + datum + "';";
+                data = db.ExecuteStringQuery(q);
 
-            if(data.Rows.Count == 0)
+                if(data.Rows.Count == 0)
+                {
+                    data = null;
+                }
+            }
+
+            if(data == null)
             {
                 int i = 0;
                 foreach (User c in Chaufs)
@@ -114,27 +121,38 @@ namespace Snelle_Wiel.Objects
                 }
                 List<PlanningItem> pls = new List<PlanningItem>();
 
-                foreach (PlanningItem pl in planningItems)
+                foreach (PlanningItem pl in PlanningItems)
                 {
                     pls.Add(pl);
                 }
-                saveplanning(pls);
             }
             else
             {
-                Console.WriteLine("teset");
+                Console.WriteLine("test");
             }
 
             return PlanningItems;
         }
 
-        public void saveplanning(List<PlanningItem> PlanningItems)
+        public void saveplanning(List<PlanningItem> PlanningItems,string datum)
         {
-            string query = "INSERT INTO `snellewiel`.`PlanningItems` (`PlanningItemId`, `PlanningId`, `OrderBeschrijving`, `OAText`, `Tijd`, `OrderId`, `ChauffeurId`, `Plaats`, `Adres`, `Postcode`, `Land`) VALUES";
+            string q = "INSERT INTO `Planning` (`Date`) VALUES ('"+ datum +"');";
+            db.ExecuteStringQuery(q);
+
+            string qu = "SELECT PlanningId FROM Planning WHERE `Date` = '" + datum + "';";
+            DataTable dt =  db.ExecuteStringQuery(qu);
+
+            DataRow dr = dt.Rows[0];
+            string date = dr["PlanningId"].ToString();
+
+
+            string query = "INSERT INTO `snellewiel`.`PlanningItems` (`PlanningId`, `OrderBeschrijving`, `OAText`, `Tijd`, `OrderId`, `ChauffeurId`, `Plaats`, `Adres`, `Postcode`, `Land`) VALUES";
             foreach(PlanningItem pi in PlanningItems)
             {
-                query += "('2', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),";
+                query += "('"+date+"', '"+pi.OrderBeschrijving+"', '"+pi.OAText+"', '"+pi.Tijd+"', '" +pi.OrderId+"', '" +pi.ChauffeurId+"', '"+pi.locatie.Plaats +"', '" + pi.locatie.Adres + "', '" + pi.locatie.Postcode+ "', '" + pi.locatie.Land+ "'),";
             }
+            query = query.Remove(query.Length - 1) + ";";
+            db.ExecuteStringQuery(query);
         }
 
 
