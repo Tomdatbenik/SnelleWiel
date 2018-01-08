@@ -49,7 +49,7 @@ namespace Snelle_Wiel.Objects
             Console.WriteLine("Order per chauf " + orderperschauf);
         }
 
-        public async Task<ObservableCollection<PlanningItem>> GetPlanningItems(int chauffeurId, string datum,int skip)
+        public async Task<ObservableCollection<PlanningItem>> GetPlanningItems(int chauffeurId, string datum)
         {
             Console.WriteLine("Order per chauf " + orderperschauf);
             ObservableCollection<PlanningItem> PlanningItems = new ObservableCollection<PlanningItem>();
@@ -57,8 +57,6 @@ namespace Snelle_Wiel.Objects
             List<User> Chaufs = GetChaufs();
             DataTable data = null; 
             //Check of planning bestaad if(query database ding)
-            if (skip == 0)
-            {
                 string q = "SELECT PlanningId FROM Planning WHERE `Date` = '" + datum + "';";
                 data = db.ExecuteStringQuery(q);
 
@@ -66,9 +64,8 @@ namespace Snelle_Wiel.Objects
                 {
                     data = null;
                 }
-            }
 
-            if(data == null)
+            if (data == null)
             {
                 int i = 0;
                 foreach (User c in Chaufs)
@@ -128,8 +125,25 @@ namespace Snelle_Wiel.Objects
             }
             else
             {
-                Console.WriteLine("test");
+                if(datum != "")
+                {
+                string query = "SELECT * FROM `PlanningItems` WHERE `ChauffeurId` = '" + chauffeurId + " ' ";
+                DataTable dt = db.ExecuteStringQuery(query);
+                foreach (DataRow dr in dt.Rows)
+                {
+                    PlanningItem pi = new PlanningItem();
+                    pi.OrderId = int.Parse(dr["OrderId"].ToString());
+                    pi.OrderBeschrijving = dr["OrderBeschrijving"].ToString();
+                    pi.Tijd = dr["Tijd"].ToString();
+                    pi.ChauffeurId = int.Parse(dr["ChauffeurId"].ToString());
+                    pi.OAText = dr["Tijd"].ToString();
+                    Locatie l = new Locatie(dr["Plaats"].ToString(), dr["Adres"].ToString(), dr["Postcode"].ToString(), dr["Land"].ToString());
+                    pi.locatie = l;
+                    PlanningItems.Add(pi);
+                }
+                }
             }
+
 
             return PlanningItems;
         }

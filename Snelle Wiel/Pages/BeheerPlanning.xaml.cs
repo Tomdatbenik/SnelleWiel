@@ -78,7 +78,7 @@ namespace Snelle_Wiel.Pages
                 Console.WriteLine("In behandeling is chauffeur: " + c.Naam);
                 if(dpdate.Text != "")
                 {
-                    Items = await p.GetPlanningItems(c.Id, dpdate.Text,0);
+                    Items = await p.GetPlanningItems(c.Id, dpdate.Text);
                     foreach(PlanningItem pl in Items)
                     {
                         Totalitems.Add(pl);
@@ -89,22 +89,12 @@ namespace Snelle_Wiel.Pages
                 {
                     string[] date = DateTime.Now.Date.ToString().ToString().Split(' ');
                     string datum = date[0];
-                    if(i == 0)
+                    Items = await p.GetPlanningItems(c.Id, datum);
+                    foreach (PlanningItem pl in Items)
                     {
-                        Items = await p.GetPlanningItems(c.Id, datum, 0);
-                        foreach (PlanningItem pl in Items)
-                        {
-                            Totalitems.Add(pl);
-                        }
+                        Totalitems.Add(pl);
                     }
-                    else
-                    {
-                        Items = await p.GetPlanningItems(c.Id, datum, 1);
-                        foreach (PlanningItem pl in Items)
-                        {
-                            Totalitems.Add(pl);
-                        }
-                    }
+
 
                     Chauflisten[i].ItemsSource = Items;
                 }
@@ -119,7 +109,18 @@ namespace Snelle_Wiel.Pages
             {
                 string[] date = DateTime.Now.Date.ToString().ToString().Split(' ');
                 string datum = date[0];
-                p.saveplanning(Totalitems, datum);
+
+                string q = "SELECT PlanningId FROM Planning WHERE `Date` = '" + datum + "';";
+                DataTable da = db.ExecuteStringQuery(q);
+
+                if (da.Rows.Count == 0)
+                {
+                    da = null;
+                }
+                if(da == null)
+                {
+                    p.saveplanning(Totalitems, datum);
+                }
             }
 
             main.Show();
@@ -163,8 +164,21 @@ namespace Snelle_Wiel.Pages
                 Chaufs.Add(u);
             }
 
+            for (int o = 0; o < 6; o++)
+            {
+                if (Chaufs.Count() > o)
+                {
+                    textblocks[o].Text = Chaufs[o].Naam;
+                }
+                else
+                {
+                    textblocks[o].Text = "placeholder";
+                }
+            }
 
-            string query = "SELECT * FROM `Order` WHERE Gebruik = '0';";
+
+
+                string query = "SELECT * FROM `Order` WHERE Gebruik = '0';";
             DataTable data = db.ExecuteStringQuery(query);
             foreach(DataRow dr in data.Rows)
             {
@@ -242,7 +256,10 @@ namespace Snelle_Wiel.Pages
 
                 for (int o = 0; o < 6; o++)
                 {
-                    textblocks[o].Text = "Chauffeur " + current;
+                    if(Chaufs.Count() < o)
+                    {
+                        textblocks[o].Text = Chaufs[o].Naam;
+                    }
                     //current = dadelijk welke chauffeur
 
 
@@ -253,14 +270,17 @@ namespace Snelle_Wiel.Pages
 
         private void btnVolgende_Click(object sender, RoutedEventArgs e)
         {
-            if(Chaufs.Count <= 6)
+            if(Chaufs.Count <= i)
             {
                 i += 6;
                 int current = i;
 
                 for (int o = 0; o < 6; o++)
                 {
-                    textblocks[o].Text = "Chauffeur " + current;
+                    if (Chaufs.Count() < o)
+                    {
+                        textblocks[o].Text = Chaufs[o].Naam;
+                    }
                     //current = dadelijk welke chauffeur
 
 

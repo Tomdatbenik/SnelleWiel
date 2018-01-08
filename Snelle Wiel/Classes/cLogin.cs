@@ -75,7 +75,7 @@ namespace Snelle_Wiel.Classes
 
                 if(Role == 2)
                 {
-                    string qureyresetplanning = "UPDATE `Order` SET `Gebruik`='0';";
+                    string qureyresetplanning = "UPDATE `Order` SET `Gebruik`='0';DELETE FROM `PlanningItems`;DELETE FROM `Planning`; ";
                     db.ExecuteStringQuery(qureyresetplanning);
                 }
                 return "OK";

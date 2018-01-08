@@ -25,6 +25,7 @@ namespace Snelle_Wiel.Windows
         Database db;
         cLogin lg;
         int id;
+        int roleid;
 
         public WEditUser(Database database, int Id)
         {
@@ -52,6 +53,7 @@ namespace Snelle_Wiel.Windows
                 {
                     TbLName.Text = dr["ULoginname"].ToString();
                     CbRole.SelectedIndex = int.Parse(dr["RoleId"].ToString()) - 1;
+                    this.roleid = int.Parse(dr["RoleId"].ToString());
                     TbName.Text = dr["Unaam"].ToString();
                     TbWoonplaats.Text = dr["UWoonplaats"].ToString();
                     TbAdres.Text = dr["UAdres"].ToString();
@@ -68,7 +70,16 @@ namespace Snelle_Wiel.Windows
             {
                 string tag = CbRole.SelectedValue.ToString();
                 int Roleid = int.Parse(tag);
+
+                if(Roleid != roleid && Roleid == 1 || Roleid == 2)
+                {
+                    string qureyresetplanning = "UPDATE `Order` SET `Gebruik`='0';DELETE FROM `PlanningItems`;DELETE FROM `Planning`; ";
+                    db.ExecuteStringQuery(qureyresetplanning);
+                }
+
                 lg.EditUser(this.id,TbLName.Text, PbPass.Password, Roleid, TbName.Text, TbWoonplaats.Text, TbAdres.Text, TbPostcode.Text, TbEmail.Text, TbTelefoon.Text);
+
+
                 this.Close();
             }
             else
