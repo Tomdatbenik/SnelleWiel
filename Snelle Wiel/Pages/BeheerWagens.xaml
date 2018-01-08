@@ -94,11 +94,11 @@
 
 
         <Button x:Name="Btninformatie" Content="Informatie wijzigen" Grid.Row="16" Grid.Column="1" Margin="1" Style="{StaticResource FlatButtonStyle}"/>
-        <Button x:Name="BtnToevoegen" Content="Wagen Toevoegen" Grid.Row="16" Grid.Column="2" Margin="1" Style="{StaticResource FlatButtonStyle}"/>
+        <Button x:Name="BtnToevoegen" Content="Wagen Toevoegen" Grid.Row="16" Grid.Column="2" Margin="1" Style="{StaticResource FlatButtonStyle}" Click="BtnToevoegen_Click"/>
         <Button x:Name="BtnVerwijderen" Content="Wagen Verwijderen" Grid.Row="16" Grid.Column="3" Margin="1" Style="{StaticResource FlatButtonStyle}"/>
 
         <TextBlock Text="Wagen zoeken:" Grid.Row="1" Grid.Column="3" FontSize="20"></TextBlock>
-        <TextBox Grid.Row="2" Grid.Column="3" VerticalAlignment="Bottom" BorderBrush="#FFC3C1C1" BorderThickness="1,1,1,1" Foreground="#FF909090" FontSize="20" Height="25"></TextBox>
+        <TextBox x:Name="TbWagenZoeken" Grid.Row="2" Grid.Column="3" VerticalAlignment="Bottom" BorderBrush="#FFC3C1C1" BorderThickness="1,1,1,1" Foreground="#FF909090" FontSize="20" Height="25" KeyDown="TbWagenZoeken_KeyDown"></TextBox>
         <ListView Grid.Column="3" Grid.Row="3" Grid.RowSpan="3">
             
         </ListView>
