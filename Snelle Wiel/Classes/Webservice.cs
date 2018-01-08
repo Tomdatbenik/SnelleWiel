@@ -38,9 +38,22 @@ namespace Snelle_Wiel.Classes
                 JToken duration = Elements["duration"];
                 string[] Distance = distance["text"].ToString().Split(' ');
                 string[] Duration = duration["text"].ToString().Split(' ');
+
+                double m = 0;
+                if (Duration.Count() == 4)
+                {
+                    double f = m + double.Parse(Duration[0]) * 60;
+                    m = f + double.Parse(Duration[2]);
+                }
+                else
+                {
+                    m = m + double.Parse(Duration[0]);
+                }
+
+
+
                 string Dis = Distance[0].Replace(".", ",");
                 double d = double.Parse(Dis);
-                double m = double.Parse(Duration[0]);
                 r.Add(new Rit(d,m));
             }
             return r[0];

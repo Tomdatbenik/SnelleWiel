@@ -38,6 +38,8 @@ namespace Snelle_Wiel.Pages
         ObservableCollection<User> Chaufs = new ObservableCollection<User>();
         List<ListView> Chauflisten = new List<ListView>();
         List<TextBlock> textblocks = new List<TextBlock>();
+        List<Rit> ritten = new List<Rit>();
+        ObservableCollection<Order> Orders = new ObservableCollection<Order>();
 
 
         string APISTRING = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=51.507764,5.397848&destinations=51.441642%2C5.469722";
@@ -49,11 +51,17 @@ namespace Snelle_Wiel.Pages
             InitializeComponent();
             this.db = database;
             setup();
+
+            Planning p = new Planning(db);
+
+            ObservableCollection<Planning> planning = new ObservableCollection<Planning>();
+            
+
+
         }
 
         public async void setup()
         {
-            ObservableCollection<Order> Orders = new ObservableCollection<Order>();
             Chauffeurone.ItemsSource = new ObservableCollection<Order>();
             Chauffeurtwo.ItemsSource = new ObservableCollection<Order>();
             Chauffeurthree.ItemsSource = new ObservableCollection<Order>();
@@ -119,23 +127,6 @@ namespace Snelle_Wiel.Pages
 
             LvOrders.ItemsSource = Orders;
 
-
-
-            Webservice ws = new Webservice();
-            Locatie start = new Locatie("Sint-Oedenrode", "Liempdseweg 43", "5492 SM", "Nederland");
-            Locatie einde = new Locatie("Vessem", "Braak 9", "5512 CC", "Nederland");
-
-            Rit r = await ws.GetTravelTime(start,einde);
-
-            Locatie S = new Locatie("Sint-Oedenrode", "Liempdseweg 43", "5492 SM", "Nederland");
-            Locatie E = new Locatie("Best", "Willem de Zwijgerweg 83", "5864 SC", "Nederland");
-
-            Rit rit = await ws.GetTravelTime(S, E);
-
-            Console.WriteLine(r.Distance);
-            Console.WriteLine(r.Duration);
-            Console.WriteLine(rit.Distance);
-            Console.WriteLine(rit.Duration);
         }
 
 
