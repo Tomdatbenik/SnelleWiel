@@ -72,6 +72,8 @@ namespace Snelle_Wiel.Pages
                 lv.ItemsSource = new ObservableCollection<PlanningItem>();
             }
             MessageBox.Show("De berekeningen worden in de achtergrond gemaakt. U kunt verder nadat alles berekend is. De applicatie niet sluiten!");
+            Loading l = new Loading();
+            l.Show();
             foreach (User c in Chaufs)
             {
                 Console.WriteLine("In behandeling is chauffeur: " + c.Naam);
@@ -132,6 +134,7 @@ namespace Snelle_Wiel.Pages
                 }
             }
 
+            l.Hide();
             setup();
         }
 
