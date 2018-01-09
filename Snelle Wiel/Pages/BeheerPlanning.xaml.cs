@@ -72,7 +72,6 @@ namespace Snelle_Wiel.Pages
                 lv.ItemsSource = new ObservableCollection<PlanningItem>();
             }
             MessageBox.Show("De berekeningen worden in de achtergrond gemaakt. U kunt verder nadat alles berekend is. De applicatie niet sluiten!");
-            main.Hide();
             foreach (User c in Chaufs)
             {
                 Console.WriteLine("In behandeling is chauffeur: " + c.Naam);
@@ -101,9 +100,18 @@ namespace Snelle_Wiel.Pages
                 i++;
             }
 
-            if (dpdate.Text != "")
+            if (dpdate.Text != "" && Items.Count != 0 && Totalitems.Count != 0)
             {
-                p.saveplanning(Totalitems, dpdate.Text);
+                string[] date = DateTime.Now.Date.ToString().ToString().Split(' ');
+                string datum = date[0];
+
+                string q = "SELECT PlanningId FROM Planning WHERE `Date` = '" + datum + "';";
+                DataTable da = db.ExecuteStringQuery(q);
+
+                if (da.Rows.Count == 0)
+                {
+                    p.saveplanning(Totalitems, dpdate.Text);
+                }
             }
             else
             {
@@ -117,13 +125,13 @@ namespace Snelle_Wiel.Pages
                 {
                     da = null;
                 }
-                if(da == null)
+
+                if(da == null && Items.Count != 0 && Totalitems.Count != 0)
                 {
                     p.saveplanning(Totalitems, datum);
                 }
             }
 
-            main.Show();
             setup();
         }
 

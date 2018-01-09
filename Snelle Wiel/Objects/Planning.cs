@@ -136,7 +136,7 @@ namespace Snelle_Wiel.Objects
                     pi.OrderBeschrijving = dr["OrderBeschrijving"].ToString();
                     pi.Tijd = dr["Tijd"].ToString();
                     pi.ChauffeurId = int.Parse(dr["ChauffeurId"].ToString());
-                    pi.OAText = dr["Tijd"].ToString();
+                    pi.OAText = dr["OAText"].ToString();
                     Locatie l = new Locatie(dr["Plaats"].ToString(), dr["Adres"].ToString(), dr["Postcode"].ToString(), dr["Land"].ToString());
                     pi.locatie = l;
                     PlanningItems.Add(pi);
@@ -153,17 +153,21 @@ namespace Snelle_Wiel.Objects
             string q = "INSERT INTO `Planning` (`Date`) VALUES ('"+ datum +"');";
             db.ExecuteStringQuery(q);
 
+
+
             string qu = "SELECT PlanningId FROM Planning WHERE `Date` = '" + datum + "';";
             DataTable dt =  db.ExecuteStringQuery(qu);
 
             DataRow dr = dt.Rows[0];
             string date = dr["PlanningId"].ToString();
 
-
             string query = "INSERT INTO `snellewiel`.`PlanningItems` (`PlanningId`, `OrderBeschrijving`, `OAText`, `Tijd`, `OrderId`, `ChauffeurId`, `Plaats`, `Adres`, `Postcode`, `Land`) VALUES";
-            foreach(PlanningItem pi in PlanningItems)
+            foreach (PlanningItem pi in PlanningItems)
             {
-                query += "('"+date+"', '"+pi.OrderBeschrijving+"', '"+pi.OAText+"', '"+pi.Tijd+"', '" +pi.OrderId+"', '" +pi.ChauffeurId+"', '"+pi.locatie.Plaats +"', '" + pi.locatie.Adres + "', '" + pi.locatie.Postcode+ "', '" + pi.locatie.Land+ "'),";
+                if (pi.OrderBeschrijving != "")
+                {
+                    query += "('" + date + "', '" + pi.OrderBeschrijving + "', '" + pi.OAText + "', '" + pi.Tijd + "', '" + pi.OrderId + "', '" + pi.ChauffeurId + "', '" + pi.locatie.Plaats + "', '" + pi.locatie.Adres + "', '" + pi.locatie.Postcode + "', '" + pi.locatie.Land + "'),";
+                }
             }
             query = query.Remove(query.Length - 1) + ";";
             db.ExecuteStringQuery(query);
