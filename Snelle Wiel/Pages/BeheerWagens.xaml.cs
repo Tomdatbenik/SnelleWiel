@@ -110,12 +110,10 @@ namespace Snelle_Wiel.Pages
 
         private void BtnVerwijderen_Click(object sender, RoutedEventArgs e)
         {
-            ////int UserId = Users[LvChauffeurs.SelectedIndex].Id;
-            //string query = "DELETE FROM `snellewiel`.`Users` WHERE  `UserId`= " + UserId + ";";
-            //string qureyresetplanning = "UPDATE `Order` SET `Gebruik`='0';";
-            //db.ExecuteStringQuery(qureyresetplanning);
-            //db.ExecuteStringQuery(query);
-            //Setup();
+            string Kenteken = Vrachtwagens[LvWagens.SelectedIndex].Kenteken;
+            string query = "DELETE FROM `snellewiel`.`Wagens` WHERE  `Kenteken`= '" + Kenteken + "';";
+            db.ExecuteStringQuery(query);
+            Setup();
         }
     }
 }
