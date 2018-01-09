@@ -211,36 +211,36 @@ namespace Snelle_Wiel.Pages
 
         private void ListView_PreviewMouseMove(object sender, MouseEventArgs e)
         {
-            oldlistbox = sender as ListView;
-            oldlist = oldlistbox.ItemsSource as ObservableCollection<Order>;
+            //oldlistbox = sender as ListView;
+            //oldlist = oldlistbox.ItemsSource as ObservableCollection<Order>;
 
-            var listBox = sender as ListView;
-            var listBoxItem = listBox.SelectedItem;
+            //var listBox = sender as ListView;
+            //var listBoxItem = listBox.SelectedItem;
 
-            if (listBoxItem != null)
-            {
-                DataObject dragData = new DataObject(_dropIdentifier, listBoxItem);
-                DragDrop.DoDragDrop(listBox, dragData, DragDropEffects.Move);
-            }
+            //if (listBoxItem != null)
+            //{
+            //    DataObject dragData = new DataObject(_dropIdentifier, listBoxItem);
+            //    DragDrop.DoDragDrop(listBox, dragData, DragDropEffects.Move);
+            //}
 
         }
 
         private void ListView_drop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(_dropIdentifier))
-            {
-                Order item = e.Data.GetData(_dropIdentifier) as Order;
-                DropOnListView(sender as ListView, item);
-            }
+            //if (e.Data.GetDataPresent(_dropIdentifier))
+            //{
+            //    Order item = e.Data.GetData(_dropIdentifier) as Order;
+            //    DropOnListView(sender as ListView, item);
+            //}
         }
 
         public void DropOnListView(ListView targetlistbox, Order item)
         {
-            oldlist.Remove(item);
-            oldlistbox.ItemsSource = oldlist;
-            ObservableCollection<Order> newlist = targetlistbox.ItemsSource as ObservableCollection<Order>;
-            newlist.Add(item);
-            targetlistbox.ItemsSource = newlist;
+            //oldlist.Remove(item);
+            //oldlistbox.ItemsSource = oldlist;
+            //ObservableCollection<Order> newlist = targetlistbox.ItemsSource as ObservableCollection<Order>;
+            //newlist.Add(item);
+            //targetlistbox.ItemsSource = newlist;
         }
 
         private void btnVorige_Click(object sender, RoutedEventArgs e)
