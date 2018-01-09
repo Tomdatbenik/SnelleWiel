@@ -27,6 +27,7 @@ namespace Snelle_Wiel.Pages
     {
         Database db;
         ObservableCollection<Wagen> Vrachtwagens = new ObservableCollection<Wagen>();
+        Wagen SelectedWagen;
         public BeheerWagens(Database database)
         {
             InitializeComponent();
@@ -84,7 +85,7 @@ namespace Snelle_Wiel.Pages
                 string type = dr["Type"].ToString();
                 string bouwjaar = dr["Bouwjaar"].ToString();
                 string brandstof = dr["Brandstof"].ToString();
-                string vermorgen = dr["Vermogen"].ToString();
+                string vermogen = dr["Vermogen"].ToString();
                 string apk = dr["APK"].ToString();
                 string voertuighoogte = dr["Voertuig hoogte"].ToString();
                 string massarijklaar = dr["MassaRijKlaar"].ToString();
@@ -94,8 +95,21 @@ namespace Snelle_Wiel.Pages
                 string status = dr["Status"].ToString();
 
                 Wagen u = new Wagen();
+                u.WagenId = wagennummer;
+                u.Chauffeur = chauffeur;
                 u.Kenteken = kenteken;
                 u.Merk = merk;
+                u.Type = type;
+                u.Bouwjaar = bouwjaar;
+                u.Brandstof = brandstof;
+                u.Vermogen = vermogen;
+                u.APK = apk;
+                u.VoertuigHoogte = voertuighoogte;
+                u.MassaRijKlaar = massarijklaar;
+                u.ToegestaandeMaximaleMassa = toegestanemaxmassavoertuig;
+                u.ToegestaandeLaadVermogen = maximalelaadvermogen;
+                u.Laadruimte = laadruiminhoud;
+                u.Status = status;
                 Vrachtwagens.Add(u);
             }
             LvWagens.ItemsSource = Vrachtwagens;
@@ -114,6 +128,26 @@ namespace Snelle_Wiel.Pages
             string query = "DELETE FROM `snellewiel`.`Wagens` WHERE  `Kenteken`= '" + Kenteken + "';";
             db.ExecuteStringQuery(query);
             Setup();
+        }
+
+        private void LvWagens_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            SelectedWagen = LvWagens.SelectedItem as Wagen;
+            TbWagenNummer.Text = SelectedWagen.WagenId.ToString();
+            TbChauffeur.Text = SelectedWagen.Chauffeur;
+            TbKenteken.Text = SelectedWagen.Kenteken;
+            TbMerk.Text = SelectedWagen.Merk;
+            TbType.Text = SelectedWagen.Type;
+            TbBouwjaar.Text = SelectedWagen.Bouwjaar;
+            TbBrandstof.Text = SelectedWagen.Brandstof;
+            TbVermogen.Text = SelectedWagen.Vermogen;
+            TbAPK.Text = SelectedWagen.APK;
+            TbVoertuighoogte.Text = SelectedWagen.VoertuigHoogte;
+            TbMassaRijklaar.Text = SelectedWagen.MassaRijKlaar;
+            TbToegestaanmaxMassa.Text = SelectedWagen.ToegestaandeMaximaleMassa;
+            TbToegestaanLaadvermogen.Text = SelectedWagen.ToegestaandeLaadVermogen;
+            TbLaadruimte.Text = SelectedWagen.Laadruimte;
+            TbSatus.Text = SelectedWagen.Status;
         }
     }
 }
