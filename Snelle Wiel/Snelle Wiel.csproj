@@ -120,6 +120,9 @@
     <Compile Include="Windows\Klantwijzigen.xaml.cs">
       <DependentUpon>Klantwijzigen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Loading.xaml.cs">
+      <DependentUpon>Loading.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\WAddVrachtwagen.xaml.cs">
       <DependentUpon>WAddVrachtwagen.xaml</DependentUpon>
     </Compile>
@@ -179,6 +182,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\Klantwijzigen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Loading.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
