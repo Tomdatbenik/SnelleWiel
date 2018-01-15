@@ -99,7 +99,7 @@
 
         <TextBlock Text="Wagen zoeken:" Grid.Row="1" Grid.Column="3" FontSize="20"></TextBlock>
         <TextBox x:Name="TbWagenZoeken" Grid.Row="2" Grid.Column="3" VerticalAlignment="Bottom" BorderBrush="#FFC3C1C1" BorderThickness="1,1,1,1" Foreground="#FF909090" FontSize="20" Height="25" KeyDown="TbWagenZoeken_KeyDown"></TextBox>
-        <ListView x:Name="LvWagens" Grid.Column="3" Grid.Row="3" Grid.RowSpan="3">
+        <ListView x:Name="LvWagens" Grid.Column="3" Grid.Row="3" Grid.RowSpan="3" MouseDoubleClick="LvWagens_MouseDoubleClick">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Kenteken" Width="50px" DisplayMemberBinding="{Binding Kenteken}"/>
