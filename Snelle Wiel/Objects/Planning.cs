@@ -111,7 +111,7 @@ namespace Snelle_Wiel.Objects
                     pi2.Tijd = MinutenNaarTijd(int.Parse(k.ToString()));
                     pi2.ChauffeurId = chauffeurId;
                     pi2.OAText = "Afleveren";
-                    pi2.locatie = o.Start;
+                    pi2.locatie = o.Einde;
 
                     PlanningItems.Add(pi2);
                     Lastorder = o;
