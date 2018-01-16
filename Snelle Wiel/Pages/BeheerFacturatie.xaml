@@ -62,7 +62,10 @@
         </ListView>
         <Button Grid.Column="1" Grid.Row="3" Content="Informatie wijzigen" Style="{StaticResource FlatButtonStyle }"/>
         <TextBlock Name="tbOrders" Text="Orders:" Grid.Column="4" Grid.Row="1" FontSize="16"/>
-        <ListView Name="lvOrders" Grid.Column="4" Grid.Row="2" MouseDoubleClick="lvOrders_MouseDoubleClick">
+        <Button Name="btOrder1" Content="Order 1" Grid.Column="4" Grid.Row="2" Height="50px" VerticalAlignment="Top" Click="btOrder1_Click"/>
+        <Button Name="btOrder2" Content="Order 2" Grid.Column="4" Grid.Row="2" Height="50px" VerticalAlignment="Center"/>
+        <Button Name="btOrder3" Content="Order 3" Grid.Column="4" Grid.Row="2" Height="50px" VerticalAlignment="Bottom"/>
+        <ListView Visibility="Hidden" Name="lvOrders" Grid.Column="4" Grid.Row="2" MouseDoubleClick="lvOrders_MouseDoubleClick">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Order" Width="120px"/>

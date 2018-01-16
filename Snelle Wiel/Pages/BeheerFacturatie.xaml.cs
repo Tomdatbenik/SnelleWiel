@@ -112,12 +112,18 @@ namespace Snelle_Wiel.Pages
 
         private void lvOrders_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            string SelectedItem = lvOrders.SelectedIndex.ToString();
-            if (SelectedItem == "Order 1")
-            {
-                MessageBox.Show(SelectedItem);
-            }
-            
+            //string[] row = {"Adres 1", "Adres 2", "Bak bier", "17-1-2018", "BIER IS GOEIE"};
+            //var listViewItem = new ListViewItem(row);
+            //lvOrderArtikelen.Items.Add(listViewItem);
+
+
+        }
+
+        private void btOrder1_Click(object sender, RoutedEventArgs e)
+        {
+            string[] row = {"Adres 1", "Adres 2", "Bak bier", "17-1-2018", "Omschrijving" };
+            var listViewItem = new ListViewItem(row);
+            lvOrderArtikelen.Items.Add(listViewItem);
         }
     }
 }
