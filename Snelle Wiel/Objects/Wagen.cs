@@ -8,7 +8,7 @@ namespace Snelle_Wiel.Objects
 {
     public class Wagen
     {
-        public string WagenId { get; set; }
+        public int WagenId { get; set; }
         public string Chauffeur { get; set; }
         public string Status { get; set; }
         public string Kenteken { get; set; }
@@ -26,7 +26,7 @@ namespace Snelle_Wiel.Objects
 
         public Wagen() { }
 
-        public Wagen(string wagenid, string chauffeur, string status, string kenteken, string merk, string type, string bouwjaar,string brandstof, string vermogen, string apk, string voertuighoogte,string massarijklaar, string toegestaandemaximalemassa, string toegestaandelaadvermogen, string laadruimteinhoud)
+        public Wagen(int wagenid, string chauffeur, string status, string kenteken, string merk, string type, string bouwjaar,string brandstof, string vermogen, string apk, string voertuighoogte,string massarijklaar, string toegestaandemaximalemassa, string toegestaandelaadvermogen, string laadruimteinhoud)
         {
             this.WagenId = wagenid;
             this.Chauffeur = chauffeur;

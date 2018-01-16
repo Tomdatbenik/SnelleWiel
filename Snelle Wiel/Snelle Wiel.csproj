@@ -24,7 +24,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -48,6 +48,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
@@ -129,6 +132,9 @@
     <Compile Include="Windows\WAddUser.xaml.cs">
       <DependentUpon>WAddUser.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\WEditVrachtwagen.xaml.cs">
+      <DependentUpon>WEditVrachtwagen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\WEditUser.xaml.cs">
       <DependentUpon>WEditUser.xaml</DependentUpon>
     </Compile>
@@ -196,6 +202,10 @@
     <Page Include="Windows\WAddUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\WEditVrachtwagen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\WEditUser.xaml">
       <SubType>Designer</SubType>

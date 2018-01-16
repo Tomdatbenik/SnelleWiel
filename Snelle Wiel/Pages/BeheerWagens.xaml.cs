@@ -78,7 +78,8 @@ namespace Snelle_Wiel.Pages
             DataTable dt = db.ExecuteStringQuery("SELECT * FROM Wagens");
             foreach (DataRow dr in dt.Rows)
             {
-                string wagennummer = dr["WagenId"].ToString();
+                string sWagen = dr["WagenId"].ToString();
+                int wagennummer = Int32.Parse(sWagen);
                 string chauffeur = dr["Chauffeur"].ToString();
                 string kenteken = dr["Kenteken"].ToString();
                 string merk = dr["Merk"].ToString();
@@ -148,6 +149,21 @@ namespace Snelle_Wiel.Pages
             TbToegestaanLaadvermogen.Text = SelectedWagen.ToegestaandeLaadVermogen;
             TbLaadruimte.Text = SelectedWagen.Laadruimte;
             TbSatus.Text = SelectedWagen.Status;
+        }
+
+        private void Btninformatie_Click(object sender, RoutedEventArgs e)
+        {
+            if (LvWagens.SelectedItem != null)
+            {
+                Wagen w = LvWagens.SelectedItem as Wagen;
+                WEditVrachtwagen ew = new WEditVrachtwagen(this.db, w.WagenId,w);
+                ew.ShowDialog();
+                Setup();
+            }
+            else
+            {
+                MessageBox.Show("Selecteer een chauffeur");
+            }
         }
     }
 }

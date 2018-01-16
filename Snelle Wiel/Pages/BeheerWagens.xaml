@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="BeheerWagens" MinHeight="350" MinWidth="525" Background="White">
-    
+
     <Page.Resources>
         <Style TargetType="Button" x:Key="FlatButtonStyle">
             <Setter Property="Background" Value="#FF4A67AB"/>
@@ -30,7 +30,7 @@
             </Style.Triggers>
         </Style>
     </Page.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.5"/>
@@ -93,7 +93,7 @@
 
 
 
-        <Button x:Name="Btninformatie" Content="Informatie wijzigen" Grid.Row="16" Grid.Column="1" Margin="1" Style="{StaticResource FlatButtonStyle}"/>
+        <Button x:Name="Btninformatie" Content="Informatie wijzigen" Grid.Row="16" Grid.Column="1" Margin="1" Style="{StaticResource FlatButtonStyle}" Click="Btninformatie_Click"/>
         <Button x:Name="BtnToevoegen" Content="Wagen Toevoegen" Grid.Row="16" Grid.Column="2" Margin="1" Style="{StaticResource FlatButtonStyle}" Click="BtnToevoegen_Click"/>
         <Button x:Name="BtnVerwijderen" Content="Wagen Verwijderen" Grid.Row="16" Grid.Column="3" Margin="1" Style="{StaticResource FlatButtonStyle}" Click="BtnVerwijderen_Click"/>
 
