@@ -47,14 +47,28 @@
             <RowDefinition Height="10*"/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
-        <Border Grid.Column="1" Grid.Row="2" BorderThickness="1" BorderBrush="Black" Grid.ColumnSpan="2">
-            <DocumentViewer Name="documentViewer1"/>
-        </Border>
-        <TextBox Name="SelectedFileTextBox" Grid.Column="1" Grid.Row="1"/>
-        <Button Content="Browse" Name="BrowseButton" Click="BrowseButton_Click" Grid.Column="2" Grid.Row="1"/>
+        <Border Grid.Column="1" Grid.Row="2" BorderThickness="1" BorderBrush="Black" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="tbOrder" Text="Order:" Grid.Column="1" Grid.Row="1" FontSize="16"/>
+        <ListView x:Name="lvOrderArtikelen" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Ophalen" Width="75px"/>
+                    <GridViewColumn Header="Afleveren" Width="75px"/>
+                    <GridViewColumn Header="Artikel" Width="75px"/>
+                    <GridViewColumn Header="Datum" Width="75px"/>
+                    <GridViewColumn Header="Omschrijving" Width="75px"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
         <Button Grid.Column="1" Grid.Row="3" Content="Informatie wijzigen" Style="{StaticResource FlatButtonStyle }"/>
-        <Border Grid.Column="4" Grid.Row="1" BorderThickness="1" BorderBrush="Black" Grid.RowSpan="4"/>
-        <Button Grid.Column="4" Grid.Row="1" Content="Factuur 1" Style="{StaticResource FlatButtonStyle }"/>
+        <TextBlock Name="tbOrders" Text="Orders:" Grid.Column="4" Grid.Row="1" FontSize="16"/>
+        <ListView Name="lvOrders" Grid.Column="4" Grid.Row="2" MouseDoubleClick="lvOrders_MouseDoubleClick">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Order" Width="120px"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 
 </Page>
