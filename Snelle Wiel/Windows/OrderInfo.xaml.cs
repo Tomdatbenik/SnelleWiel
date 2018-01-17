@@ -1,4 +1,5 @@
-﻿using Snelle_Wiel.Objects;
+﻿using Snelle_Wiel.Classes;
+using Snelle_Wiel.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,6 +60,17 @@ namespace Snelle_Wiel.Windows
             loaded = true;
         }
 
+        private void cbStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (loaded == true)
+            {
+                ComboBoxItem cbi = cbStatus.SelectedItem as ComboBoxItem;
+                string query = "UPDATE `Order` SET `Status`='"+ cbi.Tag + "' WHERE OrderId= "+o.Id+";";
+                Database db = new Database();
+                db.ExecuteStringQuery(query);
+                MessageBox.Show("Status is gewijzigd.");
+            }
+        }
 
     }
 }

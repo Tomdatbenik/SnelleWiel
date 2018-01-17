@@ -39,7 +39,7 @@
         <TextBlock x:Name="EindbestemmingPostcode" Grid.Row="9" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></TextBlock>
         <TextBlock x:Name="EindbestemmingLand" Grid.Row="10" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></TextBlock>
         <TextBlock Grid.Row="11" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Stretch" Text="Status:" FontSize="20"></TextBlock>
-        <ComboBox x:Name="cbStatus" Grid.Row="12" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+        <ComboBox x:Name="cbStatus" Grid.Row="12" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="cbStatus_SelectionChanged">
             <ComboBoxItem Tag="In behandeling">In behandeling</ComboBoxItem>
             <ComboBoxItem Tag="Onderweg" >Onderweg</ComboBoxItem>
             <ComboBoxItem Tag="Afgeleverd">Afgeleverd</ComboBoxItem>
