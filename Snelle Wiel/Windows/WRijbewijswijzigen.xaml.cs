@@ -93,5 +93,37 @@ namespace Snelle_Wiel.Windows
             ud.AddRijbewijzon(this.Id, Rijbewijzen,nrijbewijzen);
             this.Close();
         }
+
+        private void LvGive_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ListView havinglistview = LvGot as ListView;
+            ObservableCollection<Rijbewijs> HaveCollection = havinglistview.ItemsSource as ObservableCollection<Rijbewijs>;
+            ListView givelist = LvGive as ListView;
+            ObservableCollection<Rijbewijs> Givecollection = givelist.ItemsSource as ObservableCollection<Rijbewijs>;
+
+            Rijbewijs listBoxItemhas = LvGive.SelectedItem as Rijbewijs;
+
+            HaveCollection.Add(listBoxItemhas);
+            Givecollection.Remove(listBoxItemhas);
+
+            LvGive.ItemsSource = Givecollection;
+            LvGot.ItemsSource = HaveCollection;
+        }
+
+        private void LvGot_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ListView havinglistview = LvGot as ListView;
+            ObservableCollection<Rijbewijs> HaveCollection = havinglistview.ItemsSource as ObservableCollection<Rijbewijs>;
+            ListView givelist = LvGive as ListView;
+            ObservableCollection<Rijbewijs> Givecollection = givelist.ItemsSource as ObservableCollection<Rijbewijs>;
+
+            Rijbewijs listBoxItemhas = LvGot.SelectedItem as Rijbewijs;
+
+            HaveCollection.Remove(listBoxItemhas);
+            Givecollection.Add(listBoxItemhas);
+
+            LvGive.ItemsSource = Givecollection;
+            LvGot.ItemsSource = HaveCollection;
+        }
     }
 }

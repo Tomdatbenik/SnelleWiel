@@ -125,10 +125,14 @@ namespace Snelle_Wiel.Pages
 
         private void BtnVerwijderen_Click(object sender, RoutedEventArgs e)
         {
-            string Kenteken = Vrachtwagens[LvWagens.SelectedIndex].Kenteken;
-            string query = "DELETE FROM `snellewiel`.`Wagens` WHERE  `Kenteken`= '" + Kenteken + "';";
-            db.ExecuteStringQuery(query);
-            Setup();
+            System.Windows.Forms.DialogResult dialogResult = System.Windows.Forms.MessageBox.Show("Weet u het zeker", "Stop!", System.Windows.Forms.MessageBoxButtons.YesNo);
+            if (dialogResult == System.Windows.Forms.DialogResult.Yes)
+            {
+                string Kenteken = Vrachtwagens[LvWagens.SelectedIndex].Kenteken;
+                string query = "DELETE FROM `snellewiel`.`Wagens` WHERE  `Kenteken`= '" + Kenteken + "';";
+                db.ExecuteStringQuery(query);
+                Setup();
+            }
         }
 
         private void LvWagens_MouseDoubleClick(object sender, MouseButtonEventArgs e)

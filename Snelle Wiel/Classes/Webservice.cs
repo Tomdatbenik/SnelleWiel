@@ -19,6 +19,7 @@ namespace Snelle_Wiel.Classes
             string BaseUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=";
             string Url = BaseUrl + origins.Adres + "," + origins.Postcode + "," + origins.Plaats + "," + origins.Land + "&destinations=" + destinations.Adres + "," + destinations.Postcode + "," + destinations.Plaats + "," + destinations.Land;
 
+            Url = Url + "&key=AIzaSyBaxZ6-sZOgNTngJa7lTgSn27YfRSqqBK0";
             Uri httprequest = new Uri(Url);
 
             HttpClient client = new HttpClient();

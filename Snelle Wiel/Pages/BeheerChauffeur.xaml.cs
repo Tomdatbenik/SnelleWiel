@@ -88,12 +88,16 @@ namespace Snelle_Wiel.Pages
 
         private void btnChauffeurVerwijderen_Click(object sender, RoutedEventArgs e)
         {
-            int UserId = Users[LvChauffeurs.SelectedIndex].Id;
-            string query = "DELETE FROM `snellewiel`.`Users` WHERE  `UserId`= " + UserId + ";";
-            string qureyresetplanning = "UPDATE `Order` SET `Gebruik`='0';DELETE FROM `PlanningItems`;DELETE FROM `Planning`; ";
-            db.ExecuteStringQuery(qureyresetplanning);
-            db.ExecuteStringQuery(query);
-            Setup();
+            System.Windows.Forms.DialogResult dialogResult = System.Windows.Forms.MessageBox.Show("Weet u het zeker", "Stop!", System.Windows.Forms.MessageBoxButtons.YesNo);
+            if (dialogResult == System.Windows.Forms.DialogResult.Yes)
+            {
+                int UserId = Users[LvChauffeurs.SelectedIndex].Id;
+                string query = "DELETE FROM `snellewiel`.`Users` WHERE  `UserId`= " + UserId + ";";
+                string qureyresetplanning = "UPDATE `Order` SET `Gebruik`='0';DELETE FROM `PlanningItems`;DELETE FROM `Planning`; ";
+                db.ExecuteStringQuery(qureyresetplanning);
+                db.ExecuteStringQuery(query);
+                Setup();
+            }
         }
 
         private void Fillinfoboxes(User chauf)

@@ -12,6 +12,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -89,21 +90,29 @@ namespace Snelle_Wiel.Pages
             {
                 if(Users[lvUserlist.SelectedIndex].Id == db.Userid)
                 {
-                    MessageBox.Show("U kunt niet uwzelf verwijderen");
+                    System.Windows.MessageBox.Show("U kunt niet uwzelf verwijderen");
                 }
                 else
                 {
+                    System.Windows.Forms.DialogResult dialogResult = System.Windows.Forms.MessageBox.Show("Weet u het zeker", "Stop!",MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
                     int UserId = Users[lvUserlist.SelectedIndex].Id;
                     string query = "DELETE FROM `snellewiel`.`Users` WHERE  `UserId`= " + UserId + ";";
                     string qureyresetplanning = "UPDATE `Order` SET `Gebruik`='0';DELETE FROM `PlanningItems`;DELETE FROM `Planning`; ";
                     db.ExecuteStringQuery(qureyresetplanning);
                     db.ExecuteStringQuery(query);
                     loadusers();
+                    }
+                    else if (dialogResult == DialogResult.No)
+                    {
+                        //do something else
+                    }
                 }
             }
             else
             {
-                MessageBox.Show("Selecteer een gebruiker");
+                System.Windows.MessageBox.Show("Selecteer een gebruiker");
             }
         }
 
@@ -130,7 +139,7 @@ namespace Snelle_Wiel.Pages
             }
             else
             {
-                MessageBox.Show("Selecteer een gebruiker");
+                System.Windows.MessageBox.Show("Selecteer een gebruiker");
             }
         }
     }
