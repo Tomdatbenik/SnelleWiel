@@ -1,7 +1,12 @@
 ﻿using Microsoft.Office.Interop.Word;
+using Novacode;
 using Snelle_Wiel.Classes;
+using Snelle_Wiel.Objects;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -15,10 +20,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-//using Microsoft.Win32;
-//using System.Printing;
 using System.Windows.Xps.Packaging;
-//using Microsoft.Office.Interop.Word;
+
 
 
 
@@ -29,12 +32,14 @@ namespace Snelle_Wiel.Pages
     /// </summary>
     public partial class BeheerFacturatie : System.Windows.Controls.Page
     {
+        Order SelectedOrder;
         Database db;
+        ObservableCollection<Producten> producten = new ObservableCollection<Producten>();
         public BeheerFacturatie(Database database)
         {
             InitializeComponent();
-            VulListView();
             this.db = database;
+            lvOrders.ItemsSource = Getorders();
             //GetDocument();
         }
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -101,29 +106,169 @@ namespace Snelle_Wiel.Pages
         //}
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        public void VulListView ()
-        {
-            lvOrders.Items.Add("Order 1");
-            lvOrders.Items.Add("Order 2");
-            lvOrders.Items.Add("Order 3");
-            lvOrders.Items.Add("Order 4");
-            lvOrders.Items.Add("Order 5");
-        }
-
         private void lvOrders_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //string[] row = {"Adres 1", "Adres 2", "Bak bier", "17-1-2018", "BIER IS GOEIE"};
-            //var listViewItem = new ListViewItem(row);
-            //lvOrderArtikelen.Items.Add(listViewItem);
+            SelectedOrder = lvOrders.SelectedItem as Order;
+            string query = "SELECT * FROM `Producten` WHERE `OrderId` = '" + SelectedOrder.Id + "'";
+            System.Data.DataTable data = db.ExecuteStringQuery(query);
+            foreach (DataRow dr in data.Rows)
+            {
+                int ProductID = Int32.Parse(dr["ProductId"].ToString());
+                int OrderID = Int32.Parse(dr["OrderId"].ToString());
+                string Omschrijving = dr["Omschrijving"].ToString();
+                int Inhoud = Int32.Parse(dr["Inhoud"].ToString());
+                int Aantal = Int32.Parse(dr["Aantal"].ToString());
+                int Gewicht = Int32.Parse(dr["Gewicht"].ToString());
 
+                Producten p = new Producten(ProductID, OrderID, Omschrijving, Inhoud, Aantal, Gewicht);
+                producten.Add(p);
 
+            }
+            lvOrderArtikelen.ItemsSource = producten;
+            btGenereer.Visibility = System.Windows.Visibility.Visible;
         }
-
         private void btOrder1_Click(object sender, RoutedEventArgs e)
         {
-            string[] row = {"Adres 1", "Adres 2", "Bak bier", "17-1-2018", "Omschrijving" };
-            var listViewItem = new ListViewItem(row);
-            lvOrderArtikelen.Items.Add(listViewItem);
+            //string[] row = {"Adres 1", "Adres 2", "Bak bier", "17-1-2018", "Omschrijving" };
+            //var listViewItem = new ListViewItem(row);
+            //lvOrderArtikelen.Items.Add(listViewItem);
+        }
+        public ObservableCollection<Order> Getorders()
+        {
+            ObservableCollection<Order> Orders = new ObservableCollection<Order>();
+            string query = "SELECT * FROM `Order`;";
+            System.Data.DataTable data = db.ExecuteStringQuery(query);
+            foreach (DataRow dr in data.Rows)
+            {
+                string OphaalpuntPlaats = dr["OphaalpuntPlaats"].ToString();
+                string OphaalpuntAdres = dr["OphaalpuntAdres"].ToString();
+                string OphaalpuntPostcode = dr["OphaalpuntPostcode"].ToString();
+                string OphaalpuntLand = dr["OphaalpuntLand"].ToString();
+
+                string EindbestemmingPlaats = dr["EindbestemmingPlaats"].ToString();
+                string EindbestemmingAdres = dr["EindbestemmingAdres"].ToString();
+                string EindbestemmingPostcode = dr["EindbestemmingPostcode"].ToString();
+                string EindbestemmingLand = dr["EindbestemmingLand"].ToString();
+
+
+
+                Locatie s = new Locatie(OphaalpuntPlaats, OphaalpuntAdres, OphaalpuntPostcode, OphaalpuntLand);
+                Locatie e = new Locatie(EindbestemmingPlaats, EindbestemmingAdres, EindbestemmingPostcode, EindbestemmingLand);
+
+
+
+                Order o = new Order(int.Parse(dr["OrderId"].ToString()), dr["Omschrijving"].ToString(), s, e);
+                Orders.Add(o);
+            }
+            return Orders;
+        }
+
+        private void btGenereer_Click(object sender, RoutedEventArgs e)
+        {
+
+            // Modify to suit your machine:
+            string fileName = @"C:\Users\Ron\Documents\DocXExample.docx";
+  
+            // Create a document in memory:
+            var doc = DocX.Create(fileName);
+
+
+            string headlineText = "Factuur\n";
+            // A formatting object for our headline:
+            var headLineFormat = new Formatting();
+            headLineFormat.Size = 26;
+            headLineFormat.Position = 12;
+            headLineFormat.Bold = true;
+
+            // Set up our paragraph contents:
+            string paraOne = ""
+                + "Groene Vingers\n"
+                + "Crediteurenadministratie   Hr. A. van Hest\n"
+                + "Kanaaldijk 34\n"
+                + "5501 XL  Best\n\n\n\n\n\n";
+
+            // Set up our paragraph contents:
+            string paraTwo = ""
+                + "Factuurnummer:	14000345\n"
+                + "Factuurdatum:	              " + DateTime.Today.ToString("d") +"\n\n";
+            
+            //Insert all objects in document
+            doc.InsertParagraph(headlineText, false, headLineFormat);
+            doc.InsertParagraph(paraOne);
+            doc.InsertParagraph(paraTwo);
+
+            // Add a Table to this document.
+            Novacode.Table t = doc.AddTable(4, 8);
+            // Specify some properties for this Table.
+            t.Alignment = Alignment.left;
+            t.Design = TableDesign.TableNormal;
+            // Add content to this Table.
+            t.Rows[0].Cells[0].Paragraphs.First().Append("Datum").Bold();
+            t.Rows[0].Cells[0].Width = 50;
+            t.Rows[0].Cells[1].Paragraphs.First().Append("Order").Bold();
+            t.Rows[0].Cells[1].Width = 50;
+            t.Rows[0].Cells[2].Paragraphs.First().Append("L/R").Bold();
+            t.Rows[0].Cells[2].Width = 50;
+            t.Rows[0].Cells[3].Paragraphs.First().Append("Postcode").Bold();
+            t.Rows[0].Cells[3].Width = 50;
+            t.Rows[0].Cells[4].Paragraphs.First().Append("Aantal").Bold();
+            t.Rows[0].Cells[4].Width = 50;
+            t.Rows[0].Cells[5].Paragraphs.First().Append("KG").Bold();
+            t.Rows[0].Cells[5].Width = 50;
+            t.Rows[0].Cells[6].Paragraphs.First().Append("M3").Bold();
+            t.Rows[0].Cells[6].Width = 50;
+            t.Rows[0].Cells[7].Paragraphs.First().Append("Prijs").Bold();
+            t.Rows[0].Cells[7].Width = 50;
+            t.Rows[1].Cells[0].Paragraphs.First().Append("Bier");
+            t.Rows[1].Cells[1].Paragraphs.First().Append("Bier");
+            t.Rows[1].Cells[2].Paragraphs.First().Append("Bier");
+            t.Rows[1].Cells[3].Paragraphs.First().Append("Bier");
+            t.Rows[1].Cells[4].Paragraphs.First().Append("Bier");
+            t.Rows[1].Cells[5].Paragraphs.First().Append("Bier");
+            t.Rows[1].Cells[6].Paragraphs.First().Append("Bier");
+            t.Rows[1].Cells[7].Paragraphs.First().Append("Bier");
+
+            t.Rows[2].Cells[0].Paragraphs.First().Append("Bier");
+            t.Rows[2].Cells[1].Paragraphs.First().Append("Bier");
+            t.Rows[2].Cells[2].Paragraphs.First().Append("Bier");
+            t.Rows[2].Cells[3].Paragraphs.First().Append("Bier");
+            t.Rows[2].Cells[4].Paragraphs.First().Append("Bier");
+            t.Rows[2].Cells[5].Paragraphs.First().Append("Bier");
+            t.Rows[2].Cells[6].Paragraphs.First().Append("Bier");
+            t.Rows[2].Cells[7].Paragraphs.First().Append("Bier");
+
+            t.Rows[3].Cells[0].Paragraphs.First().Append("Bier");
+            t.Rows[3].Cells[1].Paragraphs.First().Append("Bier");
+            t.Rows[3].Cells[2].Paragraphs.First().Append("Bier");
+            t.Rows[3].Cells[3].Paragraphs.First().Append("Bier");
+            t.Rows[3].Cells[4].Paragraphs.First().Append("Bier");
+            t.Rows[3].Cells[5].Paragraphs.First().Append("Bier");
+            t.Rows[3].Cells[6].Paragraphs.First().Append("Bier");
+            t.Rows[3].Cells[7].Paragraphs.First().Append("Bier");
+
+            doc.InsertTable(t);
+
+            // Set up our paragraph contents:
+            string paraThree = ""
+                + "Ex BTW:    Bier\n"
+                + "BTW:    Bier\n"
+                + "Totaal:    €Bier\n\n\n";
+
+            // Body Formatting
+            var paraFormat = new Formatting();
+
+            Novacode.Paragraph letterBody = doc.InsertParagraph(paraThree, false, paraFormat);
+            letterBody.Alignment = Alignment.right;
+
+            doc.InsertParagraph(paraThree, false, paraFormat);
+
+            doc.InsertParagraph(paraThree);
+
+            // Save to the output directory:
+            doc.Save();
+  
+            // Open in Word:
+            Process.Start("WINWORD.EXE", fileName);
         }
     }
 }
