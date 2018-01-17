@@ -34,7 +34,7 @@ namespace Snelle_Wiel.Pages
         #endregion
 
         Database db;
-        ObservableCollection<Order> oldlist = new ObservableCollection<Order>();
+        ListView oldlist;
         int i = 1;
         ObservableCollection<User> Chaufs = new ObservableCollection<User>();
         List<ListView> Chauflisten = new List<ListView>();
@@ -74,6 +74,7 @@ namespace Snelle_Wiel.Pages
             MessageBox.Show("De berekeningen worden in de achtergrond gemaakt. U kunt verder nadat alles berekend is. De applicatie niet sluiten!");
             Loading l = new Loading();
             l.Show();
+            Totalitems.Clear();
             foreach (User c in Chaufs)
             {
                 Console.WriteLine("In behandeling is chauffeur: " + c.Naam);
@@ -189,7 +190,7 @@ namespace Snelle_Wiel.Pages
 
 
 
-                string query = "SELECT * FROM `Order` WHERE Gebruik = '0';";
+            string query = "SELECT * FROM `Order` WHERE Gebruik = '0';";
             DataTable data = db.ExecuteStringQuery(query);
             foreach(DataRow dr in data.Rows)
             {
@@ -223,36 +224,265 @@ namespace Snelle_Wiel.Pages
 
         private void ListView_PreviewMouseMove(object sender, MouseEventArgs e)
         {
-            //oldlistbox = sender as ListView;
-            //oldlist = oldlistbox.ItemsSource as ObservableCollection<Order>;
+            oldlist = sender as ListView;
+            PlanningItem Selectedplanningitem = oldlist.SelectedItem as PlanningItem;
+            if(Selectedplanningitem !=  null)
+            {
+                string query = "SELECT * FROM `Order` WHERE `OrderId` = '" + Selectedplanningitem.OrderId + "'";
+                DataTable data = db.ExecuteStringQuery(query);
 
-            //var listBox = sender as ListView;
-            //var listBoxItem = listBox.SelectedItem;
+                Order o = new Order(0, null, null, null);
+                foreach (DataRow dr in data.Rows)
+                {
+                    string OphaalpuntPlaats = dr["OphaalpuntPlaats"].ToString();
+                    string OphaalpuntAdres = dr["OphaalpuntAdres"].ToString();
+                    string OphaalpuntPostcode = dr["OphaalpuntPostcode"].ToString();
+                    string OphaalpuntLand = dr["OphaalpuntLand"].ToString();
 
-            //if (listBoxItem != null)
-            //{
-            //    DataObject dragData = new DataObject(_dropIdentifier, listBoxItem);
-            //    DragDrop.DoDragDrop(listBox, dragData, DragDropEffects.Move);
-            //}
+                    string EindbestemmingPlaats = dr["EindbestemmingPlaats"].ToString();
+                    string EindbestemmingAdres = dr["EindbestemmingAdres"].ToString();
+                    string EindbestemmingPostcode = dr["EindbestemmingPostcode"].ToString();
+                    string EindbestemmingLand = dr["EindbestemmingLand"].ToString();
+
+
+
+                    Locatie s = new Locatie(OphaalpuntPlaats, OphaalpuntAdres, OphaalpuntPostcode, OphaalpuntLand);
+                    Locatie eindbestemming = new Locatie(EindbestemmingPlaats, EindbestemmingAdres, EindbestemmingPostcode, EindbestemmingLand);
+
+
+
+                    o = new Order(int.Parse(dr["OrderId"].ToString()), dr["Omschrijving"].ToString(), s, eindbestemming);
+                    o.Status = dr["Status"].ToString();
+                }
+                if (o != null)
+                {
+                    DataObject dragData = new DataObject(_dropIdentifier, o);
+                    DragDrop.DoDragDrop(oldlist, dragData, DragDropEffects.Move);
+                }
+            }
 
         }
 
         private void ListView_drop(object sender, DragEventArgs e)
         {
-            //if (e.Data.GetDataPresent(_dropIdentifier))
-            //{
-            //    Order item = e.Data.GetData(_dropIdentifier) as Order;
-            //    DropOnListView(sender as ListView, item);
-            //}
+            if (e.Data.GetDataPresent(_dropIdentifier))
+            {
+                Order item = e.Data.GetData(_dropIdentifier) as Order;
+                DropOnListView(sender as ListView, item);
+            }
         }
 
-        public void DropOnListView(ListView targetlistbox, Order item)
+        private void ListView_PreviewMouseMoveOrder(object sender, MouseEventArgs e)
+        {
+            ListView OrderListview = sender as ListView;
+            oldlist = sender as ListView;
+            Order SelectedOrder = OrderListview.SelectedItem as Order;
+
+            if (SelectedOrder != null)
+            {
+                DataObject dragData = new DataObject(_dropIdentifier, SelectedOrder);
+                DragDrop.DoDragDrop(OrderListview, dragData, DragDropEffects.Move);
+            }
+        }
+
+        private void ListView_dropOrder(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(_dropIdentifier))
+            {
+                Order item = e.Data.GetData(_dropIdentifier) as Order;
+                DropOnListView(sender as ListView, item);
+            }
+        }
+
+        public void DropOnListViewOrder(ListView targetlistbox, Order item)
         {
             //oldlist.Remove(item);
             //oldlistbox.ItemsSource = oldlist;
             //ObservableCollection<Order> newlist = targetlistbox.ItemsSource as ObservableCollection<Order>;
             //newlist.Add(item);
             //targetlistbox.ItemsSource = newlist;
+        }
+
+        public async void DropOnListView(ListView targetlistbox, Order item)
+        {
+            Loading l = new Loading();
+            l.Show();
+            if (oldlist == LvOrders)
+            {
+                ObservableCollection<Order> orders = LvOrders.ItemsSource as ObservableCollection<Order>;
+                orders.Remove(item);
+                oldlist.ItemsSource = orders;
+
+                ObservableCollection<PlanningItem> items =  targetlistbox.ItemsSource as ObservableCollection<PlanningItem>;
+               
+                //maak 2 planningitems van 1 order
+                List<PlanningItem> piitems = await p.createplanningitems(item, items.ToList(), items[0].ChauffeurId);
+
+                ObservableCollection<PlanningItem> refill = new ObservableCollection<PlanningItem>();
+                foreach(PlanningItem pi in piitems)
+                {
+                    refill.Add(pi);
+                }
+
+
+                targetlistbox.ItemsSource = refill;
+            }
+            else if(targetlistbox == LvOrders)
+            {
+                ObservableCollection<PlanningItem> planningitems = oldlist.ItemsSource as ObservableCollection<PlanningItem>;
+                ObservableCollection<PlanningItem> newlistforoldbox = new ObservableCollection<PlanningItem>();
+                foreach (PlanningItem pi in planningitems)
+                {
+                    if (pi.OrderId != item.Id)
+                    {
+                        newlistforoldbox.Add(pi);
+                    }
+                }
+
+                oldlist.ItemsSource = newlistforoldbox;
+
+                ObservableCollection<Order> neworderlist = targetlistbox.ItemsSource as ObservableCollection<Order>;
+
+                neworderlist.Add(item);
+
+                targetlistbox.ItemsSource = neworderlist;
+            }
+            else
+            {
+                ObservableCollection<PlanningItem> planningitems = oldlist.ItemsSource as ObservableCollection<PlanningItem>;
+                ObservableCollection<PlanningItem> newlistforoldbox = new ObservableCollection<PlanningItem>();
+                foreach(PlanningItem pi in planningitems)
+                {
+                    if(pi.OrderId != item.Id)
+                    {
+                        newlistforoldbox.Add(pi);
+                    }
+                }
+
+                oldlist.ItemsSource = newlistforoldbox;
+
+                ObservableCollection<PlanningItem> items = targetlistbox.ItemsSource as ObservableCollection<PlanningItem>;
+
+                //maak 2 planningitems van 1 order
+                List<PlanningItem> piitems = await p.createplanningitems(item, items.ToList(), items[0].ChauffeurId);
+
+                ObservableCollection<PlanningItem> refill = new ObservableCollection<PlanningItem>();
+                foreach (PlanningItem pi in piitems)
+                {
+                    refill.Add(pi);
+                }
+
+
+                targetlistbox.ItemsSource = refill;
+            }
+
+
+            if (dpdate.Text != "")
+            {
+                string qu = "SELECT PlanningId FROM Planning WHERE `Date` = '" + dpdate.Text + "';";
+                DataTable dt = db.ExecuteStringQuery(qu);
+
+                DataRow dr = dt.Rows[0];
+                string date = dr["PlanningId"].ToString();
+
+
+
+                ObservableCollection<PlanningItem> allitems = new ObservableCollection<PlanningItem>();
+                string q = "DELETE FROM `snellewiel`.`PlanningItems` WHERE";
+                string query = "INSERT INTO `snellewiel`.`PlanningItems` (`PlanningId`, `OrderBeschrijving`, `OAText`, `Tijd`, `OrderId`, `ChauffeurId`, `Plaats`, `Adres`, `Postcode`, `Land`) VALUES";
+                string updatequery = "UPDATE `snellewiel`.`Order` SET `Gebruik`='1' WHERE";
+                foreach (ListView lv in Chauflisten)
+                {
+                    foreach(PlanningItem pi in lv.ItemsSource as ObservableCollection<PlanningItem>)
+                    {
+                        allitems.Add(pi);
+
+                        q += " (`OrderId`=" + pi.OrderId + ") OR";
+                        query += "('" + date + "', '" + pi.OrderBeschrijving + "', '" + pi.OAText + "', '" + pi.Tijd + "', '" + pi.OrderId + "', '" + pi.ChauffeurId + "', '" + pi.locatie.Plaats + "', '" + pi.locatie.Adres + "', '" + pi.locatie.Postcode + "', '" + pi.locatie.Land + "'),";
+                        
+                        if(pi.OAText == "Ophalen")
+                        {
+                            updatequery += " `OrderId`= "+ pi.OrderId +" OR";
+                        }
+                    }
+                }
+
+                string updateorderquery = "UPDATE `snellewiel`.`Order` SET `Gebruik`='0' WHERE";
+                string deleteorderquery = "DELETE FROM `snellewiel`.`PlanningItems` WHERE";
+                foreach (Order o in LvOrders.ItemsSource as ObservableCollection<Order>)
+                {
+                    deleteorderquery += " (`OrderId`=" + o.Id + ") OR";
+                    updateorderquery += " `OrderId`= " + o.Id + " OR";
+                }
+                updateorderquery = updateorderquery.Remove(updateorderquery.Length - 2) + ";";
+                db.ExecuteStringQuery(updateorderquery);
+                deleteorderquery = deleteorderquery.Remove(deleteorderquery.Length - 2) + ";";
+                db.ExecuteStringQuery(deleteorderquery);
+
+
+
+                q = q.Remove(q.Length - 2) + ";";
+                db.ExecuteStringQuery(q);
+                query = query.Remove(query.Length - 1) + ";";
+                db.ExecuteStringQuery(query);
+                updatequery = updatequery.Remove(updatequery.Length - 2) + ";";
+                db.ExecuteStringQuery(updatequery);
+            }
+            else
+            {
+                string[] date = DateTime.Now.Date.ToString().ToString().Split(' ');
+                string datum = date[0];
+
+                string qu = "SELECT PlanningId FROM Planning WHERE `Date` = '" + datum + "';";
+                DataTable dt = db.ExecuteStringQuery(qu);
+
+                DataRow dr = dt.Rows[0];
+                string id = dr["PlanningId"].ToString();
+
+
+
+                ObservableCollection<PlanningItem> allitems = new ObservableCollection<PlanningItem>();
+                string q = "DELETE FROM `snellewiel`.`PlanningItems` WHERE";
+                string query = "INSERT INTO `snellewiel`.`PlanningItems` (`PlanningId`, `OrderBeschrijving`, `OAText`, `Tijd`, `OrderId`, `ChauffeurId`, `Plaats`, `Adres`, `Postcode`, `Land`) VALUES";
+                string updatequery = "UPDATE `snellewiel`.`Order` SET `Gebruik`='1' WHERE";
+                foreach (ListView lv in Chauflisten)
+                {
+                    foreach (PlanningItem pi in lv.ItemsSource as ObservableCollection<PlanningItem>)
+                    {
+                        allitems.Add(pi);
+
+                        q += " (`OrderId`=" + pi.OrderId + ") OR";
+                        query += "('" + id + "', '" + pi.OrderBeschrijving + "', '" + pi.OAText + "', '" + pi.Tijd + "', '" + pi.OrderId + "', '" + pi.ChauffeurId + "', '" + pi.locatie.Plaats + "', '" + pi.locatie.Adres + "', '" + pi.locatie.Postcode + "', '" + pi.locatie.Land + "'),";
+                        if (pi.OAText == "Ophalen")
+                        {
+                            updatequery += " `OrderId`= " + pi.OrderId + " OR";
+                        }
+                    }
+                }
+
+                string updateorderquery = "UPDATE `snellewiel`.`Order` SET `Gebruik`='0' WHERE";
+                string deleteorderquery = "DELETE FROM `snellewiel`.`PlanningItems` WHERE";
+                foreach (Order o in LvOrders.ItemsSource as ObservableCollection<Order>)
+                {
+                    deleteorderquery += " (`OrderId`=" + o.Id + ") OR";
+                    updateorderquery += " `OrderId`= " + o.Id + " OR";
+                }
+                updateorderquery = updateorderquery.Remove(updateorderquery.Length - 2) + ";";
+                db.ExecuteStringQuery(updateorderquery);
+                deleteorderquery = deleteorderquery.Remove(deleteorderquery.Length - 2) + ";";
+                db.ExecuteStringQuery(deleteorderquery);
+
+
+
+
+                q = q.Remove(q.Length - 2) + ";";
+                db.ExecuteStringQuery(q);
+                query = query.Remove(query.Length - 1) + ";";
+                db.ExecuteStringQuery(query);
+                updatequery = updatequery.Remove(updatequery.Length - 2) + ";";
+                db.ExecuteStringQuery(updatequery);
+            }
+            l.Close();
         }
 
         private void btnVorige_Click(object sender, RoutedEventArgs e)

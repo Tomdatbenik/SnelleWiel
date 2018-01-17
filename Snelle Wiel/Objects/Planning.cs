@@ -19,6 +19,7 @@ namespace Snelle_Wiel.Objects
         int orderperschauf = 0;
         Webservice wb = new Webservice();
         int startvandedag = 510;
+        double eindigvandaaag;
         //Ritvolgorde worden de ritten gestopt op volgorde van start en van eind
 
 
@@ -153,8 +154,6 @@ namespace Snelle_Wiel.Objects
             string q = "INSERT INTO `Planning` (`Date`) VALUES ('"+ datum +"');";
             db.ExecuteStringQuery(q);
 
-
-
             string qu = "SELECT PlanningId FROM Planning WHERE `Date` = '" + datum + "';";
             DataTable dt =  db.ExecuteStringQuery(qu);
 
@@ -287,42 +286,90 @@ namespace Snelle_Wiel.Objects
 
         public string MinutenNaarTijd(int minuut)
         {
-            double M = double.Parse(minuut.ToString());
-            double Uur = M / 60;
-            Console.WriteLine(Uur);
+            double m = double.Parse(minuut.ToString());
+            double PrepareUur = m / 60;
 
-            string[] DeelVanUur = Uur.ToString().Split(',');
-            double m = 0;
-            if (DeelVanUur.Count() == 2)
-            {
-               m = double.Parse(DeelVanUur[1]);
-            }
-            double Minuut = 00;
-            if(m != 0)
-            {
-                Minuut = m / 100 * 60 * 10;
-            }
 
-            char[] fixminuten = Minuut.ToString().ToArray();
+            string[] uren = PrepareUur.ToString().Split(',');
 
-            int minuten = 0;
-            Console.WriteLine(fixminuten.Count());
-            Console.WriteLine(fixminuten.Length);
-            if (fixminuten.Count() > 1)
+            string Uur = uren[0];
+            double uurinminuten = double.Parse(Uur) * 60;
+            double prepareminuten = m - uurinminuten;
+
+            string minuten = prepareminuten.ToString();
+
+            char[] Minuten = minuten.ToArray();
+
+            if(Minuten.Count() > 1)
             {
-                minuten = int.Parse(fixminuten[0].ToString() + fixminuten[1].ToString());
-                return DeelVanUur[0] + ":" + minuten;
+                return Uur + ":" + minuten;
             }
             else
             {
-                if(Minuut == 0)
-                {
-                    return DeelVanUur[0] + ":" + Minuut + "0";
-                }
-                
-                return DeelVanUur[0] + ":" + Minuut;
+                return Uur + ":0" + minuten;
+            }
+        }
+
+
+        public async Task<List<PlanningItem>> createplanningitems(Order o,List<PlanningItem>pilist,int chaufid)
+        {
+            List<PlanningItem> pitems = new List<PlanningItem>();
+            double starttijd = 510;
+            Rit r;
+            bool omenom = false;
+            double cooler = 0;
+            string tijd = "";
+            Locatie startlocatie = null;
+
+            foreach (PlanningItem planningi in pilist)
+            {
+                tijd = planningi.Tijd;
+                startlocatie = planningi.locatie;
             }
 
+
+            PlanningItem pi = new PlanningItem();
+            pi.OrderId = o.Id;
+            pi.OrderBeschrijving = o.Omschrijving;
+            pi.ChauffeurId = chaufid;
+            pi.OAText = "Ophalen";
+            pi.locatie = o.Start;
+
+            if (startlocatie == null)
+            {
+                Rit cool = await wb.GetTravelTime(new Locatie("Sint-Oedenrode", "Liempdseweg43", "5492 SM", "Nederland"), o.Start);
+                starttijd = starttijd + cool.Duration;
+                pi.Tijd = MinutenNaarTijd(int.Parse(starttijd.ToString()));
+            }
+            else
+            {
+                Rit z = await wb.GetTravelTime(startlocatie, o.Start);
+                string[] minutenenuren = tijd.Split(':');
+                int urennaarminuut = int.Parse(minutenenuren[0]) * 60;
+
+                int minuten = int.Parse(minutenenuren[1]);
+
+                int totaaltijd = urennaarminuut + minuten;
+
+                cooler = totaaltijd + z.Duration;
+                starttijd = cooler;
+                pi.Tijd = MinutenNaarTijd(int.Parse(cooler.ToString()));
+            }
+
+            PlanningItem pitwee = new PlanningItem();
+            pitwee.OrderId = o.Id;
+            pitwee.OrderBeschrijving = o.Omschrijving;
+            Rit q = await wb.GetTravelTime(o.Start, o.Einde);
+            double volgendetijd = starttijd + q.Duration;
+            pitwee.Tijd = MinutenNaarTijd(int.Parse(volgendetijd.ToString()));
+            pitwee.ChauffeurId = chaufid;
+            pitwee.OAText = "Afleveren";
+            pitwee.locatie = o.Einde;
+
+
+            pilist.Add(pi);
+            pilist.Add(pitwee);
+            return pilist;
         }
        
     }
