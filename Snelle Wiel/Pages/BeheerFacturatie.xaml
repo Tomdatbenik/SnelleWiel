@@ -52,20 +52,20 @@
         <ListView x:Name="lvOrderArtikelen" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Ophalen" Width="75px"/>
-                    <GridViewColumn Header="Afleveren" Width="75px"/>
-                    <GridViewColumn Header="Artikel" Width="75px"/>
-                    <GridViewColumn Header="Datum" Width="75px"/>
-                    <GridViewColumn Header="Omschrijving" Width="75px"/>
+                    <GridViewColumn Header="Omscvhrijving" Width="75px" DisplayMemberBinding="{Binding Omschrijving}"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Grid.Column="1" Grid.Row="3" Content="Informatie wijzigen" Style="{StaticResource FlatButtonStyle }"/>
+        <Button Visibility="Hidden" x:Name="btGenereer" Grid.Column="1" Grid.Row="3" Content="Genereer factuur" Style="{StaticResource FlatButtonStyle }" HorizontalAlignment="Left" Width="127" Click="btGenereer_Click"/>
         <TextBlock Name="tbOrders" Text="Orders:" Grid.Column="4" Grid.Row="1" FontSize="16"/>
-        <ListView Name="lvOrders" Grid.Column="4" Grid.Row="2" MouseDoubleClick="lvOrders_MouseDoubleClick">
+        <!--<Button Name="btOrder1" Content="Order 1" Grid.Column="4" Grid.Row="2" Height="50px" VerticalAlignment="Top" Click="btOrder1_Click"/>
+        <Button Name="btOrder2" Content="Order 2" Grid.Column="4" Grid.Row="2" Height="50px" VerticalAlignment="Center"/>
+        <Button Name="btOrder3" Content="Order 3" Grid.Column="4" Grid.Row="2" Height="50px" VerticalAlignment="Bottom"/>-->
+        <ListView Visibility="Visible" Name="lvOrders" Grid.Column="4" Grid.Row="2" MouseDoubleClick="lvOrders_MouseDoubleClick">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Order" Width="120px"/>
+                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="Omschrijving" DisplayMemberBinding="{Binding Omschrijving}"/>
                 </GridView>
             </ListView.View>
         </ListView>
