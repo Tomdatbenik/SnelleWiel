@@ -77,10 +77,16 @@ namespace Snelle_Wiel.Windows
                     db.ExecuteStringQuery(qureyresetplanning);
                 }
 
-                lg.EditUser(this.id,TbLName.Text, PbPass.Password, Roleid, TbName.Text, TbWoonplaats.Text, TbAdres.Text, TbPostcode.Text, TbEmail.Text, TbTelefoon.Text);
+                if(lg.EditUser(this.id,TbLName.Text, PbPass.Password, Roleid, TbName.Text, TbWoonplaats.Text, TbAdres.Text, TbPostcode.Text, TbEmail.Text, TbTelefoon.Text) == "OK")
+                {
+                    MessageBox.Show("Gebruiker is gewijzigt");
 
-
-                this.Close();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Naam bestaat al");
+                }
             }
             else
             {

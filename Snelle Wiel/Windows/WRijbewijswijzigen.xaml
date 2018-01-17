@@ -42,7 +42,7 @@
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
 
-        <ListView x:Name="LvGot" Grid.Row="1" Grid.Column="0" AllowDrop="True" Drop="ListView_drop"  PreviewMouseDown="ListView_PreviewMouseMove">
+        <ListView x:Name="LvGot" Grid.Row="1" Grid.Column="0" AllowDrop="True" MouseDoubleClick="LvGot_MouseDoubleClick">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Catogorie" DisplayMemberBinding="{Binding Catogorie}"/>
@@ -51,7 +51,7 @@
             </ListView.View>
         </ListView>
         
-        <ListView x:Name="LvGive"  Grid.Row="1" Grid.Column="1" AllowDrop="True" Drop="ListView_drop"  PreviewMouseDown="ListView_PreviewMouseMove">
+        <ListView x:Name="LvGive"  Grid.Row="1" Grid.Column="1" AllowDrop="True" MouseDoubleClick="LvGive_MouseDoubleClick">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Catogorie" DisplayMemberBinding="{Binding Catogorie}"/>
