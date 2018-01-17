@@ -74,12 +74,12 @@ namespace Snelle_Wiel.Pages
             MessageBox.Show("De berekeningen worden in de achtergrond gemaakt. U kunt verder nadat alles berekend is. De applicatie niet sluiten!");
             Loading l = new Loading();
             l.Show();
+            Totalitems.Clear();
             foreach (User c in Chaufs)
             {
                 Console.WriteLine("In behandeling is chauffeur: " + c.Naam);
                 if(dpdate.Text != "")
                 {
-                    Items.Clear();
                     Items = await p.GetPlanningItems(c.Id, dpdate.Text);
                     foreach(PlanningItem pl in Items)
                     {
@@ -305,7 +305,9 @@ namespace Snelle_Wiel.Pages
 
         public async void DropOnListView(ListView targetlistbox, Order item)
         {
-            if(oldlist == LvOrders)
+            Loading l = new Loading();
+            l.Show();
+            if (oldlist == LvOrders)
             {
                 ObservableCollection<Order> orders = LvOrders.ItemsSource as ObservableCollection<Order>;
                 orders.Remove(item);
@@ -386,22 +388,45 @@ namespace Snelle_Wiel.Pages
 
 
                 ObservableCollection<PlanningItem> allitems = new ObservableCollection<PlanningItem>();
-                string q = "DELETE FROM `snellewiel`.`Order` WHERE";
+                string q = "DELETE FROM `snellewiel`.`PlanningItems` WHERE";
                 string query = "INSERT INTO `snellewiel`.`PlanningItems` (`PlanningId`, `OrderBeschrijving`, `OAText`, `Tijd`, `OrderId`, `ChauffeurId`, `Plaats`, `Adres`, `Postcode`, `Land`) VALUES";
+                string updatequery = "UPDATE `snellewiel`.`Order` SET `Gebruik`='1' WHERE";
                 foreach (ListView lv in Chauflisten)
                 {
                     foreach(PlanningItem pi in lv.ItemsSource as ObservableCollection<PlanningItem>)
                     {
                         allitems.Add(pi);
 
-                        q += " (`OrderId`=" + pi.OrderId + " OR";
+                        q += " (`OrderId`=" + pi.OrderId + ") OR";
                         query += "('" + date + "', '" + pi.OrderBeschrijving + "', '" + pi.OAText + "', '" + pi.Tijd + "', '" + pi.OrderId + "', '" + pi.ChauffeurId + "', '" + pi.locatie.Plaats + "', '" + pi.locatie.Adres + "', '" + pi.locatie.Postcode + "', '" + pi.locatie.Land + "'),";
+                        
+                        if(pi.OAText == "Ophalen")
+                        {
+                            updatequery += " `OrderId`= "+ pi.OrderId +" OR";
+                        }
                     }
                 }
+
+                string updateorderquery = "UPDATE `snellewiel`.`Order` SET `Gebruik`='0' WHERE";
+                string deleteorderquery = "DELETE FROM `snellewiel`.`PlanningItems` WHERE";
+                foreach (Order o in LvOrders.ItemsSource as ObservableCollection<Order>)
+                {
+                    deleteorderquery += " (`OrderId`=" + o.Id + ") OR";
+                    updateorderquery += " `OrderId`= " + o.Id + " OR";
+                }
+                updateorderquery = updateorderquery.Remove(updateorderquery.Length - 2) + ";";
+                db.ExecuteStringQuery(updateorderquery);
+                deleteorderquery = deleteorderquery.Remove(deleteorderquery.Length - 2) + ";";
+                db.ExecuteStringQuery(deleteorderquery);
+
+
+
                 q = q.Remove(q.Length - 2) + ";";
                 db.ExecuteStringQuery(q);
                 query = query.Remove(query.Length - 1) + ";";
                 db.ExecuteStringQuery(query);
+                updatequery = updatequery.Remove(updatequery.Length - 2) + ";";
+                db.ExecuteStringQuery(updatequery);
             }
             else
             {
@@ -419,22 +444,45 @@ namespace Snelle_Wiel.Pages
                 ObservableCollection<PlanningItem> allitems = new ObservableCollection<PlanningItem>();
                 string q = "DELETE FROM `snellewiel`.`PlanningItems` WHERE";
                 string query = "INSERT INTO `snellewiel`.`PlanningItems` (`PlanningId`, `OrderBeschrijving`, `OAText`, `Tijd`, `OrderId`, `ChauffeurId`, `Plaats`, `Adres`, `Postcode`, `Land`) VALUES";
+                string updatequery = "UPDATE `snellewiel`.`Order` SET `Gebruik`='1' WHERE";
                 foreach (ListView lv in Chauflisten)
                 {
                     foreach (PlanningItem pi in lv.ItemsSource as ObservableCollection<PlanningItem>)
                     {
                         allitems.Add(pi);
 
-                        q += " (`OrderId`=" + pi.OrderId + " OR";
+                        q += " (`OrderId`=" + pi.OrderId + ") OR";
                         query += "('" + id + "', '" + pi.OrderBeschrijving + "', '" + pi.OAText + "', '" + pi.Tijd + "', '" + pi.OrderId + "', '" + pi.ChauffeurId + "', '" + pi.locatie.Plaats + "', '" + pi.locatie.Adres + "', '" + pi.locatie.Postcode + "', '" + pi.locatie.Land + "'),";
+                        if (pi.OAText == "Ophalen")
+                        {
+                            updatequery += " `OrderId`= " + pi.OrderId + " OR";
+                        }
                     }
                 }
+
+                string updateorderquery = "UPDATE `snellewiel`.`Order` SET `Gebruik`='0' WHERE";
+                string deleteorderquery = "DELETE FROM `snellewiel`.`PlanningItems` WHERE";
+                foreach (Order o in LvOrders.ItemsSource as ObservableCollection<Order>)
+                {
+                    deleteorderquery += " (`OrderId`=" + o.Id + ") OR";
+                    updateorderquery += " `OrderId`= " + o.Id + " OR";
+                }
+                updateorderquery = updateorderquery.Remove(updateorderquery.Length - 2) + ";";
+                db.ExecuteStringQuery(updateorderquery);
+                deleteorderquery = deleteorderquery.Remove(deleteorderquery.Length - 2) + ";";
+                db.ExecuteStringQuery(deleteorderquery);
+
+
+
+
                 q = q.Remove(q.Length - 2) + ";";
                 db.ExecuteStringQuery(q);
                 query = query.Remove(query.Length - 1) + ";";
                 db.ExecuteStringQuery(query);
+                updatequery = updatequery.Remove(updatequery.Length - 2) + ";";
+                db.ExecuteStringQuery(updatequery);
             }
-
+            l.Close();
         }
 
         private void btnVorige_Click(object sender, RoutedEventArgs e)
