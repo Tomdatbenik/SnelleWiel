@@ -35,6 +35,9 @@ namespace Snelle_Wiel.Pages
         Order SelectedOrder;
         Database db;
         ObservableCollection<Producten> producten = new ObservableCollection<Producten>();
+        double prijs1 = 5.25;
+        double prijs2 = 10.63;
+        double prijs3 = 20.50;
         public BeheerFacturatie(Database database)
         {
             InitializeComponent();
@@ -215,43 +218,47 @@ namespace Snelle_Wiel.Pages
             t.Rows[0].Cells[6].Width = 50;
             t.Rows[0].Cells[7].Paragraphs.First().Append("Prijs").Bold();
             t.Rows[0].Cells[7].Width = 50;
-            t.Rows[1].Cells[0].Paragraphs.First().Append("Bier");
-            t.Rows[1].Cells[1].Paragraphs.First().Append("Bier");
-            t.Rows[1].Cells[2].Paragraphs.First().Append("Bier");
-            t.Rows[1].Cells[3].Paragraphs.First().Append("Bier");
-            t.Rows[1].Cells[4].Paragraphs.First().Append("Bier");
-            t.Rows[1].Cells[5].Paragraphs.First().Append("Bier");
-            t.Rows[1].Cells[6].Paragraphs.First().Append("Bier");
-            t.Rows[1].Cells[7].Paragraphs.First().Append("Bier");
+            t.Rows[1].Cells[0].Paragraphs.First().Append("19-11");
+            t.Rows[1].Cells[1].Paragraphs.First().Append("123456");
+            t.Rows[1].Cells[2].Paragraphs.First().Append("L");
+            t.Rows[1].Cells[3].Paragraphs.First().Append("5512CC");
+            t.Rows[1].Cells[4].Paragraphs.First().Append("5");
+            t.Rows[1].Cells[5].Paragraphs.First().Append("10");
+            t.Rows[1].Cells[6].Paragraphs.First().Append("0.5");
+            t.Rows[1].Cells[7].Paragraphs.First().Append(""+ prijs1 +"");
 
-            t.Rows[2].Cells[0].Paragraphs.First().Append("Bier");
-            t.Rows[2].Cells[1].Paragraphs.First().Append("Bier");
-            t.Rows[2].Cells[2].Paragraphs.First().Append("Bier");
-            t.Rows[2].Cells[3].Paragraphs.First().Append("Bier");
-            t.Rows[2].Cells[4].Paragraphs.First().Append("Bier");
-            t.Rows[2].Cells[5].Paragraphs.First().Append("Bier");
-            t.Rows[2].Cells[6].Paragraphs.First().Append("Bier");
-            t.Rows[2].Cells[7].Paragraphs.First().Append("Bier");
+            t.Rows[2].Cells[0].Paragraphs.First().Append("19-11");
+            t.Rows[2].Cells[1].Paragraphs.First().Append("123457");
+            t.Rows[2].Cells[2].Paragraphs.First().Append("R");
+            t.Rows[2].Cells[3].Paragraphs.First().Append("5945AB");
+            t.Rows[2].Cells[4].Paragraphs.First().Append("5");
+            t.Rows[2].Cells[5].Paragraphs.First().Append("5");
+            t.Rows[2].Cells[6].Paragraphs.First().Append("1");
+            t.Rows[2].Cells[7].Paragraphs.First().Append(""+ prijs2 +"");
 
-            t.Rows[3].Cells[0].Paragraphs.First().Append("Bier");
-            t.Rows[3].Cells[1].Paragraphs.First().Append("Bier");
-            t.Rows[3].Cells[2].Paragraphs.First().Append("Bier");
-            t.Rows[3].Cells[3].Paragraphs.First().Append("Bier");
-            t.Rows[3].Cells[4].Paragraphs.First().Append("Bier");
-            t.Rows[3].Cells[5].Paragraphs.First().Append("Bier");
-            t.Rows[3].Cells[6].Paragraphs.First().Append("Bier");
-            t.Rows[3].Cells[7].Paragraphs.First().Append("Bier");
+            t.Rows[3].Cells[0].Paragraphs.First().Append("19-11");
+            t.Rows[3].Cells[1].Paragraphs.First().Append("123458");
+            t.Rows[3].Cells[2].Paragraphs.First().Append("L");
+            t.Rows[3].Cells[3].Paragraphs.First().Append("5589CB");
+            t.Rows[3].Cells[4].Paragraphs.First().Append("6");
+            t.Rows[3].Cells[5].Paragraphs.First().Append("24");
+            t.Rows[3].Cells[6].Paragraphs.First().Append("2");
+            t.Rows[3].Cells[7].Paragraphs.First().Append(""+ prijs3 +"");
 
             t.Rows[4].Cells[6].Paragraphs.First().Append("");
             t.Rows[4].Cells[7].Paragraphs.First().Append("");
+
+            double totaalexbtw = prijs1 + prijs2 + prijs3;
+            double BTW = totaalexbtw * 0.21;
+            double totaal = totaalexbtw + BTW;
 
             t.Rows[5].Cells[6].Paragraphs.First().Append("Ex BTW:").Bold();
             t.Rows[6].Cells[6].Paragraphs.First().Append("BTW:").Bold();
             t.Rows[7].Cells[6].Paragraphs.First().Append("Totaal:").Bold();
 
-            t.Rows[5].Cells[7].Paragraphs.First().Append("Bier");
-            t.Rows[6].Cells[7].Paragraphs.First().Append("Bier");
-            t.Rows[7].Cells[7].Paragraphs.First().Append("€Bier");
+            t.Rows[5].Cells[7].Paragraphs.First().Append(""+ totaalexbtw +"");
+            t.Rows[6].Cells[7].Paragraphs.First().Append("" + BTW + "");
+            t.Rows[7].Cells[7].Paragraphs.First().Append("€"+ totaal +"");
 
 
 
