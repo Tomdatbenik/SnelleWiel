@@ -1,5 +1,4 @@
 ﻿using Microsoft.Office.Interop.Word;
-using Novacode;
 using Snelle_Wiel.Classes;
 using Snelle_Wiel.Objects;
 using System;
@@ -21,9 +20,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Xps.Packaging;
-
-
-
+using Xceed.Words.NET;
 
 namespace Snelle_Wiel.Pages
 {
@@ -194,10 +191,10 @@ namespace Snelle_Wiel.Pages
             string paraTwo = ""
                 + "Factuurnummer:	14000345\n"
                 + "Factuurdatum:	              " + DateTime.Today.ToString("d") +"\n\n";
-            
+
 
             // Add a Table to this document.
-            Novacode.Table t = doc.AddTable(8, 8);
+            Xceed.Words.NET.Table t = doc.AddTable(8, 8);
             // Specify some properties for this Table.
             t.Alignment = Alignment.left;
             t.Design = TableDesign.TableNormal;
@@ -218,7 +215,7 @@ namespace Snelle_Wiel.Pages
             t.Rows[0].Cells[6].Width = 50;
             t.Rows[0].Cells[7].Paragraphs.First().Append("Prijs").Bold();
             t.Rows[0].Cells[7].Width = 50;
-            t.Rows[1].Cells[0].Paragraphs.First().Append("19-11");
+            t.Rows[1].Cells[0].Paragraphs.First().Append("17-1");
             t.Rows[1].Cells[1].Paragraphs.First().Append("123456");
             t.Rows[1].Cells[2].Paragraphs.First().Append("L");
             t.Rows[1].Cells[3].Paragraphs.First().Append("5512CC");
@@ -227,7 +224,7 @@ namespace Snelle_Wiel.Pages
             t.Rows[1].Cells[6].Paragraphs.First().Append("0.5");
             t.Rows[1].Cells[7].Paragraphs.First().Append(""+ prijs1 +"");
 
-            t.Rows[2].Cells[0].Paragraphs.First().Append("19-11");
+            t.Rows[2].Cells[0].Paragraphs.First().Append("17-1");
             t.Rows[2].Cells[1].Paragraphs.First().Append("123457");
             t.Rows[2].Cells[2].Paragraphs.First().Append("R");
             t.Rows[2].Cells[3].Paragraphs.First().Append("5945AB");
@@ -236,7 +233,7 @@ namespace Snelle_Wiel.Pages
             t.Rows[2].Cells[6].Paragraphs.First().Append("1");
             t.Rows[2].Cells[7].Paragraphs.First().Append(""+ prijs2 +"");
 
-            t.Rows[3].Cells[0].Paragraphs.First().Append("19-11");
+            t.Rows[3].Cells[0].Paragraphs.First().Append("17-1");
             t.Rows[3].Cells[1].Paragraphs.First().Append("123458");
             t.Rows[3].Cells[2].Paragraphs.First().Append("L");
             t.Rows[3].Cells[3].Paragraphs.First().Append("5589CB");
@@ -272,7 +269,7 @@ namespace Snelle_Wiel.Pages
                 + "__________________________________________________________________________________\n\n";
 
             // Add a Table to this document.
-            Novacode.Table footer = doc.AddTable(3, 2);
+            Xceed.Words.NET.Table footer = doc.AddTable(3, 2);
             // Specify some properties for this Table.
             footer.Alignment = Alignment.left;
             footer.Design = TableDesign.TableNormal;
