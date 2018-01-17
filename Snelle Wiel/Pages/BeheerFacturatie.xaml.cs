@@ -176,13 +176,13 @@ namespace Snelle_Wiel.Pages
             string headlineText = "Factuur\n";
             // A formatting object for our headline:
             var headLineFormat = new Formatting();
-            headLineFormat.Size = 26;
+            headLineFormat.Size = 36;
             headLineFormat.Position = 12;
             headLineFormat.Bold = true;
 
             // Set up our paragraph contents:
             string paraOne = ""
-                + "Groene Vingers\n"
+                + "\n\nGroene Vingers\n"
                 + "Crediteurenadministratie   Hr. A. van Hest\n"
                 + "Kanaaldijk 34\n"
                 + "5501 XL  Best\n\n\n\n\n\n";
@@ -192,13 +192,9 @@ namespace Snelle_Wiel.Pages
                 + "Factuurnummer:	14000345\n"
                 + "Factuurdatum:	              " + DateTime.Today.ToString("d") +"\n\n";
             
-            //Insert all objects in document
-            doc.InsertParagraph(headlineText, false, headLineFormat);
-            doc.InsertParagraph(paraOne);
-            doc.InsertParagraph(paraTwo);
 
             // Add a Table to this document.
-            Novacode.Table t = doc.AddTable(4, 8);
+            Novacode.Table t = doc.AddTable(8, 8);
             // Specify some properties for this Table.
             t.Alignment = Alignment.left;
             t.Design = TableDesign.TableNormal;
@@ -246,23 +242,57 @@ namespace Snelle_Wiel.Pages
             t.Rows[3].Cells[6].Paragraphs.First().Append("Bier");
             t.Rows[3].Cells[7].Paragraphs.First().Append("Bier");
 
-            doc.InsertTable(t);
+            t.Rows[4].Cells[6].Paragraphs.First().Append("");
+            t.Rows[4].Cells[7].Paragraphs.First().Append("");
+
+            t.Rows[5].Cells[6].Paragraphs.First().Append("Ex BTW:").Bold();
+            t.Rows[6].Cells[6].Paragraphs.First().Append("BTW:").Bold();
+            t.Rows[7].Cells[6].Paragraphs.First().Append("Totaal:").Bold();
+
+            t.Rows[5].Cells[7].Paragraphs.First().Append("Bier");
+            t.Rows[6].Cells[7].Paragraphs.First().Append("Bier");
+            t.Rows[7].Cells[7].Paragraphs.First().Append("€Bier");
+
+
 
             // Set up our paragraph contents:
             string paraThree = ""
-                + "Ex BTW:    Bier\n"
-                + "BTW:    Bier\n"
-                + "Totaal:    €Bier\n\n\n";
+                + "\n\n\nTe betalen voor 12 december 2016 onder vermelding van het factuurnummer. Bij betaling voor 29 november geldt een korting van 9%.\n\n"
+                + "De Algemene Leveringsvoorwaarden gelden. Deze kunt u vinden op  www.snwi.nl/alv. Informatie over onze actuele tarieven kunt u vinden op www.snwi.nl / tarieven.\n\n\n\n\n\n";
+
+            //// Set up our paragraph contents:
+            string paraFour = ""
+                + "__________________________________________________________________________________\n\n";
+
+            // Add a Table to this document.
+            Novacode.Table footer = doc.AddTable(3, 2);
+            // Specify some properties for this Table.
+            footer.Alignment = Alignment.left;
+            footer.Design = TableDesign.TableNormal;
+            // Add content to this Table.
+            footer.Rows[0].Cells[0].Paragraphs.First().Append("Snelle Wiel");
+            footer.Rows[0].Cells[1].Paragraphs.First().Append("IBAN:  NL44ASNB0034178902");
+            footer.Rows[1].Cells[0].Paragraphs.First().Append("Spoordijk 23");
+            footer.Rows[1].Cells[1].Paragraphs.First().Append("KVK nr:  10672392 Eindhoven");
+            footer.Rows[2].Cells[0].Paragraphs.First().Append("5610 XL  Best");
+            footer.Rows[2].Cells[1].Paragraphs.First().Append("t.v.mierlo@snwi.nl");
+
 
             // Body Formatting
             var paraFormat = new Formatting();
+            paraFormat.FontColor = System.Drawing.Color.Gray;
 
-            Novacode.Paragraph letterBody = doc.InsertParagraph(paraThree, false, paraFormat);
-            letterBody.Alignment = Alignment.right;
-
-            doc.InsertParagraph(paraThree, false, paraFormat);
-
+            //Insert all objects in document
+            doc.InsertParagraph(headlineText, false, headLineFormat);
+            doc.InsertParagraph(paraOne);
+            doc.InsertParagraph(paraTwo);
+            doc.InsertTable(t);
             doc.InsertParagraph(paraThree);
+            doc.InsertParagraph(paraFour, false, paraFormat);
+            doc.InsertTable(footer);
+
+
+
 
             // Save to the output directory:
             doc.Save();
