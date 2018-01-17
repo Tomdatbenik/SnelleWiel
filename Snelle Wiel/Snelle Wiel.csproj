@@ -138,6 +138,9 @@
     <Compile Include="Windows\WEditUser.xaml.cs">
       <DependentUpon>WEditUser.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Weetuzeker.xaml.cs">
+      <DependentUpon>Weetuzeker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\WRijbewijswijzigen.xaml.cs">
       <DependentUpon>WRijbewijswijzigen.xaml</DependentUpon>
     </Compile>
@@ -208,6 +211,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\WEditUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Weetuzeker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
