@@ -414,10 +414,16 @@ namespace Snelle_Wiel.Pages
                     deleteorderquery += " (`OrderId`=" + o.Id + ") OR";
                     updateorderquery += " `OrderId`= " + o.Id + " OR";
                 }
-                updateorderquery = updateorderquery.Remove(updateorderquery.Length - 2) + ";";
-                db.ExecuteStringQuery(updateorderquery);
-                deleteorderquery = deleteorderquery.Remove(deleteorderquery.Length - 2) + ";";
-                db.ExecuteStringQuery(deleteorderquery);
+                ObservableCollection<Order> wtf = LvOrders.ItemsSource as ObservableCollection<Order>;
+
+                int count = wtf.Count;
+                if (count > 1)
+                {
+                    updateorderquery = updateorderquery.Remove(updateorderquery.Length - 2) + ";";
+                    db.ExecuteStringQuery(updateorderquery);
+                    deleteorderquery = deleteorderquery.Remove(deleteorderquery.Length - 2) + ";";
+                    db.ExecuteStringQuery(deleteorderquery);
+                }
 
 
 
@@ -467,10 +473,16 @@ namespace Snelle_Wiel.Pages
                     deleteorderquery += " (`OrderId`=" + o.Id + ") OR";
                     updateorderquery += " `OrderId`= " + o.Id + " OR";
                 }
-                updateorderquery = updateorderquery.Remove(updateorderquery.Length - 2) + ";";
-                db.ExecuteStringQuery(updateorderquery);
-                deleteorderquery = deleteorderquery.Remove(deleteorderquery.Length - 2) + ";";
-                db.ExecuteStringQuery(deleteorderquery);
+                ObservableCollection<Order> wtf = LvOrders.ItemsSource as ObservableCollection<Order>;
+
+                int count = wtf.Count;
+                if (count > 1)
+                {
+                    updateorderquery = updateorderquery.Remove(updateorderquery.Length - 2) + ";";
+                    db.ExecuteStringQuery(updateorderquery);
+                    deleteorderquery = deleteorderquery.Remove(deleteorderquery.Length - 2) + ";";
+                    db.ExecuteStringQuery(deleteorderquery);
+                }
 
 
 
