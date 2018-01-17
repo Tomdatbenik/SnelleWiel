@@ -141,6 +141,7 @@
             </ListView.View>
         </ListView>
 
-
+        <Button x:Name="btnOrderInfo" Grid.Column="9" Grid.Row="5" Height="20" VerticalAlignment="Bottom" Style="{StaticResource FlatButtonStyle}" Content="Order Info" Click="btnOrderInfo_Click"></Button>
+        
     </Grid>
 </Page>

@@ -127,6 +127,9 @@
     <Compile Include="Windows\Loading.xaml.cs">
       <DependentUpon>Loading.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\OrderInfo.xaml.cs">
+      <DependentUpon>OrderInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\WAddVrachtwagen.xaml.cs">
       <DependentUpon>WAddVrachtwagen.xaml</DependentUpon>
     </Compile>
@@ -138,9 +141,6 @@
     </Compile>
     <Compile Include="Windows\WEditUser.xaml.cs">
       <DependentUpon>WEditUser.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Weetuzeker.xaml.cs">
-      <DependentUpon>Weetuzeker.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\WRijbewijswijzigen.xaml.cs">
       <DependentUpon>WRijbewijswijzigen.xaml</DependentUpon>
@@ -199,6 +199,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\OrderInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\WAddVrachtwagen.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -212,10 +216,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\WEditUser.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Weetuzeker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

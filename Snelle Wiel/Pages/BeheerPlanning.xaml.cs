@@ -211,6 +211,7 @@ namespace Snelle_Wiel.Pages
 
 
                 Order o = new Order(int.Parse(dr["OrderId"].ToString()),dr["Omschrijving"].ToString(),s,e);
+                o.Status = dr["Status"].ToString();
                 Orders.Add(o);
             }
 
@@ -308,5 +309,18 @@ namespace Snelle_Wiel.Pages
              e.Handled = true;
         }
 
+        private void btnOrderInfo_Click(object sender, RoutedEventArgs e)
+        {
+            if(LvOrders.SelectedItem != null)
+            {
+                Order o = LvOrders.SelectedItem as Order;
+                OrderInfo oi = new OrderInfo(o);
+                oi.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Selecteer een order.");
+            }
+        }
     }
 }
