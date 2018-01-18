@@ -307,7 +307,7 @@ namespace Snelle_Wiel.Pages
         {
             Loading l = new Loading();
             l.Show();
-            if (oldlist == LvOrders)
+            if (oldlist == LvOrders && targetlistbox != LvOrders)
             {
                 ObservableCollection<Order> orders = LvOrders.ItemsSource as ObservableCollection<Order>;
                 orders.Remove(item);
@@ -327,7 +327,7 @@ namespace Snelle_Wiel.Pages
 
                 targetlistbox.ItemsSource = refill;
             }
-            else if(targetlistbox == LvOrders)
+            else if(targetlistbox == LvOrders && oldlist != LvOrders)
             {
                 ObservableCollection<PlanningItem> planningitems = oldlist.ItemsSource as ObservableCollection<PlanningItem>;
                 ObservableCollection<PlanningItem> newlistforoldbox = new ObservableCollection<PlanningItem>();
@@ -347,13 +347,13 @@ namespace Snelle_Wiel.Pages
 
                 targetlistbox.ItemsSource = neworderlist;
             }
-            else
+            else if (targetlistbox != LvOrders)
             {
                 ObservableCollection<PlanningItem> planningitems = oldlist.ItemsSource as ObservableCollection<PlanningItem>;
                 ObservableCollection<PlanningItem> newlistforoldbox = new ObservableCollection<PlanningItem>();
-                foreach(PlanningItem pi in planningitems)
+                foreach (PlanningItem pi in planningitems)
                 {
-                    if(pi.OrderId != item.Id)
+                    if (pi.OrderId != item.Id)
                     {
                         newlistforoldbox.Add(pi);
                     }

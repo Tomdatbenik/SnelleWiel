@@ -167,7 +167,7 @@ namespace Snelle_Wiel.Pages
         {
 
             // Modify to suit your machine:
-            string fileName = @"C:\Users\Ron\Documents\DocXExample.docx";
+            string fileName = @"D:\Test\DocXExample.docx";
   
             // Create a document in memory:
             var doc = DocX.Create(fileName);
@@ -261,7 +261,7 @@ namespace Snelle_Wiel.Pages
 
             // Set up our paragraph contents:
             string paraThree = ""
-                + "\n\n\nTe betalen voor 12 december 2016 onder vermelding van het factuurnummer. Bij betaling voor 29 november geldt een korting van 9%.\n\n"
+                + "\n\n\nTe betalen voor 12 december 2018 onder vermelding van het factuurnummer. Bij betaling voor 29 november geldt een korting van 9%.\n\n"
                 + "De Algemene Leveringsvoorwaarden gelden. Deze kunt u vinden op  www.snwi.nl/alv. Informatie over onze actuele tarieven kunt u vinden op www.snwi.nl / tarieven.\n\n\n\n\n\n";
 
             //// Set up our paragraph contents:
