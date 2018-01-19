@@ -135,8 +135,8 @@
         <ListView AllowDrop="True" Drop="ListView_dropOrder"  PreviewMouseDown="ListView_PreviewMouseMoveOrder" Grid.Column="9" Grid.Row="3" Grid.RowSpan="3" x:Name="LvOrders">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
                     <GridViewColumn Header="Omschrijving" DisplayMemberBinding="{Binding Omschrijving}"/>
+                    <GridViewColumn Header="Ophaal postcode" DisplayMemberBinding="{Binding Path=Start.Postcode}"/>
                 </GridView>
             </ListView.View>
         </ListView>

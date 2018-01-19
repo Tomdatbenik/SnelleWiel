@@ -78,10 +78,10 @@ namespace Snelle_Wiel.Pages
             foreach (User c in Chaufs)
             {
                 Console.WriteLine("In behandeling is chauffeur: " + c.Naam);
-                if(dpdate.Text != "")
+                if (dpdate.Text != "")
                 {
                     Items = await p.GetPlanningItems(c.Id, dpdate.Text);
-                    foreach(PlanningItem pl in Items)
+                    foreach (PlanningItem pl in Items)
                     {
                         Totalitems.Add(pl);
                     }
@@ -105,10 +105,7 @@ namespace Snelle_Wiel.Pages
 
             if (dpdate.Text != "" && Items.Count != 0 && Totalitems.Count != 0)
             {
-                string[] date = DateTime.Now.Date.ToString().ToString().Split(' ');
-                string datum = date[0];
-
-                string q = "SELECT PlanningId FROM Planning WHERE `Date` = '" + datum + "';";
+                string q = "SELECT PlanningId FROM Planning WHERE `Date` = '" + dpdate.Text + "';";
                 DataTable da = db.ExecuteStringQuery(q);
 
                 if (da.Rows.Count == 0)
@@ -129,7 +126,7 @@ namespace Snelle_Wiel.Pages
                     da = null;
                 }
 
-                if(da == null && Items.Count != 0 && Totalitems.Count != 0)
+                if (da == null && Items.Count != 0 && Totalitems.Count != 0)
                 {
                     p.saveplanning(Totalitems, datum);
                 }
@@ -181,10 +178,20 @@ namespace Snelle_Wiel.Pages
                 if (Chaufs.Count() > o)
                 {
                     textblocks[o].Text = Chaufs[o].Naam;
+                    Chauflisten[o].Tag = Chaufs[o].Id;
                 }
                 else
                 {
-                    textblocks[o].Text = "placeholder";
+                    textblocks[o].Text = "";
+                    Chauflisten[o].Tag = null;
+                }
+            }
+
+            foreach (ListView chauflijst in Chauflisten)
+            {
+                if (chauflijst.Tag == null)
+                {
+                    chauflijst.IsEnabled = false;
                 }
             }
 
@@ -192,7 +199,7 @@ namespace Snelle_Wiel.Pages
 
             string query = "SELECT * FROM `Order` WHERE Gebruik = '0';";
             DataTable data = db.ExecuteStringQuery(query);
-            foreach(DataRow dr in data.Rows)
+            foreach (DataRow dr in data.Rows)
             {
                 string OphaalpuntPlaats = dr["OphaalpuntPlaats"].ToString();
                 string OphaalpuntAdres = dr["OphaalpuntAdres"].ToString();
@@ -211,7 +218,7 @@ namespace Snelle_Wiel.Pages
 
 
 
-                Order o = new Order(int.Parse(dr["OrderId"].ToString()),dr["Omschrijving"].ToString(),s,e);
+                Order o = new Order(int.Parse(dr["OrderId"].ToString()), dr["Omschrijving"].ToString(), s, e);
                 o.Status = dr["Status"].ToString();
                 Orders.Add(o);
             }
@@ -226,7 +233,7 @@ namespace Snelle_Wiel.Pages
         {
             oldlist = sender as ListView;
             PlanningItem Selectedplanningitem = oldlist.SelectedItem as PlanningItem;
-            if(Selectedplanningitem !=  null)
+            if (Selectedplanningitem != null)
             {
                 string query = "SELECT * FROM `Order` WHERE `OrderId` = '" + Selectedplanningitem.OrderId + "'";
                 DataTable data = db.ExecuteStringQuery(query);
@@ -313,13 +320,13 @@ namespace Snelle_Wiel.Pages
                 orders.Remove(item);
                 oldlist.ItemsSource = orders;
 
-                ObservableCollection<PlanningItem> items =  targetlistbox.ItemsSource as ObservableCollection<PlanningItem>;
-               
+                ObservableCollection<PlanningItem> items = targetlistbox.ItemsSource as ObservableCollection<PlanningItem>;
+
                 //maak 2 planningitems van 1 order
-                List<PlanningItem> piitems = await p.createplanningitems(item, items.ToList(), items[0].ChauffeurId);
+                List<PlanningItem> piitems = await p.createplanningitems(item, items.ToList(), int.Parse(targetlistbox.Tag.ToString()));
 
                 ObservableCollection<PlanningItem> refill = new ObservableCollection<PlanningItem>();
-                foreach(PlanningItem pi in piitems)
+                foreach (PlanningItem pi in piitems)
                 {
                     refill.Add(pi);
                 }
@@ -327,7 +334,7 @@ namespace Snelle_Wiel.Pages
 
                 targetlistbox.ItemsSource = refill;
             }
-            else if(targetlistbox == LvOrders && oldlist != LvOrders)
+            else if (targetlistbox == LvOrders && oldlist != LvOrders)
             {
                 ObservableCollection<PlanningItem> planningitems = oldlist.ItemsSource as ObservableCollection<PlanningItem>;
                 ObservableCollection<PlanningItem> newlistforoldbox = new ObservableCollection<PlanningItem>();
@@ -364,7 +371,7 @@ namespace Snelle_Wiel.Pages
                 ObservableCollection<PlanningItem> items = targetlistbox.ItemsSource as ObservableCollection<PlanningItem>;
 
                 //maak 2 planningitems van 1 order
-                List<PlanningItem> piitems = await p.createplanningitems(item, items.ToList(), items[0].ChauffeurId);
+                List<PlanningItem> piitems = await p.createplanningitems(item, items.ToList(), int.Parse(targetlistbox.Tag.ToString()));
 
                 ObservableCollection<PlanningItem> refill = new ObservableCollection<PlanningItem>();
                 foreach (PlanningItem pi in piitems)
@@ -382,57 +389,116 @@ namespace Snelle_Wiel.Pages
                 string qu = "SELECT PlanningId FROM Planning WHERE `Date` = '" + dpdate.Text + "';";
                 DataTable dt = db.ExecuteStringQuery(qu);
 
-                DataRow dr = dt.Rows[0];
-                string date = dr["PlanningId"].ToString();
-
-
-
-                ObservableCollection<PlanningItem> allitems = new ObservableCollection<PlanningItem>();
-                string q = "DELETE FROM `snellewiel`.`PlanningItems` WHERE";
-                string query = "INSERT INTO `snellewiel`.`PlanningItems` (`PlanningId`, `OrderBeschrijving`, `OAText`, `Tijd`, `OrderId`, `ChauffeurId`, `Plaats`, `Adres`, `Postcode`, `Land`) VALUES";
-                string updatequery = "UPDATE `snellewiel`.`Order` SET `Gebruik`='1' WHERE";
-                foreach (ListView lv in Chauflisten)
+                if(dt.Rows.Count != 0)
                 {
-                    foreach(PlanningItem pi in lv.ItemsSource as ObservableCollection<PlanningItem>)
-                    {
-                        allitems.Add(pi);
+                    DataRow dr = dt.Rows[0];
+                    string date = dr["PlanningId"].ToString();
 
-                        q += " (`OrderId`=" + pi.OrderId + ") OR";
-                        query += "('" + date + "', '" + pi.OrderBeschrijving + "', '" + pi.OAText + "', '" + pi.Tijd + "', '" + pi.OrderId + "', '" + pi.ChauffeurId + "', '" + pi.locatie.Plaats + "', '" + pi.locatie.Adres + "', '" + pi.locatie.Postcode + "', '" + pi.locatie.Land + "'),";
-                        
-                        if(pi.OAText == "Ophalen")
+                    ObservableCollection<PlanningItem> allitems = new ObservableCollection<PlanningItem>();
+                    string q = "DELETE FROM `snellewiel`.`PlanningItems` WHERE";
+                    string query = "INSERT INTO `snellewiel`.`PlanningItems` (`PlanningId`, `OrderBeschrijving`, `OAText`, `Tijd`, `OrderId`, `ChauffeurId`, `Plaats`, `Adres`, `Postcode`, `Land`) VALUES";
+                    string updatequery = "UPDATE `snellewiel`.`Order` SET `Gebruik`='1' WHERE";
+                    foreach (ListView lv in Chauflisten)
+                    {
+                        foreach (PlanningItem pi in lv.ItemsSource as ObservableCollection<PlanningItem>)
                         {
-                            updatequery += " `OrderId`= "+ pi.OrderId +" OR";
+                            allitems.Add(pi);
+
+                            q += " (`OrderId`=" + pi.OrderId + ") OR";
+                            query += "('" + date + "', '" + pi.OrderBeschrijving + "', '" + pi.OAText + "', '" + pi.Tijd + "', '" + pi.OrderId + "', '" + pi.ChauffeurId + "', '" + pi.locatie.Plaats + "', '" + pi.locatie.Adres + "', '" + pi.locatie.Postcode + "', '" + pi.locatie.Land + "'),";
+
+                            if (pi.OAText == "Ophalen")
+                            {
+                                updatequery += " `OrderId`= " + pi.OrderId + " OR";
+                            }
                         }
                     }
-                }
 
-                string updateorderquery = "UPDATE `snellewiel`.`Order` SET `Gebruik`='0' WHERE";
-                string deleteorderquery = "DELETE FROM `snellewiel`.`PlanningItems` WHERE";
-                foreach (Order o in LvOrders.ItemsSource as ObservableCollection<Order>)
+                    string updateorderquery = "UPDATE `snellewiel`.`Order` SET `Gebruik`='0' WHERE";
+                    string deleteorderquery = "DELETE FROM `snellewiel`.`PlanningItems` WHERE";
+                    foreach (Order o in LvOrders.ItemsSource as ObservableCollection<Order>)
+                    {
+                        deleteorderquery += " (`OrderId`=" + o.Id + ") OR";
+                        updateorderquery += " `OrderId`= " + o.Id + " OR";
+                    }
+                    ObservableCollection<Order> wtf = LvOrders.ItemsSource as ObservableCollection<Order>;
+
+                    int count = wtf.Count;
+                    if (count > 1)
+                    {
+                        updateorderquery = updateorderquery.Remove(updateorderquery.Length - 2) + ";";
+                        db.ExecuteStringQuery(updateorderquery);
+                        deleteorderquery = deleteorderquery.Remove(deleteorderquery.Length - 2) + ";";
+                        db.ExecuteStringQuery(deleteorderquery);
+                    }
+
+
+
+                    q = q.Remove(q.Length - 2) + ";";
+                    db.ExecuteStringQuery(q);
+                    query = query.Remove(query.Length - 1) + ";";
+                    db.ExecuteStringQuery(query);
+                    updatequery = updatequery.Remove(updatequery.Length - 2) + ";";
+                    db.ExecuteStringQuery(updatequery);
+                }
+                else
                 {
-                    deleteorderquery += " (`OrderId`=" + o.Id + ") OR";
-                    updateorderquery += " `OrderId`= " + o.Id + " OR";
+                    string planningquery = "INSERT INTO `Planning` (`Date`) VALUES ('" + dpdate.Text + "');";
+                    db.ExecuteStringQuery(planningquery);
+
+                    string selectplanningquery = "SELECT PlanningId FROM Planning WHERE `Date` = '" + dpdate.Text + "';";
+                    DataTable plannintdata = db.ExecuteStringQuery(selectplanningquery);
+
+                    DataRow dr = plannintdata.Rows[0];
+                    string date = dr["PlanningId"].ToString();
+
+                    ObservableCollection<PlanningItem> allitems = new ObservableCollection<PlanningItem>();
+                    string q = "DELETE FROM `snellewiel`.`PlanningItems` WHERE";
+                    string query = "INSERT INTO `snellewiel`.`PlanningItems` (`PlanningId`, `OrderBeschrijving`, `OAText`, `Tijd`, `OrderId`, `ChauffeurId`, `Plaats`, `Adres`, `Postcode`, `Land`) VALUES";
+                    string updatequery = "UPDATE `snellewiel`.`Order` SET `Gebruik`='1' WHERE";
+                    foreach (ListView lv in Chauflisten)
+                    {
+                        foreach (PlanningItem pi in lv.ItemsSource as ObservableCollection<PlanningItem>)
+                        {
+                            allitems.Add(pi);
+
+                            q += " (`OrderId`=" + pi.OrderId + ") OR";
+                            query += "('" + date + "', '" + pi.OrderBeschrijving + "', '" + pi.OAText + "', '" + pi.Tijd + "', '" + pi.OrderId + "', '" + pi.ChauffeurId + "', '" + pi.locatie.Plaats + "', '" + pi.locatie.Adres + "', '" + pi.locatie.Postcode + "', '" + pi.locatie.Land + "'),";
+
+                            if (pi.OAText == "Ophalen")
+                            {
+                                updatequery += " `OrderId`= " + pi.OrderId + " OR";
+                            }
+                        }
+                    }
+
+                    string updateorderquery = "UPDATE `snellewiel`.`Order` SET `Gebruik`='0' WHERE";
+                    string deleteorderquery = "DELETE FROM `snellewiel`.`PlanningItems` WHERE";
+                    foreach (Order o in LvOrders.ItemsSource as ObservableCollection<Order>)
+                    {
+                        deleteorderquery += " (`OrderId`=" + o.Id + ") OR";
+                        updateorderquery += " `OrderId`= " + o.Id + " OR";
+                    }
+                    ObservableCollection<Order> wtf = LvOrders.ItemsSource as ObservableCollection<Order>;
+
+                    int count = wtf.Count;
+                    if (count > 1)
+                    {
+                        updateorderquery = updateorderquery.Remove(updateorderquery.Length - 2) + ";";
+                        db.ExecuteStringQuery(updateorderquery);
+                        deleteorderquery = deleteorderquery.Remove(deleteorderquery.Length - 2) + ";";
+                        db.ExecuteStringQuery(deleteorderquery);
+                    }
+
+
+
+                    q = q.Remove(q.Length - 2) + ";";
+                    db.ExecuteStringQuery(q);
+                    query = query.Remove(query.Length - 1) + ";";
+                    db.ExecuteStringQuery(query);
+                    updatequery = updatequery.Remove(updatequery.Length - 2) + ";";
+                    db.ExecuteStringQuery(updatequery);
                 }
-                ObservableCollection<Order> wtf = LvOrders.ItemsSource as ObservableCollection<Order>;
-
-                int count = wtf.Count;
-                if (count > 1)
-                {
-                    updateorderquery = updateorderquery.Remove(updateorderquery.Length - 2) + ";";
-                    db.ExecuteStringQuery(updateorderquery);
-                    deleteorderquery = deleteorderquery.Remove(deleteorderquery.Length - 2) + ";";
-                    db.ExecuteStringQuery(deleteorderquery);
-                }
-
-
-
-                q = q.Remove(q.Length - 2) + ";";
-                db.ExecuteStringQuery(q);
-                query = query.Remove(query.Length - 1) + ";";
-                db.ExecuteStringQuery(query);
-                updatequery = updatequery.Remove(updatequery.Length - 2) + ";";
-                db.ExecuteStringQuery(updatequery);
             }
             else
             {
@@ -484,9 +550,6 @@ namespace Snelle_Wiel.Pages
                     db.ExecuteStringQuery(deleteorderquery);
                 }
 
-
-
-
                 q = q.Remove(q.Length - 2) + ";";
                 db.ExecuteStringQuery(q);
                 query = query.Remove(query.Length - 1) + ";";
@@ -499,7 +562,7 @@ namespace Snelle_Wiel.Pages
 
         private void btnVorige_Click(object sender, RoutedEventArgs e)
         {
-            if(i == 1)
+            if (i == 1)
             {
                 MessageBox.Show("U kunt niet verder terug");
             }
@@ -507,11 +570,17 @@ namespace Snelle_Wiel.Pages
             {
                 i -= 6;
 
+                foreach (ListView chauflijsten in Chauflisten)
+                {
+                    chauflijsten.Tag = null;
+                }
+
                 for (int o = i - 1; o < i; o++)
                 {
-                    if(Chaufs.Count() < i)
+                    if (Chaufs.Count() < i)
                     {
                         textblocks[o].Text = Chaufs[i].Naam;
+                        Chauflisten[o].Tag = Chaufs[i].Id;
                     }
                 }
             }
@@ -519,15 +588,21 @@ namespace Snelle_Wiel.Pages
 
         private void btnVolgende_Click(object sender, RoutedEventArgs e)
         {
-            if(Chaufs.Count <= i)
+            if (Chaufs.Count <= i)
             {
                 i += 6;
+
+                foreach (ListView chauflijsten in Chauflisten)
+                {
+                    chauflijsten.Tag = null;
+                }
 
                 for (int o = i - 1; o < i; o++)
                 {
                     if (Chaufs.Count() < i)
                     {
                         textblocks[o].Text = Chaufs[i].Naam;
+                        Chauflisten[o].Tag = Chaufs[i].Id;
                     }
                 }
             }
@@ -548,12 +623,12 @@ namespace Snelle_Wiel.Pages
 
         private void dpdate_KeyDown(object sender, KeyEventArgs e)
         {
-             e.Handled = true;
+            e.Handled = true;
         }
 
         private void btnOrderInfo_Click(object sender, RoutedEventArgs e)
         {
-            if(LvOrders.SelectedItem != null)
+            if (LvOrders.SelectedItem != null)
             {
                 Order o = LvOrders.SelectedItem as Order;
                 OrderInfo oi = new OrderInfo(o);
