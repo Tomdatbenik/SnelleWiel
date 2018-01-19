@@ -114,7 +114,6 @@ namespace Snelle_Wiel.Classes
             foreach (Rijbewijs r in Nrijbewijs)
             {
                  q += " (`RId`=" + r.Id + " AND `UId`=" + id + ") OR";
-               
             }
             q = q.Remove(q.Length - 2) + ";";
             db.ExecuteStringQuery(q);

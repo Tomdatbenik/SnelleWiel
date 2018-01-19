@@ -103,11 +103,15 @@ namespace Snelle_Wiel.Windows
 
             Rijbewijs listBoxItemhas = LvGive.SelectedItem as Rijbewijs;
 
-            HaveCollection.Add(listBoxItemhas);
-            Givecollection.Remove(listBoxItemhas);
 
-            LvGive.ItemsSource = Givecollection;
-            LvGot.ItemsSource = HaveCollection;
+            if (listBoxItemhas != null)
+            {
+                HaveCollection.Add(listBoxItemhas);
+                Givecollection.Remove(listBoxItemhas);
+
+                LvGive.ItemsSource = Givecollection;
+                LvGot.ItemsSource = HaveCollection;
+            }
         }
 
         private void LvGot_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -119,11 +123,15 @@ namespace Snelle_Wiel.Windows
 
             Rijbewijs listBoxItemhas = LvGot.SelectedItem as Rijbewijs;
 
-            HaveCollection.Remove(listBoxItemhas);
-            Givecollection.Add(listBoxItemhas);
 
-            LvGive.ItemsSource = Givecollection;
-            LvGot.ItemsSource = HaveCollection;
+            if(listBoxItemhas != null)
+            {
+                HaveCollection.Remove(listBoxItemhas);
+                Givecollection.Add(listBoxItemhas);
+
+                LvGive.ItemsSource = Givecollection;
+                LvGot.ItemsSource = HaveCollection;
+            }
         }
     }
 }

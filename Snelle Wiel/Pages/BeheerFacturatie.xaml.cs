@@ -108,6 +108,7 @@ namespace Snelle_Wiel.Pages
 
         private void lvOrders_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            producten.Clear();
             SelectedOrder = lvOrders.SelectedItem as Order;
             string query = "SELECT * FROM `Producten` WHERE `OrderId` = '" + SelectedOrder.Id + "'";
             System.Data.DataTable data = db.ExecuteStringQuery(query);
