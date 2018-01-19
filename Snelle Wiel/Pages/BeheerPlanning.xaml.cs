@@ -105,6 +105,9 @@ namespace Snelle_Wiel.Pages
 
             if (dpdate.Text != "" && Items.Count != 0 && Totalitems.Count != 0)
             {
+                string[] date = DateTime.Now.Date.ToString().ToString().Split(' ');
+                string datum = date[0];
+
                 string q = "SELECT PlanningId FROM Planning WHERE `Date` = '" + dpdate.Text + "';";
                 DataTable da = db.ExecuteStringQuery(q);
 
