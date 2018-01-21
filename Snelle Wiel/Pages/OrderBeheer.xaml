@@ -34,7 +34,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="16*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="15*"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
@@ -46,12 +47,30 @@
             <ColumnDefinition Width="0.1*"/>
         </Grid.ColumnDefinitions>
 
-        <Button x:Name="BtnWijzigen" Content="Order Wijzigen" Grid.Row="2" Grid.Column="1" Style="{StaticResource FlatButtonStyle}" Margin="1"></Button>
+        <TextBlock Text="Orders:" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" FontSize="15"></TextBlock>
+        <TextBlock Text="Zoeken:" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Right" FontSize="15"></TextBlock>
+        <TextBox x:Name="TbZoeken" Grid.Column="3" Grid.Row="1" BorderBrush="#FFC3C1C1" BorderThickness="1,1,1,1" Foreground="#FF909090" FontSize="15" VerticalAlignment="Top" HorizontalAlignment="Stretch" TextChanged="TbZoeken_TextChanged" />
 
-        <Button x:Name="BtnOrderVerwijderen" Content="Order verwijderen" Grid.Row="2" Grid.Column="2" Style="{StaticResource FlatButtonStyle}" Margin="1"></Button>
 
-        <Button x:Name="BtnXML" Content="Xml uitlezen" Grid.Row="2" Grid.Column="3" Style="{StaticResource FlatButtonStyle}" Margin="1"></Button>
+        <Button x:Name="BtnWijzigen" Content="Status Wijzigen" Grid.Row="3" Grid.Column="1" Style="{StaticResource FlatButtonStyle}" Margin="1" Click="BtnWijzigen_Click"></Button>
+
+        <Button x:Name="BtnXML" Content="Xml uitlezen" Grid.Row="3" Grid.Column="3" Style="{StaticResource FlatButtonStyle}" Margin="1"></Button>
         
-        <ListView x:Name="LvOrders" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1"></ListView>
+        <ListView x:Name="LvOrders" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Omschrijving" DisplayMemberBinding="{Binding Omschrijving}"/>
+                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}"/>
+                    <GridViewColumn Header="Ophaal plaats" DisplayMemberBinding="{Binding  Path=Start.Plaats}"/>
+                    <GridViewColumn Header="Ophaal adres" DisplayMemberBinding="{Binding Path=Start.Adres}"/>
+                    <GridViewColumn Header="Ophaal postcode" DisplayMemberBinding="{Binding  Path=Start.Postcode}"/>
+                    <GridViewColumn Header="Ophaal land" DisplayMemberBinding="{Binding Path=Start.Land}"/>
+                    <GridViewColumn Header="Aflever plaats" DisplayMemberBinding="{Binding  Path=Einde.Plaats}"/>
+                    <GridViewColumn Header="Aflever adres" DisplayMemberBinding="{Binding Path=Einde.Adres}"/>
+                    <GridViewColumn Header="Aflever postcode" DisplayMemberBinding="{Binding  Path=Einde.Postcode}"/>
+                    <GridViewColumn Header="Aflever land" DisplayMemberBinding="{Binding Path=Einde.Land}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Page>

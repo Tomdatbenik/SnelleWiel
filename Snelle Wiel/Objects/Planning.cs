@@ -180,10 +180,6 @@ namespace Snelle_Wiel.Objects
             db.ExecuteStringQuery(query);
         }
 
-
-
-
-
         public List<Order> SelectordersAndSet()
         {
             List<Order> Orders = new List<Order>();
