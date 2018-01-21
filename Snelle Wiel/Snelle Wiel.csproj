@@ -121,6 +121,9 @@
     <Compile Include="Objects\Rit.cs" />
     <Compile Include="Objects\User.cs" />
     <Compile Include="Objects\Wagen.cs" />
+    <Compile Include="Pages\OrderBeheer.xaml.cs">
+      <DependentUpon>OrderBeheer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Klantwijzigen.xaml.cs">
       <DependentUpon>Klantwijzigen.xaml</DependentUpon>
     </Compile>
@@ -190,6 +193,10 @@
     <Page Include="Pages\LoginPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\OrderBeheer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Klantwijzigen.xaml">
       <SubType>Designer</SubType>

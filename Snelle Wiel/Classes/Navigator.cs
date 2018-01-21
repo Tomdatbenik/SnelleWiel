@@ -20,6 +20,7 @@ namespace Snelle_Wiel.Classes
         BeheerPlanning Beheerplanning;
         Home home;
         Database db;
+        OrderBeheer orderbeheer;
 
         public Navigator(Home givenhome, Database database,MainWindow main)
         {
@@ -31,6 +32,7 @@ namespace Snelle_Wiel.Classes
             this.Beheerwagens = new BeheerWagens(this.db);
             this.Beheerapplicatie = new BeheerApplicatie(this.db);
             this.Beheerplanning = new BeheerPlanning(this.db, main);
+            this.orderbeheer = new OrderBeheer(this.db);
         }
 
         public void NavigateTo(string Location)
@@ -55,6 +57,9 @@ namespace Snelle_Wiel.Classes
                     break;
                 case "Applicatie":
                     home.FNavigateframe.Navigate(this.Beheerapplicatie);
+                    break;
+                case "Order Beheer":
+                    home.FNavigateframe.Navigate(this.orderbeheer);
                     break;
                 default:
                     home.FNavigateframe.Source = null;

@@ -58,20 +58,21 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="18*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Border Grid.Row="3" Background="#FF4A67AB" Grid.ColumnSpan="6"></Border>
-        <Frame x:Name="FNavigateframe" Grid.Row="1"  Grid.ColumnSpan="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden" />
+        <Border Grid.Row="3" Background="#FF4A67AB" Grid.ColumnSpan="7"></Border>
+        <Frame x:Name="FNavigateframe" Grid.Row="1"  Grid.ColumnSpan="7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden" />
         <Button Content="Planning" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="navigatorbutton_click" Background="#FF4A67AB" Foreground="White"/>
         <Button Content="Chauffeurs" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="navigatorbutton_click" Background="#FF4A67AB" Foreground="White"/>
         <Button Content="Wagens" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="navigatorbutton_click" Background="#FF4A67AB" Foreground="White"/>
         <Button Content="Klant" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="navigatorbutton_click" Background="#FF4A67AB" Foreground="White"/>
         <Button Content="Facturatie" Grid.Column="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="navigatorbutton_click" Background="#FF4A67AB" Foreground="White"/>
         <Button Content="Applicatie" Grid.Column="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="navigatorbutton_click" Background="#FF4A67AB" Foreground="White"/>
-
+        <Button Content="Order Beheer" Grid.Column="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="navigatorbutton_click" Background="#FF4A67AB" Foreground="White"/>
     </Grid>
 </Page>

@@ -48,7 +48,7 @@
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
         <Border Grid.Column="1" Grid.Row="2" BorderThickness="1" BorderBrush="Black" Grid.ColumnSpan="2"/>
-        <TextBlock x:Name="tbOrder" Text="Order:" Grid.Column="1" Grid.Row="1" FontSize="16"/>
+        <TextBlock x:Name="tbOrder" Text="Producten:" Grid.Column="1" Grid.Row="1" FontSize="16"/>
         <ListView x:Name="lvOrderArtikelen" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2">
             <ListView.View>
                 <GridView>
@@ -64,7 +64,6 @@
         <ListView Visibility="Visible" Name="lvOrders" Grid.Column="4" Grid.Row="2" MouseDoubleClick="lvOrders_MouseDoubleClick">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
                     <GridViewColumn Header="Omschrijving" DisplayMemberBinding="{Binding Omschrijving}"/>
                 </GridView>
             </ListView.View>
