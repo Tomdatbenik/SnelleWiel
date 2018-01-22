@@ -510,10 +510,23 @@ namespace Snelle_Wiel.Pages
 
                 string qu = "SELECT PlanningId FROM Planning WHERE `Date` = '" + datum + "';";
                 DataTable dt = db.ExecuteStringQuery(qu);
+                string id = null;
+                if (dt.Rows.Count > 0)
+                {
+                    DataRow dr = dt.Rows[0];
+                    id = dr["PlanningId"].ToString();
+                }
+                else
+                {
+                    string planningquery = "INSERT INTO `Planning` (`Date`) VALUES ('" + datum + "');";
+                    db.ExecuteStringQuery(planningquery);
 
-                DataRow dr = dt.Rows[0];
-                string id = dr["PlanningId"].ToString();
+                    string selectplanningquery = "SELECT PlanningId FROM Planning WHERE `Date` = '" + datum + "';";
+                    DataTable plannintdata = db.ExecuteStringQuery(selectplanningquery);
 
+                    DataRow dr = dt.Rows[0];
+                    id = dr["PlanningId"].ToString();
+                }
 
 
                 ObservableCollection<PlanningItem> allitems = new ObservableCollection<PlanningItem>();

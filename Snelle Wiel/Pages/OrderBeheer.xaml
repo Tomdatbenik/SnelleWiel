@@ -54,7 +54,7 @@
 
         <Button x:Name="BtnWijzigen" Content="Status Wijzigen" Grid.Row="3" Grid.Column="1" Style="{StaticResource FlatButtonStyle}" Margin="1" Click="BtnWijzigen_Click"></Button>
 
-        <Button x:Name="BtnXML" Content="Xml uitlezen" Grid.Row="3" Grid.Column="3" Style="{StaticResource FlatButtonStyle}" Margin="1"></Button>
+        <Button x:Name="BtnXML" Content="Xml uitlezen" Grid.Row="3" Grid.Column="3" Style="{StaticResource FlatButtonStyle}" Margin="1" Click="BtnXML_Click"></Button>
         
         <ListView x:Name="LvOrders" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2">
             <ListView.View>

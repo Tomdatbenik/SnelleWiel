@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,11 +13,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace Snelle_Wiel.Pages
 {
@@ -120,7 +124,81 @@ namespace Snelle_Wiel.Pages
             }
             else
             {
-                MessageBox.Show("Selecteer een order.");
+                System.Windows.MessageBox.Show("Selecteer een order.");
+            }
+        }
+
+        private void BtnXML_Click(object sender, RoutedEventArgs e)
+        {
+            Stream myStream = null;
+            OpenFileDialog theDialog = new OpenFileDialog();
+            theDialog.Title = "Open Text File";
+            theDialog.Filter = "XML files|*.xml";
+            theDialog.InitialDirectory = @"C:\";
+            if (theDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    if ((myStream = theDialog.OpenFile()) != null)
+                    {
+                        using (myStream)
+                        {
+                            string filename = theDialog.FileName;
+                            XmlDocument doc = new XmlDocument();
+                            doc.Load(filename);
+                            XMLRootObject ro = new XMLRootObject();
+
+                            foreach (XmlNode xmlitem in doc.SelectNodes("bezorgorder"))
+                            {
+                                    //XMLItem item = new XMLItem();
+
+                                    //item.Name = xmlitem.ChildNodes[i].Name;
+                                    //item.Innertext = xmlitem.ChildNodes[i].InnerText;
+                                    //item.Innerxml = xmlitem.ChildNodes[i].InnerXml;
+
+                                    //ro.Add(item);
+
+
+                                    string omschrijving = xmlitem["ophaaladres"]["naam"].InnerText;
+                                    string Status = "In behandeling";
+                                    string OphaalpuntPlaats = xmlitem["ophaaladres"]["plaats"].InnerText;
+                                    string OphaalpuntAdres = xmlitem["ophaaladres"]["straat"].InnerText + " " + xmlitem["ophaaladres"]["huisnr"].InnerText;
+                                    string OphaalpuntPostcode = xmlitem["ophaaladres"]["postcode"].InnerText;
+                                    string OphaalpuntLand = "Nederlands";
+                                    string EindbestemmingPlaats = xmlitem["afleveradres"]["plaats"].InnerText;
+                                    string EindbestemmingAdres = xmlitem["afleveradres"]["straat"].InnerText + " " + xmlitem["afleveradres"]["huisnr"].InnerText;
+                                    string EindbestemmingPostcode = xmlitem["afleveradres"]["postcode"].InnerText; 
+                                    string EindbestemmingLand = "Nederlands";
+                                    string Klantid = xmlitem["opdrachtgever"]["nr"].InnerText;
+
+                                    string query = "INSERT INTO `snellewiel`.`Order` (`Omschrijving`, `Status`, `OphaalpuntPlaats`, `OphaalpuntAdres`, `OphaalpuntPostcode`, `OphaalpuntLand`, `EindbestemmingPlaats`, `EindbestemmingAdres`, `EindbestemmingPostcode`, `EindbestemmingLand`, `Klantid`)" +
+                                        " VALUES ('" + omschrijving + "'," +
+                                        " '" + Status + "'," +
+                                        " '" + OphaalpuntPlaats + "'," +
+                                        " '" + OphaalpuntAdres + "'," +
+                                        " '" + OphaalpuntPostcode + "'," +
+                                        " '" + OphaalpuntLand + "'," +
+                                        " '" + EindbestemmingPlaats + "'," +
+                                        " '" + EindbestemmingAdres + "'," +
+                                        " '" + EindbestemmingPostcode + "'," +
+                                        " '" + EindbestemmingLand + "'," +
+                                        " '" + Klantid + "');";
+
+                                    db.ExecuteStringQuery(query);
+                                    setup();
+                            }
+
+
+                            //Console.WriteLine(ro.Items);
+
+
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Windows.MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+                }
             }
         }
     }

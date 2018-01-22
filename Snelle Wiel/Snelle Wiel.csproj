@@ -121,6 +121,8 @@
     <Compile Include="Objects\Rit.cs" />
     <Compile Include="Objects\User.cs" />
     <Compile Include="Objects\Wagen.cs" />
+    <Compile Include="Objects\XMLItem.cs" />
+    <Compile Include="Objects\XMLRootObject.cs" />
     <Compile Include="Pages\OrderBeheer.xaml.cs">
       <DependentUpon>OrderBeheer.xaml</DependentUpon>
     </Compile>
